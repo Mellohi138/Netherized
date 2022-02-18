@@ -29,7 +29,7 @@ public class Netherized {
 	
     public static final String MODID = "netherized";
     public static final String MODNAME = "Netherized";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.1A";
     
     public static final String CLIENT_PROXY = "mellohi138.netherized.proxy.ClientProxy";
     public static final String SERVER_PROXY = "mellohi138.netherized.proxy.CommonProxy";
