@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "netherized:items/netherite_pickaxe"
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "netherized:blocks/blackstone_top",
+        "side": "netherized:blocks/blackstone_side"
+    }
+}

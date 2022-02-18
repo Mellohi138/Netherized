@@ -1,0 +1,10 @@
+{
+    "variants": {
+      "is_active=true": {
+        "model": "netherized:inferno_reactor_active"
+    },
+      "is_active=false": {
+        "model": "netherized:inferno_reactor_off" 
+    }
+  }
+}

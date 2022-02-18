@@ -1,0 +1,16 @@
+[
+{
+  "modid": "melexpansion",
+  "name": "Mel-Expansion",
+  "description": "A mod which is specially designed to backport some stuff from the future versions along with it's own additional content. Mostly add stuff for the nether update.",
+  "version": "1.0",
+  "mcversion": "1.12.2",
+  "url": "",
+  "updateUrl": "N/A",
+  "authorList": ["Mellohi"],
+  "credits": "The Forge and FML guys, for providing the source needed to mod.",
+  "logoFile": "netherized.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "netherized:blocks/respawn_anchor_top_charge",
+        "bottom": "netherized:blocks/crying_obsidian",
+        "side": "netherized:blocks/respawn_anchor_side_charge_2"
+    }
+}

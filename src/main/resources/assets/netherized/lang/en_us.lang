@@ -1,0 +1,61 @@
+//Items
+item.netherite_ingot.name=Netherite Ingot
+item.netherite_scrap.name=Netherite Scrap
+item.netherite_sword.name=Netherite Sword
+item.netherite_shovel.name=Netherite Shovel
+item.netherite_pickaxe.name=Netherite Pickaxe
+item.netherite_axe.name=Netherite Axe
+item.netherite_hoe.name=Netherite Hoe
+item.netherite_helmet.name=Netherite Helmet
+item.netherite_chestplate.name=Netherite Chestplate
+item.netherite_leggings.name=Netherite Leggings
+item.netherite_boots.name=Netherite Boots
+item.netherite_horse_armor.name=Netherite Horse Armor
+
+item.brute_axe.name=Brute'l Axe
+
+item.warped_fungus_on_a_stick.name=Warped Fungus On A Stick
+
+//Blocks
+tile.crimson_planks.name=Crimson Planks
+tile.warped_planks.name=Warped Planks
+tile.ancient_debris.name=Ancient Debris
+tile.netherite_block.name=Netherite Block
+tile.nether_iron_ore.name=Nether Iron Ore
+tile.nether_gold_ore.name=Nether Gold Ore
+tile.basalt.name=Basalt
+tile.blackstone.name=Blackstone
+tile.soul_soil.name=Soul Soil
+tile.crimson_nylium.name=Crimson Nylium
+tile.warped_nylium.name=Warped Nylium
+tile.crimson_roots.name=Crimson Roots
+tile.warped_roots.name=Warped Roots
+tile.warped_sprouts.name=Warped Sprouts
+tile.shroomlight.name=Shroomlight
+tile.glowing_obsidian.name=Glowing Obsidian
+tile.crying_obsidian.name=Crying Obsidian
+tile.respawn_anchor.name=Respawn Anchor
+tile.inferno_reactor.name=Infernal Reactor Core
+
+//Entities
+entity.piglin.name=Piglin
+entity.piglin_brute.name=Piglin Brute
+entity.zombified_piglin.name=Zombified Piglin
+entity.hoglin.name=Hoglin
+entity.zoglin.name=Zoglin
+entity.strider.name=Strider
+entity.hovering_inferno.name=Hovering Inferno
+
+//Creative Tabs
+itemGroup.netherized_items=Netherized Items
+itemGroup.netherized_blocks=Netherized Blocks
+
+/Descriptions
+item.weapon.brute_axe.desc=The bigger the for the harder they fall. Deals extra damage based on how much health your opponent has left.
+item.record.record_pigstep.desc=Lena Raine - pigstep
+
+//Subtitles
+subtitles.item.armor.equip_netherite=Netherite armor clanks
+subtitles.block.respawn_anchor.charge=Respawn anchor charges
+subtitles.block.respawn_anchor.deplete=Respawn anchor fails
+subtitles.block.respawn_anchor.ambience=Respawn anchor whooshes

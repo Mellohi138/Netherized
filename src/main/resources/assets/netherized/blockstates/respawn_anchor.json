@@ -1,0 +1,19 @@
+{
+    "variants": {
+      "charges=0": {
+        "model": "netherized:respawn_anchor_off"
+    },
+      "charges=1": {
+        "model": "netherized:respawn_anchor_charge_1"
+    },
+      "charges=2": {
+        "model": "netherized:respawn_anchor_charge_2"
+    },
+      "charges=3": {
+        "model": "netherized:respawn_anchor_charge_3"
+    },
+      "charges=4": {
+        "model": "netherized:respawn_anchor_charge_4"
+    }
+  }
+}
