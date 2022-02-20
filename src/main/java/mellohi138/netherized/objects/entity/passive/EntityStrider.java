@@ -78,7 +78,7 @@ public class EntityStrider extends EntityAnimal {
     public void onUpdate() {
 		super.onUpdate();
 		
-		if(this.checkIfOnLava()) {
+		if(this.isOnLava()) {
 			this.motionY = 0.0F;
 			this.onGround = true;
 		}
@@ -91,13 +91,21 @@ public class EntityStrider extends EntityAnimal {
             this.attackEntityFrom(DamageSource.DROWN, 1.0F);
         }
         if (this.world.getTotalWorldTime() % 100L == 0L) {
-            this.setIsCold(!this.checkIfOnLava());
+            this.setIsCold(!this.isInsideLava());
         }
     }
 	
-	private boolean checkIfOnLava() {
+	private boolean isOnLava() {
 		float x = MathHelper.floor(this.posX);
-		float y = MathHelper.floor(this.posY - Float.MIN_VALUE);
+		float y = MathHelper.floor(this.posY);
+		float z = MathHelper.floor(this.posZ);
+		
+		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava() ;
+	}
+	
+	private boolean isInsideLava() {
+		float x = MathHelper.floor(this.posX);
+		float y = MathHelper.floor(this.posY- Float.MIN_VALUE);
 		float z = MathHelper.floor(this.posZ);
 		
 		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava() ;
@@ -209,12 +217,12 @@ public class EntityStrider extends EntityAnimal {
         }
     }
     
-    private IEntityLivingData addRider(DifficultyInstance difficultyIn, EntityLiving entityMob, @Nullable IEntityLivingData livingData) {
-    	entityMob.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-    	entityMob.onInitialSpawn(difficultyIn, livingData);
-		this.world.spawnEntity(entityMob);
-		entityMob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, NetherizedItems.WARPED_FUNGUS_ON_A_STICK.getDefaultInstance());
-		entityMob.startRiding(this);
+    private IEntityLivingData addRider(DifficultyInstance difficultyIn, EntityLiving entityIn, @Nullable IEntityLivingData livingData) {
+    	entityIn.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
+    	entityIn.onInitialSpawn(difficultyIn, livingData);
+		this.world.spawnEntity(entityIn);
+		entityIn.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, NetherizedItems.WARPED_FUNGUS_ON_A_STICK.getDefaultInstance());
+		entityIn.startRiding(this);
         return livingData;
      }
     
@@ -250,7 +258,7 @@ public class EntityStrider extends EntityAnimal {
     }
     
     public void travel(float strafe, float vertical, float forward) {
-    	this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * (this.canBeBoosted() ? 0.66F : 1.0F));
+    	this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * (this.getIsCold() ? 0.66F : 1.0F));
     	
         Entity entity = this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
 
@@ -269,7 +277,7 @@ public class EntityStrider extends EntityAnimal {
             }
 
             if (this.canPassengerSteer()) {
-                float f = (float)this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * (this.canBeBoosted() ? 0.23F : 0.55F);
+                float f = (float)this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * (this.getIsCold() ? 0.23F : 0.55F);
 
                 if (this.boosting) {
                     f += f * 1.15F * MathHelper.sin((float)this.boostTime / (float)this.totalBoostTime * (float)Math.PI);
@@ -311,10 +319,6 @@ public class EntityStrider extends EntityAnimal {
             this.getDataManager().set(BOOST_TIME, Integer.valueOf(this.totalBoostTime));
             return true;
         }
-    }
-    
-    public boolean canBeBoosted() {
-    	return this.getRidingEntity() instanceof EntityStrider ? ((EntityStrider)this.getRidingEntity()).canBeBoosted() : this.dataManager.get(IS_COLD);
     }
     
     public double getMountedYOffset() {

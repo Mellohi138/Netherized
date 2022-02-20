@@ -35,9 +35,9 @@ public class BlockCryingObsidian extends Block {
 		if (rand.nextInt(5) == 0) {
 			EnumFacing side = EnumFacing.random(rand);
 			if (side != EnumFacing.UP) {
-				BlockPos blockpos = pos.offset(side);
-				IBlockState blockstate = worldIn.getBlockState(blockpos);
-				if (!stateIn.isTopSolid() || !blockstate.isSideSolid(worldIn, blockpos, side.getOpposite())) {
+				BlockPos blockPos = pos.offset(side);
+				IBlockState blockstate = worldIn.getBlockState(blockPos);
+				if (!stateIn.isTopSolid() || !blockstate.isSideSolid(worldIn, blockPos, side.getOpposite())) {
 					double d0 = side.getXOffset() == 0 ? rand.nextDouble() : 0.5D + (double)side.getXOffset() * 0.6D;
 	                double d1 = side.getYOffset() == 0 ? rand.nextDouble() : 0.5D + (double)side.getYOffset() * 0.6D;
 	                double d2 = side.getZOffset() == 0 ? rand.nextDouble() : 0.5D + (double)side.getZOffset() * 0.6D;
