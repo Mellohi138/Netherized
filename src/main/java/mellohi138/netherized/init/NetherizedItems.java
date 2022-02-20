@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class NetherizedItems {
 	public static final List<Item> ITEM_LIST = new ArrayList<Item>();
 	
-	public static final Item NETHERITE_INGOT = NetherizedItems.addItem(new ItemBase("netherite_ingot", Netherized.NETHERIZED_ITEMS));
+	public static final Item NETHERITE_INGOT = NetherizedItems.addItem(new ItemBase("netherite_ingot", Netherized.NETHERIZED_ITEMS, true));
 	public static final Item NETHERITE_SCRAP = NetherizedItems.addItem(new ItemBase("netherite_scrap", Netherized.NETHERIZED_ITEMS));
 	
 	public static final Item NETHERITE_SWORD = NetherizedItems.addItem(new ItemNetheriteSword("netherite_sword", NetherizedMaterials.NETHERITE_TOOL_MATERIAL, Netherized.NETHERIZED_ITEMS));
@@ -30,7 +30,7 @@ public class NetherizedItems {
     public static final Item NETHERITE_LEGGINGS = NetherizedItems.addItem(new ItemNetheriteArmor("netherite_leggings", NetherizedMaterials.NETHERITE_ARMOR_MATERIAL, 2, EntityEquipmentSlot.LEGS, Netherized.NETHERIZED_ITEMS));
     public static final Item NETHERITE_BOOTS = NetherizedItems.addItem(new ItemNetheriteArmor("netherite_boots", NetherizedMaterials.NETHERITE_ARMOR_MATERIAL, 1, EntityEquipmentSlot.FEET, Netherized.NETHERIZED_ITEMS));
     
-    public static final Item NETHERITE_HORSE_ARMOR = NetherizedItems.addItem(new ItemNetheriteHorseArmor("netherite_horse_armor", Netherized.NETHERIZED_ITEMS));
+    public static final Item NETHERITE_HORSE_ARMOR = NetherizedItems.addItem(new ItemNetheriteHorseArmor("netherite_horse_armor", NetherizedMaterials.NETHERITE_HORSE_ARMOR, Netherized.NETHERIZED_ITEMS));
     
     public static final Item BRUTE_AXE = NetherizedItems.addItem(new ItemBruteAxe("brute_axe", ToolMaterial.GOLD, Netherized.NETHERIZED_ITEMS));
     

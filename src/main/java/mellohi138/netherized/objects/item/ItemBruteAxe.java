@@ -35,29 +35,27 @@ public class ItemBruteAxe extends ItemAxe {
 	
 	@Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(!target.isDead) {
-			if(attacker instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer)attacker;
+		if(!target.isDead && attacker instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)attacker;
+			
+			if(!player.getCooldownTracker().hasCooldown(this)) {					
+				//Resets the immunity frames. Required for this to properly work.
+				target.hurtResistantTime = 0;
 				
-				if(!player.getCooldownTracker().hasCooldown(this)) {					
-					//Resets the immunity frames. Required for this to properly work.
-					target.hurtResistantTime = 0;
+				//Copied and edited from EntityPlayer.attackTargetEntityWithCurrentItem(Entity entityIn)
+				boolean isCritical = player.swingProgress == 0 && player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding() && !player.isSprinting();
+				
+				if(isCritical) {
+					float criticalDamage = MathUtil.calculatePrecentage(target.getHealth(), NetherizedConfig.bruteAxeDamage * 1.5F);
+					target.attackEntityFrom(DamageSource.causePlayerDamage(player), criticalDamage);
+					target.knockBack(target, 0.5F, player.posX - target.posX, player.posZ - target.posZ);
+					player.getCooldownTracker().setCooldown(this, 300);
+				} else {
+					float swingProgress = 1.0F - attacker.swingProgress;
+					float damage = MathUtil.calculatePrecentage(target.getHealth(), swingProgress * NetherizedConfig.bruteAxeDamage);
 					
-					//Copied and edited from EntityPlayer.attackTargetEntityWithCurrentItem(Entity entityIn)
-					boolean isCritical = player.swingProgress == 0 && player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding() && !player.isSprinting();
-					
-					if(isCritical) {
-						float criticalDamage = MathUtil.calculatePrecentage(target.getHealth(), NetherizedConfig.bruteAxeDamage * 1.5F);
-						target.attackEntityFrom(DamageSource.causePlayerDamage(player), criticalDamage);
-						target.knockBack(target, 0.5F, player.posX - target.posX, player.posZ - target.posZ);
-						player.getCooldownTracker().setCooldown(this, 300);
-					} else {
-						float swingProgress = 1.0F - attacker.swingProgress;
-						float damage = MathUtil.calculatePrecentage(target.getHealth(), swingProgress * NetherizedConfig.bruteAxeDamage);
-						
-						target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
-						player.getCooldownTracker().setCooldown(this, (int) (swingProgress * 200));
-					}
+					target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
+					player.getCooldownTracker().setCooldown(this, (int) (swingProgress * 200));
 				}
 			}
 		}
@@ -67,8 +65,9 @@ public class ItemBruteAxe extends ItemAxe {
 	
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack itemStack, Enchantment enchantment) {
-    	if(enchantment == Enchantments.SWEEPING) 
+    	if(enchantment == Enchantments.SWEEPING) {
     		return false;
+    	}
     	
         return enchantment.type == EnumEnchantmentType.WEAPON || enchantment.type == EnumEnchantmentType.DIGGER || enchantment.type == EnumEnchantmentType.BREAKABLE;
     }

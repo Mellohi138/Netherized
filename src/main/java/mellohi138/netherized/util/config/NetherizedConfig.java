@@ -31,7 +31,7 @@ public class NetherizedConfig {
 	@Config.Comment(value = "How much protection the netherite horse armor will give")
 	public static float netheriteKnockbackResistance = 0.25F;
 	
-	@Config.RangeDouble(min = 1F)
+	@Config.RangeDouble(min = 0F)
 	@Config.Comment(value = "How much armor toughness netherite armor will give")
 	public static float netheriteArmorToughness = 3.0F;
 	
@@ -43,14 +43,14 @@ public class NetherizedConfig {
 	@Config.Comment(value = "How much protection the netherite horse armor will give")
 	public static int netheriteHorseArmorProtectionAmount = 14;
 	
-	@Config.RangeDouble(min = 1)
+	@Config.RangeDouble(min = 0)
 	@Config.Comment(value = "How much protection the netherite horse armor will give")
 	public static float netheriteHorseArmorKnockbackResistance = 1F;
 	
 	@Config.Comment(value = "Whether or not allow netherite anvil recipes to be used")
 	public static boolean netheriteAnvilRecipes = true;
 	
-	@Config.RangeDouble(min = 1.0F, max = 100.0F)
+	@Config.RangeDouble(min = 0.0F, max = 100.0F)
 	@Config.Comment(value = "The amount of precentage damage the brute'l axe will deal")
 	public static float bruteAxeDamage = 5.0F;
 	
@@ -71,4 +71,7 @@ public class NetherizedConfig {
     		Netherized.MODID + ":netherite_horse_armor",
     		Netherized.MODID + ":netherite_block"
     };
+	
+	@Config.Comment(value = "Enabling this will make reverse the logic of the fireproof item list. Items that are in the list will be normal and the ones that aren't will be fireproof.")
+	public static boolean fireproofItemBlacklist = false;
 }

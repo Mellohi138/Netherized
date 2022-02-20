@@ -12,9 +12,9 @@ public class IsImmune {
 	public static boolean isFireproof(Item item) {
 		for (String itemName : NetherizedConfig.fireproofItemList) {
 			if (ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName)) == item) {
-				return true;
+				return !NetherizedConfig.fireproofItemBlacklist;
 			}
 		}
-		return false;
+		return NetherizedConfig.fireproofItemBlacklist;
 	}
 }

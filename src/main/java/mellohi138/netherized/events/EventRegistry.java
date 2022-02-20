@@ -51,27 +51,20 @@ public class EventRegistry {
 			EntityItem entityItem = (EntityItem)event.getEntity();
 			ItemStack stack = entityItem.getItem();
 			
-			if(IsImmune.isFireproof(stack.getItem())) {
-				if(!stack.isEmpty()) {
-					if(!worldIn.isRemote) {
-			    		EntityFireproofItem fireproofItem = new EntityFireproofItem(worldIn, entityItem, stack);
-			    		worldIn.spawnEntity(fireproofItem);
-						entityItem.setDead();
-					}
-				}
+			if(IsImmune.isFireproof(stack.getItem()) && !stack.isEmpty() && !worldIn.isRemote) {
+	    		EntityFireproofItem fireproofItem = new EntityFireproofItem(worldIn, entityItem, stack);
+	    		worldIn.spawnEntity(fireproofItem);
+				entityItem.setDead();
 			}
-		} else if(event.getEntity().getClass() == EntityFireproofItem.class) {
+		} 
+		if(event.getEntity().getClass() == EntityFireproofItem.class) {
 			EntityFireproofItem fireproofItem = (EntityFireproofItem)event.getEntity();
 			ItemStack stack = fireproofItem.getItem();
 			
-			if(!IsImmune.isFireproof(stack.getItem())) {
-				if(!stack.isEmpty()) {
-					if(!worldIn.isRemote) {
-						EntityItem entityItem = new EntityItem(worldIn, fireproofItem.posX, fireproofItem.posY, fireproofItem.posZ, stack);
-						worldIn.spawnEntity(entityItem);
-						fireproofItem.setDead();
-					}
-				}
+			if(!IsImmune.isFireproof(stack.getItem()) && !stack.isEmpty() && !worldIn.isRemote) {
+				EntityItem entityItem = new EntityItem(worldIn, fireproofItem.posX, fireproofItem.posY, fireproofItem.posZ, stack);
+				worldIn.spawnEntity(entityItem);
+				fireproofItem.setDead();
 			}
 		}
 	}

@@ -66,7 +66,7 @@ public class WorldGenMinableNoAir extends WorldGenMinable {
                                 BlockPos blockpos = new BlockPos(l1, i2, j2);
                                 
                                 IBlockState state = worldIn.getBlockState(blockpos);
-                                if ((!isAdjacentToAir(worldIn, l1, i2, j2)) && state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
+                                if ((!isAdjacentToAir(worldIn, blockpos)) && state.getBlock().isReplaceableOreGen(state, worldIn, blockpos, this.predicate)) {
                                     worldIn.setBlockState(blockpos, this.oreBlock, 2);
                                 }
                             }
@@ -91,12 +91,12 @@ public class WorldGenMinableNoAir extends WorldGenMinable {
             }
         }
     
-	private static boolean isAdjacentToAir(World world, int x, int y, int z) {     
-		return world.isAirBlock(new BlockPos(x + 1, y, z)) ||
-			   world.isAirBlock(new BlockPos(x, y, z + 1)) ||
-			   world.isAirBlock(new BlockPos(x, y + 1, z)) ||
-			   world.isAirBlock(new BlockPos(x - 1, y, z)) ||
-			   world.isAirBlock(new BlockPos(x, y, z - 1)) ||
-			   world.isAirBlock(new BlockPos(x, y - 1, z));
+	private static boolean isAdjacentToAir(World worldIn, BlockPos pos) {     
+		for(BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
+			if (worldIn.isAirBlock(blockPos)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
