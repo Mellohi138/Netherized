@@ -29,14 +29,10 @@ public class NetherizedBlocks {
 	public static final Block GLOWING_OBSIDIAN = NetherizedBlocks.addBlock(new BlockGlowingObsidian("glowing_obsidian", Material.ROCK, MapColor.RED, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F).setLightLevel(1F));
 	public static final Block CRIMSON_PLANKS = NetherizedBlocks.addBlock(new BlockBase("crimson_planks", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
 	public static final Block WARPED_PLANKS = NetherizedBlocks.addBlock(new BlockBase("warped_planks", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
-	public static final Block NETHERITE_BLOCK = NetherizedBlocks.addBlock(new BlockBase("netherite_block", Material.ROCK, MapColor.BLACK, "pickaxe", 3, NetherizedSounds.SOUND_TYPE_NETHERITE_BLOCK, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F));
+	public static final Block NETHERITE_BLOCK = NetherizedBlocks.addBlock(new BlockBase("netherite_block", Material.ROCK, MapColor.BLACK, "pickaxe", 3, NetherizedSounds.SOUND_TYPE_NETHERITE_BLOCK, Netherized.NETHERIZED_BLOCKS, true).setHardness(50.0F).setResistance(2000.0F));
 	
 	//Re-registered Blocks
 	public static final Block NETHERRACK = NetherizedBlocks.reRegisterBlock(new BlockNewNetherrack());
-	public static final Block NETHER_QUARTZ_ORE = NetherizedBlocks.reRegisterBlock(new BlockNewNetherQuartzOre());
-	public static final Block NETHER_WART = NetherizedBlocks.reRegisterBlock(new BlockNewNetherWart());
-	public static final Block NETHER_WART_BLOCK = NetherizedBlocks.reRegisterBlock(new BlockNewNetherWartBlock());
-	public static final Block SOUL_SAND = NetherizedBlocks.reRegisterBlock(new BlockNewSoulSand());
 	
 	//Ores
 	public static final Block NETHER_IRON_ORE = NetherizedBlocks.addBlock(new BlockNetherOre("nether_iron_ore", Material.ROCK, MapColor.NETHERRACK, "pickaxe", 0, NetherizedSounds.SOUND_TYPE_NETHER_ORE, Netherized.NETHERIZED_BLOCKS).setHardness(3.0F).setResistance(3.0F));

@@ -39,6 +39,7 @@ public class Netherized {
 	    
     @EventHandler
     public void preInitialization(FMLPreInitializationEvent event) {
+    	RegistryHandler.registerBlockSounds();
     	RegistryHandler.registerMobUtils();
     	MinecraftForge.EVENT_BUS.register(new EventRegistry());
     } 
