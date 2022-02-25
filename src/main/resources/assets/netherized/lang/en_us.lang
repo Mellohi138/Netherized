@@ -19,6 +19,10 @@ item.warped_fungus_on_a_stick.name=Warped Fungus On A Stick
 //Blocks
 tile.crimson_planks.name=Crimson Planks
 tile.warped_planks.name=Warped Planks
+tile.crimson_fungus.name=Crimson Fungus
+tile.warped_fungus.name=Warped Fungus
+tile.crimson_stem.name=Crimson Stem
+tile.warped_stem.name=Warped Stem
 tile.ancient_debris.name=Ancient Debris
 tile.netherite_block.name=Netherite Block
 tile.nether_iron_ore.name=Nether Iron Ore
@@ -59,3 +63,11 @@ subtitles.item.armor.equip_netherite=Netherite armor clanks
 subtitles.block.respawn_anchor.charge=Respawn anchor charges
 subtitles.block.respawn_anchor.deplete=Respawn anchor fails
 subtitles.block.respawn_anchor.ambience=Respawn anchor whooshes
+
+subtitles.entity.strider.chirp=Strider Chirps
+subtitles.entity.strider.death=Strider dies
+subtitles.entity.strider.eat=Strider eats
+subtitles.entity.strider.hurt=Strider hurts
+subtitles.entity.strider.retreat=Strider retreats
+subtitles.entity.strider.step.lava=Strider steps on lava
+subtitles.entity.strider.warble=Strider warbles
