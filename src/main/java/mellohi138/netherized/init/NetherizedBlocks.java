@@ -27,8 +27,10 @@ public class NetherizedBlocks {
 	public static final Block SOUL_SOIL = NetherizedBlocks.addBlock(new BlockBase("soul_soil", Material.GROUND, MapColor.BROWN, "shovel", 0, NetherizedSounds.SOUND_TYPE_SOUL_SOIL, Netherized.NETHERIZED_BLOCKS).setHardness(0.5F));
 	public static final Block CRYING_OBSIDIAN = NetherizedBlocks.addBlock(new BlockCryingObsidian("crying_obsidian", Material.ROCK, MapColor.BLACK, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F).setLightLevel(0.7F));
 	public static final Block GLOWING_OBSIDIAN = NetherizedBlocks.addBlock(new BlockGlowingObsidian("glowing_obsidian", Material.ROCK, MapColor.RED, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F).setLightLevel(1F));
+	public static final Block CRIMSON_STEM = NetherizedBlocks.addBlock(new BlockRotatedPillarBase("crimson_stem", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(2.0F));
+	public static final Block WARPED_STEM = NetherizedBlocks.addBlock(new BlockRotatedPillarBase("warped_stem", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(2.0F));
 	public static final Block CRIMSON_PLANKS = NetherizedBlocks.addBlock(new BlockBase("crimson_planks", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
-	public static final Block WARPED_PLANKS = NetherizedBlocks.addBlock(new BlockBase("warped_planks", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
+	public static final Block WARPED_PLANKS = NetherizedBlocks.addBlock(new BlockBase("warped_planks", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
 	public static final Block NETHERITE_BLOCK = NetherizedBlocks.addBlock(new BlockBase("netherite_block", Material.ROCK, MapColor.BLACK, "pickaxe", 3, NetherizedSounds.SOUND_TYPE_NETHERITE_BLOCK, Netherized.NETHERIZED_BLOCKS, true).setHardness(50.0F).setResistance(2000.0F));
 	
 	//Re-registered Blocks
@@ -44,6 +46,9 @@ public class NetherizedBlocks {
 	public static final Block RESPAWN_ANCHOR = NetherizedBlocks.addBlock(new BlockRespawnAnchor("respawn_anchor", Material.ANVIL, MapColor.BLACK, "pickaxe", 3, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F));
 	
 	//Nether Vegetation
+	public static final Block CRIMSON_FUNGUS = NetherizedBlocks.addBlock(new BlockFungus("crimson_fungus", Material.PLANTS, MapColor.NETHERRACK, NetherizedSounds.SOUND_TYPE_NETHER_FUNGUS, Netherized.NETHERIZED_BLOCKS));
+	public static final Block WARPED_FUNGUS = NetherizedBlocks.addBlock(new BlockFungus("warped_fungus", Material.PLANTS, MapColor.CYAN, NetherizedSounds.SOUND_TYPE_NETHER_FUNGUS, Netherized.NETHERIZED_BLOCKS));
+	
 	public static final Block CRIMSON_NYLIUM = NetherizedBlocks.addBlock(new BlockNetherNylium("crimson_nylium", Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY, "pickaxe", 0, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
 	public static final Block WARPED_NYLIUM = NetherizedBlocks.addBlock(new BlockNetherNylium("warped_nylium", Material.ROCK, MapColor.GREEN_STAINED_HARDENED_CLAY, "pickaxe", 0, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
 	

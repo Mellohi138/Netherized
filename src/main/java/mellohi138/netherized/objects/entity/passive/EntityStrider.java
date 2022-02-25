@@ -6,11 +6,13 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
+import mellohi138.netherized.init.NetherizedBlocks;
 import mellohi138.netherized.init.NetherizedItems;
+import mellohi138.netherized.init.NetherizedSounds;
 import mellohi138.netherized.objects.entity.ai.EntityAIMoveToLava;
 import mellohi138.netherized.objects.entity.ai.pathfinding.PathNavigateLava;
 import mellohi138.netherized.objects.entity.hostile.EntityZombifiedPiglin;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -41,6 +43,7 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -51,10 +54,13 @@ public class EntityStrider extends EntityAnimal {
     private static final DataParameter<Boolean> IS_COLD = EntityDataManager.<Boolean>createKey(EntityStrider.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> IS_SADDLED = EntityDataManager.<Boolean>createKey(EntityStrider.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> BOOST_TIME = EntityDataManager.<Integer>createKey(EntityStrider.class, DataSerializers.VARINT);
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.CARROT);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Item.getItemFromBlock(NetherizedBlocks.WARPED_FUNGUS));
     private boolean boosting;
     private int boostTime;
     private int totalBoostTime;
+    
+    private EntityAIPanic panicAI;
+    private EntityAITempt temptationAI;
     
 	public EntityStrider(World worldIn) {
 		super(worldIn);
@@ -78,20 +84,34 @@ public class EntityStrider extends EntityAnimal {
     public void onUpdate() {
 		super.onUpdate();
 		
+		if (this.isTempted() && this.rand.nextInt(140) == 0) {
+			this.playSound(NetherizedSounds.ENTITY_STRIDER_WARBLE, 1.0F, this.getSoundPitch());
+		} else if (this.isPanicing() && this.rand.nextInt(60) == 0) {
+			this.playSound(NetherizedSounds.ENTITY_STRIDER_RETREAT, 1.0F, this.getSoundPitch());
+		}
+	      
 		if(this.isOnLava()) {
 			this.motionY = 0.0F;
 			this.onGround = true;
 		}
+		
+		this.setIsCold(!this.isInsideLava());
+    	this.doBlockCollisions();
     }
+	
+	private boolean isPanicing() {     
+		return this.panicAI != null && this.panicAI.shouldExecute();
+	}
+ 
+	private boolean isTempted() {  
+		return this.temptationAI != null && this.temptationAI.isRunning();
+	}
     
 	@Override
     protected void updateAITasks() {
 		super.updateAITasks();
         if (this.isWet()) {
             this.attackEntityFrom(DamageSource.DROWN, 1.0F);
-        }
-        if (this.world.getTotalWorldTime() % 100L == 0L) {
-            this.setIsCold(!this.isInsideLava());
         }
     }
 	
@@ -100,7 +120,7 @@ public class EntityStrider extends EntityAnimal {
 		float y = MathHelper.floor(this.posY);
 		float z = MathHelper.floor(this.posZ);
 		
-		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava() ;
+		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava();
 	}
 	
 	private boolean isInsideLava() {
@@ -108,7 +128,7 @@ public class EntityStrider extends EntityAnimal {
 		float y = MathHelper.floor(this.posY- Float.MIN_VALUE);
 		float z = MathHelper.floor(this.posZ);
 		
-		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava() ;
+		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava();
 	}
 	
     protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
@@ -143,14 +163,15 @@ public class EntityStrider extends EntityAnimal {
 	
 	@Override
     protected void initEntityAI() {
-        this.tasks.addTask(1, new EntityAIPanic(this, 1.65D));
-        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.2D, NetherizedItems.WARPED_FUNGUS_ON_A_STICK, false));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.2D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(4, new EntityAIMoveToLava(this, 1.5F));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1F));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0F));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityStrider.class, 12.0F));
+		this.panicAI = new EntityAIPanic(this, 1.65D);
+        this.tasks.addTask(0, this.panicAI);
+        this.tasks.addTask(1, new EntityAIMate(this, 1.0D));
+        this.temptationAI = new EntityAITempt(this, 1.4D, false, TEMPTATION_ITEMS);
+        this.tasks.addTask(2, temptationAI);
+        this.tasks.addTask(3, new EntityAIMoveToLava(this, 1.5F));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1F));
+        this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0F));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityStrider.class, 12.0F));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
@@ -162,7 +183,7 @@ public class EntityStrider extends EntityAnimal {
 	@Override
     protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0F);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0F);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.175F);
     }
 	
@@ -195,6 +216,10 @@ public class EntityStrider extends EntityAnimal {
 	
     public static void registerFixesStrider(DataFixer fixer) {
         EntityLiving.registerFixesMob(fixer, EntityStrider.class);
+    }
+    
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+    	this.playSound(this.isOnLava() ? NetherizedSounds.ENTITY_STRIDER_STEP_LAVA : NetherizedSounds.ENTITY_STRIDER_STEP, 1.0F, 1.0F);
     }
 	
     @Nullable
@@ -346,6 +371,21 @@ public class EntityStrider extends EntityAnimal {
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return TEMPTATION_ITEMS.contains(stack.getItem());
+    }
+    
+    @Nullable
+    protected SoundEvent getAmbientSound() {
+        return !this.isPanicing() && !this.isTempted() ? NetherizedSounds.ENTITY_STRIDER_CHIRP : null;
+    }
+    
+    @Nullable
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return NetherizedSounds.ENTITY_STRIDER_HURT;
+    }
+
+    @Nullable
+    protected SoundEvent getDeathSound() {
+        return NetherizedSounds.ENTITY_STRIDER_DEATH;
     }
 	
 	@Override
