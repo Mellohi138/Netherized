@@ -33,6 +33,7 @@ public class BlockNetherRoots extends BlockBush implements IShearable {
 		this.setCreativeTab(tab);
         this.setSoundType(soundType);
 	}
+	
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
     	return true;
     }
@@ -57,7 +58,7 @@ public class BlockNetherRoots extends BlockBush implements IShearable {
     }
 	
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && canStay(worldIn, pos);
+        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && this.canStay(worldIn, pos);
     }
     
     public boolean canStay(World worldIn, BlockPos pos) {

@@ -38,7 +38,7 @@ public class TileEntityInfernoReactor extends TileEntity implements ITickable {
             int x = this.pos.getX();
             int y = this.pos.getY();
             int z = this.pos.getZ();
-            AxisAlignedBB axisAlignedBB = (new AxisAlignedBB(x, y, z, (x + 1), (y + 1), (z + 1))).grow(48F).expand(0.0F, this.world.getHeight(), 0.0F);
+            AxisAlignedBB axisAlignedBB = new AxisAlignedBB(x, y, z, (x + 1), (y + 1), (z + 1)).grow(48F).expand(0.0F, this.world.getHeight(), 0.0F);
             List<EntityPlayer> list = this.world.<EntityPlayer>getEntitiesWithinAABB(EntityPlayer.class, axisAlignedBB);
 
             for (EntityPlayer player : list) {
