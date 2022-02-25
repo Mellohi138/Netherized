@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":    { "model": "netherized:crimson_stem" },
+        "axis=z":     { "model": "netherized:crimson_stem", "x": 90 },
+        "axis=x":     { "model": "netherized:crimson_stem", "x": 90, "y": 90 },
+        "axis=none":   { "model": "netherized:crimson_stem" }
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "netherized:blocks/crimson_stem_top",
+        "side": "netherized:blocks/crimson_stem_side"
+    }
+}
