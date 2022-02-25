@@ -11,6 +11,75 @@
         "category": "record",
         "sounds": [{"name" : "netherized:items/records/record_pigstep"}]
     },
+    "entity.strider.chirp": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.chirp",
+        "sounds": [{"name" : "netherized:entity/strider/chirp/strider_chirp_1"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_2"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_3"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_4"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_5"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_6"}]
+    },
+    "entity.strider.death": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.death",
+        "sounds": [{"name" : "netherized:entity/strider/death/strider_death_1"},
+                   {"name" : "netherized:entity/strider/death/strider_death_2"},
+                   {"name" : "netherized:entity/strider/death/strider_death_3"},
+                   {"name" : "netherized:entity/strider/death/strider_death_4"}]
+    },
+    "entity.strider.eat": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.eat",
+        "sounds": [{"name" : "netherized:entity/strider/eat/strider_eat_1"},
+                   {"name" : "netherized:entity/strider/eat/strider_eat_2"},
+                   {"name" : "netherized:entity/strider/eat/strider_eat_3"}]
+    },
+    "entity.strider.hurt": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.hurt",
+        "sounds": [{"name" : "netherized:entity/strider/hurt/strider_hurt_1"},
+                   {"name" : "netherized:entity/strider/hurt/strider_hurt_2"},
+				   {"name" : "netherized:entity/strider/hurt/strider_hurt_3"},
+                   {"name" : "netherized:entity/strider/hurt/strider_hurt_4"}]
+    },
+    "entity.strider.retreat": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.retreat",
+        "sounds": [{"name" : "netherized:entity/strider/retreat/strider_retreat_1"},
+                   {"name" : "netherized:entity/strider/retreat/strider_retreat_2"},
+				   {"name" : "netherized:entity/strider/retreat/strider_retreat_3"},
+                   {"name" : "netherized:entity/strider/retreat/strider_retreat_4"},
+				   {"name" : "netherized:entity/strider/retreat/strider_retreat_5"}]
+    },
+    "entity.strider.step": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:entity/strider/step/strider_step_1"},
+                   {"name" : "netherized:entity/strider/step/strider_step_2"},
+				   {"name" : "netherized:entity/strider/step/strider_step_3"},
+                   {"name" : "netherized:entity/strider/step/strider_step_4"},
+				   {"name" : "netherized:entity/strider/step/strider_step_5"}]
+    },
+	"entity.strider.step.lava": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.step.lava",
+        "sounds": [{"name" : "netherized:entity/strider/step/lava/strider_step_lava_1"},
+                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_2"},
+				   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_3"},
+                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_4"},
+                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_5"},
+				   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_6"}]
+    },
+	"entity.strider.warble": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.warble",
+        "sounds": [{"name" : "netherized:entity/strider/warble/strider_warble_1"},
+                   {"name" : "netherized:entity/strider/warble/strider_warble_2"},
+				   {"name" : "netherized:entity/strider/warble/strider_warble_3"},
+                   {"name" : "netherized:entity/strider/warble/strider_warble_4"},
+				   {"name" : "netherized:entity/strider/warble/strider_warble_5"}]
+    },
     "block.netherrack.break": {
         "category": "block",
 		"subtitle": "subtitles.block.generic.break",
@@ -318,6 +387,55 @@
                    {"name" : "netherized:blocks/warped_sprouts/step/warped_sprouts_step_4"},
                    {"name" : "netherized:blocks/warped_sprouts/step/warped_sprouts_step_5"}]
     },
+	"block.nether_stem.break": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.break",
+        "sounds": [{"name" : "netherized:blocks/nether_stem/break/nether_stem_break_1"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_2"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_3"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_4"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_5"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_6"}]
+    },
+    "block.nether_stem.fall": {
+        "category": "block",
+        "sounds": [{"name" : "netherized:blocks/nether_stem/step/nether_stem_step_1"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_2"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_3"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_4"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_5"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_6"}]
+    },
+    "block.nether_stem.hit": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.hit",
+        "sounds": [{"name" : "netherized:blocks/nether_stem/step/nether_stem_step_1"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_2"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_3"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_4"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_5"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_6"}]
+    },
+    "block.nether_stem.place": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.place",
+        "sounds": [{"name" : "netherized:blocks/nether_stem/break/nether_stem_break_1"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_2"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_3"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_4"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_5"},
+                   {"name" : "netherized:blocks/nether_stem/break/nether_stem_break_6"}]
+    },
+    "block.nether_stem.step": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.footsteps",
+        "sounds": [{"name" : "netherized:blocks/nether_stem/step/nether_stem_step_1"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_2"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_3"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_4"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_5"},
+                   {"name" : "netherized:blocks/nether_stem/step/nether_stem_step_6"}]
+    },
     "block.shroomlight.break": {
         "category": "block",
 		"subtitle": "subtitles.block.generic.break",
@@ -452,6 +570,14 @@
                    {"name" : "netherized:blocks/chain/step/chain_step_5"},
                    {"name" : "netherized:blocks/chain/step/chain_step_6"}]
     },
+	"block.lodestone.place": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.place",
+        "sounds": [{"name" : "netherized:blocks/lodestone/place/lodestone_place_1"},
+                   {"name" : "netherized:blocks/lodestone/place/lodestone_place_2"},
+                   {"name" : "netherized:blocks/lodestone/place/lodestone_place_3"},
+                   {"name" : "netherized:blocks/lodestone/place/lodestone_place_4"}]
+    },
     "block.nether_wart.break": {
         "category": "block",
 		"subtitle": "subtitles.block.generic.break",
@@ -507,6 +633,36 @@
                    {"name" : "netherized:blocks/nether_bricks/break/nether_bricks_break_4"},
                    {"name" : "netherized:blocks/nether_bricks/break/nether_bricks_break_5"},
                    {"name" : "netherized:blocks/nether_bricks/break/nether_bricks_break_6"}]
+    },
+    "block.nether_fungus.break": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.break",
+        "sounds": [{"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_1"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_2"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_3"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_4"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_5"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_6"}]
+    },
+    "block.nether_fungus.step": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.footsteps",
+        "sounds": [{"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_1"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_2"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_3"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_4"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_5"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_6"}]
+    },
+    "block.nether_fungus.place": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.place",
+        "sounds": [{"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_1"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_2"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_3"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_4"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_5"},
+                   {"name" : "netherized:blocks/nether_fungus/break/nether_fungus_break_6"}]
     },
     "block.nether_bricks.fall": {
         "category": "block",
