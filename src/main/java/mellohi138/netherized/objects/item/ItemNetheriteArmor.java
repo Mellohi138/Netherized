@@ -3,16 +3,12 @@ package mellohi138.netherized.objects.item;
 import com.google.common.collect.Multimap;
 
 import mellohi138.netherized.Netherized;
-import mellohi138.netherized.objects.entity.EntityFireproofItem;
 import mellohi138.netherized.util.config.NetherizedConfig;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ItemNetheriteArmor extends ItemArmor {
 	private final AttributeModifier knockbackResistance;
@@ -34,14 +30,4 @@ public class ItemNetheriteArmor extends ItemArmor {
         }
         return multimap;
     }
-	
-    @Override
-	public boolean hasCustomEntity(final ItemStack stack) {
-		return true;
-	}
-	
-    @Override
-	public Entity createEntity(final World world, final Entity location, final ItemStack itemstack) {
-	    return new EntityFireproofItem(world, location, itemstack);
-	}
 }
