@@ -36,7 +36,7 @@ public class NetherizedItems {
     public static final Item INFERNAL_HELMET = addItem(new ItemInfernalHelmet("inferno_helmet", NetherizedMaterials.NETHERITE_ARMOR_MATERIAL, Netherized.NETHERIZED_ITEMS));
     public static final Item INFERNAL_SHIELD = addItem(new ItemInfernalShield("inferno_shield", Netherized.NETHERIZED_ITEMS));
     
-	public static final Item LODESTONE_COMPASS = addItem(new ItemLodestoneCompass("lodestone_compass", Netherized.NETHERIZED_ITEMS));
+	public static final Item LODESTONE_COMPASS = addItem(new ItemLodestoneCompass("lodestone_compass", null));
     public static final Item WARPED_FUNGUS_ON_A_STICK = addItem(new ItemWarpedFungusOnAStick("warped_fungus_on_a_stick", Netherized.NETHERIZED_ITEMS));
     public static final Item RECORD_PIGSTEP = addItem(new ItemRecordBase("record_pigstep", NetherizedSounds.RECORD_PIGSTEP, Netherized.NETHERIZED_ITEMS));
     
