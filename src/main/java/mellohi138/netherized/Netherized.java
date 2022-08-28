@@ -2,13 +2,10 @@ package mellohi138.netherized;
 
 import org.apache.logging.log4j.Logger;
 
-import mellohi138.netherized.events.EventRegistry;
-import mellohi138.netherized.proxy.CommonProxy;
 import mellohi138.netherized.util.NetherizedCreativeTabs;
-import mellohi138.netherized.util.NetherizedOreDictionary;
 import mellohi138.netherized.util.RegistryHandler;
+import mellohi138.netherized.util.interfaces.IProxy;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,13 +20,13 @@ public class Netherized {
 	public static Netherized INSTANCE;
 	
 	@SidedProxy(clientSide = Netherized.CLIENT_PROXY, serverSide = Netherized.SERVER_PROXY)
-	public static CommonProxy PROXY;
+	public static IProxy PROXY;
 	
     public static Logger LOGGER;
 	
     public static final String MODID = "netherized";
     public static final String MODNAME = "Netherized";
-    public static final String VERSION = "1.1A";
+    public static final String VERSION = "0.0.5-A";
     
     public static final String CLIENT_PROXY = "mellohi138.netherized.proxy.ClientProxy";
     public static final String SERVER_PROXY = "mellohi138.netherized.proxy.CommonProxy";
@@ -38,19 +35,24 @@ public class Netherized {
 	public static final CreativeTabs NETHERIZED_BLOCKS = new NetherizedCreativeTabs(1);
 	    
     @EventHandler
-    public void preInitialization(FMLPreInitializationEvent event) {
-    	RegistryHandler.registerBlockSounds();
-    	RegistryHandler.registerMobUtils();
-    	MinecraftForge.EVENT_BUS.register(new EventRegistry());
+    public void preInit(FMLPreInitializationEvent event) {
+    	LOGGER = event.getModLog();
+    	RegistryHandler.registerModEvents();
+    	
+    	PROXY.preInit();
     } 
     
 	@EventHandler
-    public void Initialization(FMLInitializationEvent event) {
-		Netherized.PROXY.registerEntityModels();
+    public void init(FMLInitializationEvent event) {
+    	RegistryHandler.registerOreDict();
+    	RegistryHandler.registerBlockSounds();
+    	RegistryHandler.registerMobUtils();
+    	
+		PROXY.init();
     }
     
     @EventHandler
-    public void postInitialization(FMLPostInitializationEvent event) {
-    	NetherizedOreDictionary.registerOreDict();
+    public void postInit(FMLPostInitializationEvent event) {
+    	PROXY.postInit();
     }
 }

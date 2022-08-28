@@ -38,7 +38,7 @@ public class EntityInfernoFireball extends EntitySmallFireball {
             }
 
             boolean flag1 = ForgeEventFactory.getMobGriefingEvent(this.world, this.shootingEntity);
-            this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag1, flag1);
+            this.world.newExplosion((Entity)null, this.posX, this.posY, this.posZ, (float)this.explosionPower, flag1, false);
             this.setDead();
         }
     }

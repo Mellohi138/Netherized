@@ -1,0 +1,6 @@
+{
+    "parent": "block/torch",
+    "textures": {
+        "torch": "netherized:blocks/soul_torch"
+    }
+}

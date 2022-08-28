@@ -39,13 +39,33 @@ public class NetherizedConfig {
 	@Config.Comment(value = "Calculates the durability of the netherite armor")
 	public static int netheriteArmorDurabilityMultiplier = 37;
 	
+	@Config.RangeInt(min = 6)
+	@Config.Comment(value = "How much protection the infernal helmet will give")
+	public static int infernoProtectionAmount = 3;
+	
+	@Config.RangeDouble(min = 1)
+	@Config.Comment(value = "How much protection the infernal helmet will give")
+	public static float infernoKnockbackResistance = 0.4F;
+	
+	@Config.RangeDouble(min = 0F)
+	@Config.Comment(value = "How much armor toughness the infernal helmet will give")
+	public static float infernoToughness = 2.0F;
+	
+	@Config.RangeInt(min = 1)
+	@Config.Comment(value = "Calculates the durability of the infernal helmet")
+	public static int infernoDurabilityMultiplier = 15;
+	
+	@Config.RangeInt(min = 1)
+	@Config.Comment(value = "The enchantability level of the infernal helmet")
+	public static int infernoEnchantability = 15;
+	
 	@Config.RangeInt(min = 1)
 	@Config.Comment(value = "How much protection the netherite horse armor will give")
 	public static int netheriteHorseArmorProtectionAmount = 14;
 	
 	@Config.RangeDouble(min = 0)
-	@Config.Comment(value = "How much protection the netherite horse armor will give")
-	public static float netheriteHorseArmorKnockbackResistance = 1F;
+	@Config.Comment(value = "How much knockback resistance the netherite horse armor will give")
+	public static float netheriteHorseArmorKnockbackResistance = 0.4F;
 	
 	@Config.Comment(value = "Whether or not allow netherite anvil recipes to be used")
 	public static boolean netheriteAnvilRecipes = true;
@@ -74,4 +94,7 @@ public class NetherizedConfig {
 	
 	@Config.Comment(value = "Enabling this will make reverse the logic of the fireproof item list. Items that are in the list will be normal and the ones that aren't will be fireproof.")
 	public static boolean fireproofItemBlacklist = false;
+	
+	@Config.Comment(value = "This will replace the current knockback system with the one from 1.16")
+	public static boolean newKnockback = true;
 }

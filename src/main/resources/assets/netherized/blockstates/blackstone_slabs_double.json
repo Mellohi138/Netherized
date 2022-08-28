@@ -1,0 +1,6 @@
+{
+    "variants": {
+		
+        "half=top,variant=default": { "model": "netherized:blackstone" }
+    }
+}

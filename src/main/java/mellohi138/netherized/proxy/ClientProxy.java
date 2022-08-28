@@ -1,101 +1,96 @@
 package mellohi138.netherized.proxy;
 
-import net.minecraft.block.Block;
+import mellohi138.netherized.Netherized;
+import mellohi138.netherized.client.init.EntityRenderRegistry;
+import mellohi138.netherized.client.init.NetherizedTEISR;
+import mellohi138.netherized.client.particle.ParticleCryingObsidianTear;
+import mellohi138.netherized.client.particle.ParticleNetherSpores;
+import mellohi138.netherized.client.particle.ParticleReversedPortal;
+import mellohi138.netherized.client.particle.ParticleSoul;
+import mellohi138.netherized.client.particle.ParticleSoulFlame;
+import mellohi138.netherized.client.render.entity.RenderHoveringInferno;
+import mellohi138.netherized.client.render.entity.RenderStrider;
+import mellohi138.netherized.enums.EnumNetherizedParticles;
+import mellohi138.netherized.init.NetherizedItems;
+import mellohi138.netherized.objects.entity.hostile.EntityHoveringInferno;
+import mellohi138.netherized.objects.entity.passive.EntityStrider;
+import mellohi138.netherized.util.interfaces.IProxy;
+import mellohi138.netherized.util.interfaces.ITEISRModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import mellohi138.netherized.util.interfaces.ICustomRenderer;
-import mellohi138.netherized.Netherized;
-import mellohi138.netherized.client.particle.*;
-import mellohi138.netherized.client.render.entity.*;
-import mellohi138.netherized.init.NetherizedBlocks;
-import mellohi138.netherized.init.NetherizedItems;
-import mellohi138.netherized.objects.entity.passive.*;
-import mellohi138.netherized.objects.entity.hostile.*;
 
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(modid = Netherized.MODID)
-public class ClientProxy extends CommonProxy {
-	@SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void registerModels(ModelRegistryEvent event) {
-		for(Item item : NetherizedItems.ITEM_LIST) {
-			if(!(item instanceof ICustomRenderer)) {
-				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-			} else if(item instanceof ICustomRenderer) {
-				((ICustomRenderer)item).registerModels();
-			}
-		}
-        for(Block block : NetherizedBlocks.BLOCK_LIST) {
-			if(!(block instanceof ICustomRenderer)) {
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Item.getItemFromBlock(block).getRegistryName(), "inventory"));
-			} else if(block instanceof ICustomRenderer) {
-				((ICustomRenderer)block).registerModels();
-			}
-        }
-    }
-	
+@Mod.EventBusSubscriber(modid = Netherized.MODID, value = Side.CLIENT)
+public class ClientProxy implements IProxy {
 	@Override
-    @SideOnly(Side.CLIENT)
-	public void registerCustomModel(Item item, int metadata) {
-		ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+	public void preInit() {
+		this.registerEntityModels();
 	}
 	
 	@Override
-    @SideOnly(Side.CLIENT)
-	@SuppressWarnings("deprecation")
-    public void registerEntityModels() {
-		RenderManager renderManagerIn = Minecraft.getMinecraft().getRenderManager();
+	public void init() {
+	}
+
+	@Override
+	public void postInit() {
+		for(Item item : NetherizedItems.ITEM_LIST) {
+			if(item instanceof ITEISRModel) {
+				item.setTileEntityItemStackRenderer(new NetherizedTEISR());
+			}
+		}
+	}
+	
+	private void registerEntityModels() {	
+		RenderingRegistry.registerEntityRenderingHandler(EntityStrider.class, new EntityRenderRegistry<EntityStrider>() {
+			@Override
+			public Render<? super EntityStrider> createRenderFor(RenderManager manager) {
+				return new RenderStrider(manager);
+			}
+		});
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityStrider.class, new RenderStrider(renderManagerIn));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHoveringInferno.class, new EntityRenderRegistry<EntityHoveringInferno>( ) {
+			@Override
+			public Render<? super EntityHoveringInferno> createRenderFor(RenderManager manager) {
+				return new RenderHoveringInferno(manager);
+			}
+		});
     }
     
 	@Override
-    @SideOnly(Side.CLIENT)
-    public void spawnParticle(String particleName, double x, double y, double z, double motX, double motY, double motZ) {
-        World worldIn = Minecraft.getMinecraft().world;
-        if (worldIn == null) {
-            return;
-        }
+    public void spawnParticle(EnumNetherizedParticles particleEnum, World worldIn, double x, double y, double z, double motX, double motY, double motZ) {
+		if(worldIn == null) worldIn = Minecraft.getMinecraft().world;
+		
+		Particle particleEffect = null;
+		
+		switch(particleEnum) {
+		case REVERSED_PORTAL:
+			particleEffect = new ParticleReversedPortal.Factory().createParticle(0, worldIn, x, y, z, motX, motY, motZ);
+			break;
+		case CRYING_OBSIDIAN_TEAR:
+			particleEffect = new ParticleCryingObsidianTear.Factory().createParticle(0, worldIn, x, y, z, motX, motY, motZ);
+			break;
+		case CRIMSON_SPORE:
+			particleEffect = new ParticleNetherSpores.CrimsonFactory().createParticle(0, worldIn, x, y, z, motX, motY, motZ);
+			break;
+		case WARPED_SPORE:
+			particleEffect = new ParticleNetherSpores.WarpedFactory().createParticle(0, worldIn, x, y, z, motX, motY, motZ);
+			break;
+		case SOUL_FLAME:
+			particleEffect = new ParticleSoulFlame.Factory().createParticle(0, worldIn, x, y, z, motX, motY, motZ);
+			break;
+		case SOUL:
+			particleEffect = new ParticleSoul.Factory().createParticle(0, worldIn, x, y, z, motX, motY, motZ);
+			break;
+		}
         
-        Particle particle = null;
-        
-        if (particleName == "reversed_portal") {
-        	particle = new ParticleReversedPortal(worldIn, x, y, z, motX, motY, motZ);
-        }
-        
-        if (particleName == "crying_obsidian_tear") {
-            particle = new ParticleCryingObsidianTear(worldIn, x, y, z);
-        }
-        
-        if (particleName == "crimson_spore") {
-        	particle = null;
-        }
-        
-        if (particleName == "warped_spore") {
-        	particle = null;
-        }
-        
-        if (particleName == "soul_fire_flame") {
-        	particle = null;
-        }
-        
-        if (particleName == "soul") {
-        	particle = null;
-        }
-        
-        if (particle != null) {
-            Minecraft.getMinecraft().effectRenderer.addEffect(particle);
-        }
+		if(particleEffect != null) {
+			Minecraft.getMinecraft().effectRenderer.addEffect(particleEffect);
+		}           	
     }
 }

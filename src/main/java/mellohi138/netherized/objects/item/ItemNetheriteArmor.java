@@ -19,7 +19,7 @@ public class ItemNetheriteArmor extends ItemArmor {
 		this.setRegistryName(Netherized.MODID, name);
 		this.setCreativeTab(tab);
 		
-		this.knockbackResistance = new AttributeModifier("generic.knockbackResistance", NetherizedConfig.netheriteKnockbackResistance, 0);
+		this.knockbackResistance = new AttributeModifier("netheriteKnockbackResistance", NetherizedConfig.netheriteKnockbackResistance, 0);
 	}
 	
 	@Override

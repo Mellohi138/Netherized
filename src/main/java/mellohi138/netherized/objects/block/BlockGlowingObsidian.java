@@ -2,8 +2,6 @@ package mellohi138.netherized.objects.block;
 
 import java.util.Random;
 
-import mellohi138.netherized.Netherized;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -18,14 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockGlowingObsidian extends Block {
+public class BlockGlowingObsidian extends BlockBase {
 	public BlockGlowingObsidian(String name, Material material, MapColor color, String usedTool, int toolStrength, SoundType soundType, CreativeTabs tab) {
-		super(material, color);
-		this.setTranslationKey(name);
-		this.setRegistryName(Netherized.MODID, name);
-		this.setCreativeTab(tab);
-        this.setHarvestLevel(usedTool, toolStrength);
-        this.setSoundType(soundType);
+		super(name, material, color, usedTool, toolStrength, soundType, tab, false);
 	}
 	
     public boolean isFireSource(World world, BlockPos pos, EnumFacing side) {
@@ -35,14 +28,14 @@ public class BlockGlowingObsidian extends Block {
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
     	return Item.getItemFromBlock(Blocks.OBSIDIAN);
     }
-	
+    
+	@Override
 	@SideOnly(Side.CLIENT)
-    @SuppressWarnings("deprecation")
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		EnumFacing side = EnumFacing.random(rand);
 		BlockPos blockpos = pos.offset(side);
 		IBlockState blockstate = worldIn.getBlockState(blockpos);
-		if (!stateIn.isTopSolid() || !blockstate.isSideSolid(worldIn, blockpos, side.getOpposite())) {
+		if (!stateIn.isSideSolid(worldIn, blockpos, EnumFacing.UP) || !blockstate.isSideSolid(worldIn, blockpos, side.getOpposite())) {
 			double d0 = side.getXOffset() == 0 ? rand.nextDouble() : 0.5D + (double)side.getXOffset() * 0.6D;
             double d1 = side.getYOffset() == 0 ? rand.nextDouble() : 0.5D + (double)side.getYOffset() * 0.6D;
             double d2 = side.getZOffset() == 0 ? rand.nextDouble() : 0.5D + (double)side.getZOffset() * 0.6D;

@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "netherized:blocks/polished_blackstone",
+        "top": "netherized:blocks/polished_blackstone",
+        "side": "netherized:blocks/polished_blackstone"
+    }
+}

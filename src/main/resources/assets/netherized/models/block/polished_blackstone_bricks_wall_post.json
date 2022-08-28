@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_post",
+    "textures": {
+        "wall": "netherized:blocks/polished_blackstone_bricks"
+    }
+}

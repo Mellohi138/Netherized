@@ -11,7 +11,6 @@ import mellohi138.netherized.init.NetherizedItems;
 import mellohi138.netherized.init.NetherizedSounds;
 import mellohi138.netherized.objects.entity.ai.EntityAIMoveToLava;
 import mellohi138.netherized.objects.entity.ai.pathfinding.PathNavigateLava;
-import mellohi138.netherized.objects.entity.hostile.EntityZombifiedPiglin;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,6 +26,7 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -89,15 +89,18 @@ public class EntityStrider extends EntityAnimal {
 		} else if (this.isPanicing() && this.rand.nextInt(60) == 0) {
 			this.playSound(NetherizedSounds.ENTITY_STRIDER_RETREAT, 1.0F, this.getSoundPitch());
 		}
-	      
-		if(this.isOnLava()) {
+		
+		if(this.getLavaCheck()) {
 			this.motionY = 0.0F;
 			this.onGround = true;
 		}
-		
-		this.setIsCold(!this.isInsideLava());
+
     	this.doBlockCollisions();
     }
+	
+	private boolean getLavaCheck() {
+		return this.getEntityWorld().getBlockState(new BlockPos(this.posX, this.posY, this.posZ)).getMaterial() == Material.LAVA;
+	}
 	
 	private boolean isPanicing() {     
 		return this.panicAI != null && this.panicAI.shouldExecute();
@@ -113,23 +116,9 @@ public class EntityStrider extends EntityAnimal {
         if (this.isWet()) {
             this.attackEntityFrom(DamageSource.DROWN, 1.0F);
         }
+		
+		this.setIsCold(!this.getLavaCheck());
     }
-	
-	private boolean isOnLava() {
-		float x = MathHelper.floor(this.posX);
-		float y = MathHelper.floor(this.posY);
-		float z = MathHelper.floor(this.posZ);
-		
-		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava();
-	}
-	
-	private boolean isInsideLava() {
-		float x = MathHelper.floor(this.posX);
-		float y = MathHelper.floor(this.posY- Float.MIN_VALUE);
-		float z = MathHelper.floor(this.posZ);
-		
-		return this.world.getBlockState(new BlockPos(x, y, z)).getMaterial() == Material.LAVA || this.isInsideOfMaterial(Material.LAVA) || this.isInLava();
-	}
 	
     protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
     	this.doBlockCollisions();
@@ -219,7 +208,7 @@ public class EntityStrider extends EntityAnimal {
     }
     
     protected void playStepSound(BlockPos pos, Block blockIn) {
-    	this.playSound(this.isOnLava() ? NetherizedSounds.ENTITY_STRIDER_STEP_LAVA : NetherizedSounds.ENTITY_STRIDER_STEP, 1.0F, 1.0F);
+    	this.playSound(this.getLavaCheck() ? NetherizedSounds.ENTITY_STRIDER_STEP_LAVA : NetherizedSounds.ENTITY_STRIDER_STEP, 1.0F, 1.0F);
     }
 	
     @Nullable
@@ -229,7 +218,7 @@ public class EntityStrider extends EntityAnimal {
         } else {
         	if(!this.world.isRemote) {
         		if(this.rand.nextInt(30) == 0) {
-        			EntityZombifiedPiglin zombifiedPiglin = new EntityZombifiedPiglin(this.world);
+        			EntityPigZombie zombifiedPiglin = new EntityPigZombie(this.world);
         			livingData = this.addRider(difficultyIn, zombifiedPiglin, livingData);
         		} else if(this.rand.nextInt(10) == 0) {
         			EntityStrider strider = new EntityStrider(this.world);
@@ -262,9 +251,10 @@ public class EntityStrider extends EntityAnimal {
         }
     }
     
+    @Override
     @Nullable
     public Entity getControllingPassenger() {
-        return this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
+        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
     }
     
     public void onDeath(DamageSource cause) {
@@ -282,10 +272,11 @@ public class EntityStrider extends EntityAnimal {
     	return null;
     }
     
+    @Override
     public void travel(float strafe, float vertical, float forward) {
     	this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue() * (this.getIsCold() ? 0.66F : 1.0F));
     	
-        Entity entity = this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
+        Entity entity = this.getControllingPassenger();
 
         if (this.isBeingRidden() && this.canBeSteered()) {
             this.rotationYaw = entity.rotationYaw;
@@ -309,7 +300,7 @@ public class EntityStrider extends EntityAnimal {
                 }
 
                 this.setAIMoveSpeed(f);
-                super.travel(0.0F, 0.0F, 1.0F);
+                super.travel(0.0F, 0.0F, 0.5F);
             } else {
                 this.motionX = 0.0D;
                 this.motionY = 0.0D;
@@ -373,16 +364,19 @@ public class EntityStrider extends EntityAnimal {
         return TEMPTATION_ITEMS.contains(stack.getItem());
     }
     
+    @Override
     @Nullable
     protected SoundEvent getAmbientSound() {
         return !this.isPanicing() && !this.isTempted() ? NetherizedSounds.ENTITY_STRIDER_CHIRP : null;
     }
     
+    @Override
     @Nullable
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return NetherizedSounds.ENTITY_STRIDER_HURT;
     }
 
+    @Override
     @Nullable
     protected SoundEvent getDeathSound() {
         return NetherizedSounds.ENTITY_STRIDER_DEATH;

@@ -26,58 +26,64 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 public class BlockNetherRoots extends BlockBush implements IShearable {
-	public BlockNetherRoots(String name, Material material, MapColor color, SoundType soundType, CreativeTabs tab) {
+	private final int rootID;
+	
+	public BlockNetherRoots(String name, Material material, MapColor color, SoundType soundType, CreativeTabs tab, int rootID) {
 		super(material, color);
 		this.setTranslationKey(name);
 		this.setRegistryName(Netherized.MODID, name);
 		this.setCreativeTab(tab);
         this.setSoundType(soundType);
+        
+        this.rootID = rootID;
 	}
 	
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
-    	return true;
+	@Override
+    public boolean isFoliage(IBlockAccess world, BlockPos pos) {
+        return true;
     }
 	
+	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return null;
     }
     
-    @SuppressWarnings("static-access")
+    @Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         if (!worldIn.isRemote && stack.getItem() == Items.SHEARS) {
             player.addStat(StatList.getBlockStats(this));
-            if (this == NetherizedBlocks.CRIMSON_ROOTS) {
-            	this.spawnAsEntity(worldIn, pos, new ItemStack(NetherizedBlocks.CRIMSON_ROOTS, 1, 0));
-            } else if (this == NetherizedBlocks.WARPED_ROOTS) {
-            	this.spawnAsEntity(worldIn, pos, new ItemStack(NetherizedBlocks.WARPED_ROOTS, 1, 0));
-            } else if (this == NetherizedBlocks.WARPED_SPROUTS) {
-            	this.spawnAsEntity(worldIn, pos, new ItemStack(NetherizedBlocks.WARPED_SPROUTS, 1, 0));
-            }
+            Block.spawnAsEntity(worldIn, pos, new ItemStack(this, 1, 0));
         }
         super.harvestBlock(worldIn, player, pos, state, te, stack);
     }
 	
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && this.canStay(worldIn, pos);
+        return worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) && this.canBlockStay(worldIn, pos, worldIn.getBlockState(pos));
     }
-    
-    public boolean canStay(World worldIn, BlockPos pos) {
+
+    @Override
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         IBlockState soil = worldIn.getBlockState(pos.down());
-        if (this == NetherizedBlocks.CRIMSON_ROOTS) {
-            return soil.getBlock() == NetherizedBlocks.CRIMSON_NYLIUM;
-        } else if (this == NetherizedBlocks.WARPED_ROOTS || this == NetherizedBlocks.WARPED_SPROUTS) {
-            return soil.getBlock() == NetherizedBlocks.WARPED_NYLIUM;
+        
+        switch(this.rootID) {
+        case 0 :
+        	return soil.getBlock() == NetherizedBlocks.CRIMSON_NYLIUM;
+		case 1:
+        	return soil.getBlock() == NetherizedBlocks.WARPED_NYLIUM;
         }
 		return false;
     }
     
-    @Deprecated
+    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         worldIn.scheduleUpdate(pos, this, 1);
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
     }
     
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    	if (!this.canStay(worldIn, pos)) {
+    	if (!this.canBlockStay(worldIn, pos, state)) {
     		worldIn.destroyBlock(pos, true);
         }
     }
@@ -89,13 +95,6 @@ public class BlockNetherRoots extends BlockBush implements IShearable {
 
 	@Override
 	public NonNullList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        if (this == NetherizedBlocks.CRIMSON_ROOTS) {
-        	return NonNullList.withSize(1, new ItemStack(NetherizedBlocks.CRIMSON_ROOTS, 1, 0));
-        } else if (this == NetherizedBlocks.WARPED_ROOTS) {  
-        	return NonNullList.withSize(1, new ItemStack(NetherizedBlocks.WARPED_ROOTS, 1, 0));
-        } else if (this == NetherizedBlocks.WARPED_SPROUTS) {  
-        	return NonNullList.withSize(1, new ItemStack(NetherizedBlocks.WARPED_SPROUTS, 1, 0));
-        }
-		return null;
+    	return NonNullList.withSize(1, new ItemStack(this));
 	}
 }

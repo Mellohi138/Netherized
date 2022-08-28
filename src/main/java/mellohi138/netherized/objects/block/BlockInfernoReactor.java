@@ -4,12 +4,13 @@ import java.util.Random;
 
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.init.NetherizedBlocks;
-import mellohi138.netherized.objects.entity.tile.TileEntityInfernoReactor;
+import mellohi138.netherized.objects.block.tileentity.TileEntityInfernoReactor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -43,7 +44,9 @@ public class BlockInfernoReactor extends BlockContainer {
     }
 
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, IS_ACTIVE);
+        return new BlockStateContainer(this, new IProperty[] {
+        		IS_ACTIVE
+        });
     }
     
     public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -59,20 +62,13 @@ public class BlockInfernoReactor extends BlockContainer {
 		return new TileEntityInfernoReactor();
 	}
 	
-	public static void setReactor(boolean isActive, World worldIn, BlockPos pos) {
-        IBlockState blockState = NetherizedBlocks.INFERNO_REACTOR.getDefaultState().withProperty(BlockInfernoReactor.IS_ACTIVE, Boolean.valueOf(isActive));
-        if (worldIn.getBlockState(pos) != blockState) {
-        	worldIn.setBlockState(pos, blockState);
-        }
-	}
-    
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) { 
+	@Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         
         if(tileEntity instanceof TileEntityInfernoReactor) {
-        	if(((TileEntityInfernoReactor)tileEntity).isAssembled()) {
-        		worldIn.setBlockState(pos, state.withProperty(IS_ACTIVE, Boolean.valueOf(true)), 3);
-        	}
+        	TileEntityInfernoReactor reactor = ((TileEntityInfernoReactor)tileEntity);
+        	reactor.update();
         }
     }
 }

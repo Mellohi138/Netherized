@@ -25,20 +25,18 @@ public class NetherizedEntities {
 	
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
-    	event.getRegistry().register(NetherizedEntities.registerEntity("strider", EntityStrider.class, 10236982, 5065037));
+    	event.getRegistry().register(registerEntity("strider", EntityStrider.class, 10236982, 5065037));
     	
     	//event.getRegistry().register(NetherizedEntities.registerEntity("piglin", EntityPiglin.class, 10051392, 16380836));
     	//event.getRegistry().register(NetherizedEntities.registerEntity("piglin_brute", EntityPiglinBrute.class, 5843472, 16380836));
     	//event.getRegistry().register(NetherizedEntities.registerEntity("hoglin", EntityHoglin.class, 13004373, 6251620);
     	//event.getRegistry().register(NetherizedEntities.registerEntity("zoglin", EntityZoglin.class, 13004373, 15132390);
     	
-    	//event.getRegistry().register(NetherizedEntities.registerEntity("hovering_inferno", EntityHoveringInferno.class, 1444107, 16758329));
-		event.getRegistry().register(NetherizedEntities.registerEntity("zombified_piglin", EntityZombifiedPiglin.class, 15373203, 5009705));
+    	event.getRegistry().register(registerEntity("hovering_inferno", EntityHoveringInferno.class, 1444107, 16758329));
+		event.getRegistry().register(registerEntity("zombified_piglin", EntityZombifiedPiglin.class, 15373203, 5009705));
 		
-		event.getRegistry().register(NetherizedEntities.registerEntity("fireproof_item", EntityFireproofItem.class));
-		event.getRegistry().register(NetherizedEntities.registerEntity("inferno_fireball", EntityInfernoFireball.class));
-        
-        //EntityRegistry.removeSpawn(EntityPigZombie.class, EnumCreatureType.MONSTER, Biomes.HELL);
+		event.getRegistry().register(registerEntity("fireproof_item", EntityFireproofItem.class));
+		event.getRegistry().register(registerEntity("inferno_fireball", EntityInfernoFireball.class));
     }
     
     private static EntityEntry registerEntity(String name, Class<? extends Entity> entityClass, int mainEggColor, int subEggColor) {

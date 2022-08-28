@@ -17,20 +17,22 @@ public class NetherizedCreativeTabs extends CreativeTabs {
 	
     @Override
     public ItemStack createIcon() {
-    	if(tabID == 0) {
+    	switch(this.tabID) {
+    	case 0:
     		return new ItemStack(Items.GOLD_INGOT);
-    	} else if(tabID == 1) {
+    	case 1:
     		return new ItemStack(Blocks.NETHERRACK);
     	}
     	return new ItemStack(Items.AIR);
     }
     
     private static String getName(int ID) {
-        if(ID == 0) {
+    	switch(ID) {
+    	case 0:
             return "_items";
-        } else if (ID == 1) {
+    	case 1:
             return "_blocks";
-        }
+    	}
         return "_blank";
     }
 }

@@ -13,6 +13,7 @@ public class ItemBase extends Item {
 	}
 	
 	public ItemBase(String name, CreativeTabs tab, boolean isBeaconPayment) {
+		super();
 		this.setTranslationKey(name);
 		this.setRegistryName(Netherized.MODID, name);
 		this.setCreativeTab(tab);

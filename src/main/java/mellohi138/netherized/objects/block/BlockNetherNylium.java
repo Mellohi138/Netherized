@@ -2,8 +2,6 @@ package mellohi138.netherized.objects.block;
 
 import java.util.Random;
 
-import mellohi138.netherized.Netherized;
-import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -15,14 +13,9 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockNetherNylium extends Block implements IGrowable {
+public class BlockNetherNylium extends BlockBase implements IGrowable {
 	public BlockNetherNylium(String name, Material material, MapColor color, String usedTool, int toolStrength, SoundType soundType, CreativeTabs tab) {
-		super(material, color);
-		this.setTranslationKey(name);
-		this.setRegistryName(Netherized.MODID, name);
-		this.setCreativeTab(tab);
-        this.setHarvestLevel(usedTool, toolStrength);
-        this.setSoundType(soundType);
+		super(name, material, color, usedTool, toolStrength, soundType, tab, false);
 	}
 	
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {

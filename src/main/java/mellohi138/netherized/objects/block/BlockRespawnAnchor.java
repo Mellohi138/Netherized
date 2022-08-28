@@ -5,10 +5,10 @@ import java.util.Random;
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.enums.EnumNetherizedParticles;
 import mellohi138.netherized.init.NetherizedSounds;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,66 +29,68 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRespawnAnchor extends Block {
+public class BlockRespawnAnchor extends BlockBase {
 	public static final PropertyInteger CHARGE = PropertyInteger.create("charges", 0, 4);
 			
 	public BlockRespawnAnchor(String name, Material material, MapColor color, String usedTool, int toolStrength, SoundType soundType, CreativeTabs tab) {
-		super(material, color);
-		this.setTranslationKey(name);
-		this.setRegistryName(Netherized.MODID, name);
-		this.setCreativeTab(tab);
-        this.setHarvestLevel(usedTool, toolStrength);
-        this.setSoundType(soundType);
-        
+		super(name, material, color, usedTool, toolStrength, soundType, tab, false);
+		
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHARGE, Integer.valueOf(0)));
 	}
 	
+	@Override
     public IBlockState getStateFromMeta(int meta) {
     	return this.getDefaultState().withProperty(CHARGE, Integer.valueOf(MathHelper.clamp(meta, 0, 4)));
     }
 
+    @Override
     public int getMetaFromState(IBlockState state) {
     	return ((Integer)state.getValue(CHARGE)).intValue();
     }
     
+    @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, CHARGE);
+        return new BlockStateContainer(this, new IProperty[] {	
+        		CHARGE
+        });
     }
 	
-	@SuppressWarnings("static-access")
+    @Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		ItemStack itemstack = playerIn.getHeldItem(hand);
-		if (hand == EnumHand.MAIN_HAND && !this.getRespawnFuel(itemstack) && this.getRespawnFuel(playerIn.getHeldItem(EnumHand.OFF_HAND))) {
+		ItemStack stack = playerIn.getHeldItem(hand);
+		
+		if(playerIn.isSneaking() && !this.isEmpty(state)) {
+			this.takeGlowstone(playerIn, worldIn, pos, state);
 			return true;
-		} else if (this.getRespawnFuel(itemstack) && this.canBeCharged(state)) {
+		} else if (this.getRespawnFuel(stack) && this.canBeCharged(state)) {
 			this.charge(worldIn, pos, state); 
 			if (!playerIn.isCreative()) {
-				itemstack.shrink(1); 
+				stack.shrink(1); 
 			}
 			return true;
-		} else if (state.getValue(CHARGE) == 0) {
-	    	  return true;
-		} else if (!this.canSetSpawn(worldIn)) {
+		} else if(state.getValue(CHARGE) == 0) {
+			return false;
+		} else if (!this.canSetSpawn(worldIn) && !this.isEmpty(state)) {
 			if (!worldIn.isRemote) {
 				this.explode(worldIn, pos);
 			}
+			return true;
 		} else {
 			if (!worldIn.isRemote) {
-				playerIn.setSpawnDimension(playerIn.dimension); 
-				playerIn.setSpawnPoint(pos.offset(facing), true);
-				this.removeCharge(worldIn, pos, state);
-				return true;
+				if(playerIn.getSpawnDimension() != worldIn.provider.getDimension() || !playerIn.getBedLocation().equals(pos)) {
+					playerIn.setSpawnDimension(worldIn.provider.getDimension()); 
+					playerIn.setSpawnPoint(pos, true);
+					this.removeCharge(worldIn, pos, state);
+					return true;
+				}
 			}
 		}
 		
-		/*
-		if(Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-			this.takeGlowstone(playerIn, worldIn, pos, state);
-		}
-		*/
-		return true;
+		System.out.print(this.getScaledChargeLevel(state));
+		return false;
 	}
     
+	@Override
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     	if (stateIn.getValue(CHARGE) != 0) {
@@ -100,59 +102,73 @@ public class BlockRespawnAnchor extends Block {
             double d1 = (double)pos.getY() + 1.0D;
             double d2 = (double)pos.getZ() + 0.5D + (0.5D - rand.nextDouble());
             double d3 = (double)rand.nextFloat() * 0.04D;
-            Netherized.PROXY.spawnParticle(EnumNetherizedParticles.REVERSED_PORTAL.getParticleName(), d0, d1, d2, 0.0D, d3, 0.0D);
+            Netherized.PROXY.spawnParticle(EnumNetherizedParticles.REVERSED_PORTAL, worldIn, d0, d1, d2, 0.0D, d3, 0.0D);
     	}
     }
        
-    private static boolean canSetSpawn(World worldIn) {
-		return worldIn.provider.getDimensionType() == DimensionType.NETHER;
+    private boolean canSetSpawn(World worldIn) {
+		return worldIn.provider.getDimension() == DimensionType.NETHER.getId();
 	}
 	
-	private static int getScaledChargeLevel(IBlockState state, float scale) {  
-		return MathHelper.floor((float)(state.getValue(CHARGE) - 0) / 4.0F * (int)scale);
+	private float getScaledChargeLevel(IBlockState state) {  
+		switch(state.getValue(CHARGE).intValue()) {
+		case 0:
+			return 0.0F;
+		case 1:
+			return 0.25F;
+		case 2:
+			return 0.5F;
+		case 3:
+			return 0.75F;
+		case 4:
+			return 1.0F;
+		}
+		return 1.0F;
 	}
 	
-    @Deprecated
+	@Override
     public boolean hasComparatorInputOverride(IBlockState state) {
         return true;
     }
     
-	@Deprecated
-    @SuppressWarnings("static-access")
+    @Override
     public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
-        return this.getScaledChargeLevel(blockState, 1F);
+        return (int) (this.getScaledChargeLevel(blockState) * 15);
     }
-	
-	private void explode(World worldIn, BlockPos pos) {
-		worldIn.setBlockToAir(pos);
-		worldIn.newExplosion((Entity)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 5.0F, true, true);
-		worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, NetherizedSounds.BLOCK_RESPAWN_ANCHOR_DEPLETE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-	}
 
-	private static boolean getRespawnFuel(ItemStack stack) {   
+	private boolean getRespawnFuel(ItemStack stack) {   
 		return stack.getItem() == Item.getItemFromBlock(Blocks.GLOWSTONE);
 	}
 	
-	private static boolean canBeCharged(IBlockState state) {   
+	private boolean isEmpty(IBlockState state) {   
+		return state.getValue(CHARGE) == 0;
+	}
+	
+	private boolean canBeCharged(IBlockState state) {   
 		return state.getValue(CHARGE) < 4;
 	}
 	
-	private static void charge(World worldIn, BlockPos pos, IBlockState state) {
-		worldIn.setBlockState(pos, state.withProperty(CHARGE, Integer.valueOf(state.getValue(CHARGE) + 1)), 3);
+	private void charge(World worldIn, BlockPos pos, IBlockState state) {
+		worldIn.setBlockState(pos, state.cycleProperty(CHARGE));
 		worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, NetherizedSounds.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 	
-	private static void removeCharge(World worldIn, BlockPos pos, IBlockState state) {
+	private void removeCharge(World worldIn, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos, state.withProperty(CHARGE, Integer.valueOf(state.getValue(CHARGE) - 1)), 3);
 		worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, NetherizedSounds.BLOCK_RESPAWN_ANCHOR_SPAWN_SET, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 	
-	@SuppressWarnings("unused")
-	private static void takeGlowstone(EntityPlayer playerIn, World worldIn, BlockPos pos, IBlockState state) {
+	private void takeGlowstone(EntityPlayer playerIn, World worldIn, BlockPos pos, IBlockState state) {
 		if(!playerIn.isCreative()) {
 			playerIn.inventory.addItemStackToInventory(new ItemStack(Blocks.GLOWSTONE));
 		}
 		worldIn.setBlockState(pos, state.withProperty(CHARGE, Integer.valueOf(state.getValue(CHARGE) - 1)), 3);
 		worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	}
+	
+	private void explode(World worldIn, BlockPos pos) {
+		worldIn.destroyBlock(pos, false);
+		worldIn.newExplosion((Entity)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 5.0F, true, true);
+		worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, NetherizedSounds.BLOCK_RESPAWN_ANCHOR_DEPLETE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 }

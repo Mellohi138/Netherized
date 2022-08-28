@@ -1,5 +1,7 @@
 package mellohi138.netherized.client.particle;
 
+import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
@@ -35,5 +37,12 @@ public class ParticleReversedPortal extends ParticlePortal {
            this.posY += this.motionY * (double)f;
            this.posZ += this.motionZ * (double)f;
         }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static class Factory implements IParticleFactory {
+    	public Particle createParticle(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_) {
+    		return new ParticleReversedPortal(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
+    	}
     }
 }

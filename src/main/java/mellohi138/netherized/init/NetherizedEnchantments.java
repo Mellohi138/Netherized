@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class NetherizedEnchantments {
 	public static final List<Enchantment> ENCHANTMENT_LIST = new ArrayList<Enchantment>();
 	
-	public static final Enchantment SOUL_SPEED = NetherizedEnchantments.addEnchantment(new EnchantmentSoulSpeed("soul_speed", Rarity.VERY_RARE, EnumEnchantmentType.ARMOR_FEET));
+	public static final Enchantment SOUL_SPEED = addEnchantment(new EnchantmentSoulSpeed("soul_speed", Rarity.VERY_RARE, EnumEnchantmentType.ARMOR_FEET));
 
 	private static Enchantment addEnchantment(Enchantment enchantmentIn) {
 		NetherizedEnchantments.ENCHANTMENT_LIST.add(enchantmentIn);

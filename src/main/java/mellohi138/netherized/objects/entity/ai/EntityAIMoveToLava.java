@@ -3,6 +3,7 @@ package mellohi138.netherized.objects.entity.ai;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIMoveToBlock;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -71,8 +72,7 @@ public class EntityAIMoveToLava extends EntityAIMoveToBlock {
 	}
 	
 	@Override
-	@SuppressWarnings("deprecation")
 	protected boolean shouldMoveTo(World worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos).getBlock() == Blocks.LAVA && !worldIn.getBlockState(pos.up()).isTopSolid();
+		return worldIn.getBlockState(pos).getBlock() == Blocks.LAVA && !worldIn.getBlockState(pos.up()).isSideSolid(worldIn, pos, EnumFacing.UP);
 	}
 }

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=x": { "model": "netherized:chain", "x": 90, "y": 90 },
+        "axis=y": { "model": "netherized:chain" },
+        "axis=z": { "model": "netherized:chain", "x": 90 }
+    }
+}

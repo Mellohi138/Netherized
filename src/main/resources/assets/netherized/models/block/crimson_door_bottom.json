@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "netherized:blocks/crimson_door_bottom",
+        "top": "netherized:blocks/crimson_door_top"
+    }
+}

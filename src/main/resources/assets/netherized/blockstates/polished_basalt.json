@@ -1,0 +1,14 @@
+{
+    "variants": {
+	
+	    "axis=x": {
+          "model": "netherized:polished_basalt",
+          "x": 90,
+          "y": 90 },
+		"axis=y": {
+          "model": "netherized:polished_basalt" },
+        "axis=z": {
+          "model": "netherized:polished_basalt",
+          "x": 90 }
+	}
+}

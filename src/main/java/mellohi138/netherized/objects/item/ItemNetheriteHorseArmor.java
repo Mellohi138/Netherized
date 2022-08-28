@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemNetheriteHorseArmor extends Item {
-	protected static final UUID KNOCKBACK_RESISTANCE_MODIFIER = UUID.fromString("ba912d2b-9413-3171-be0e-5b384abadf2a");
+	public static final UUID KNOCKBACK_RESISTANCE_MODIFIER = UUID.fromString("ba912d2b-9413-3171-be0e-5b384abadf2a");
 	public static final float KNOCKBACK_RESISTANCE_BONUS = NetherizedConfig.netheriteHorseArmorKnockbackResistance;
 	private final HorseArmorType armorType;
 	

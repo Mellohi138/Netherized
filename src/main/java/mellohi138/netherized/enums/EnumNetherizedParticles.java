@@ -5,7 +5,7 @@ public enum EnumNetherizedParticles {
 	CRYING_OBSIDIAN_TEAR("crying_obsidian_tear", 1),
 	CRIMSON_SPORE("crimson_spore", 2),
 	WARPED_SPORE("warped_spore", 3),
-	SOUL_FIRE_FLAME("soul_fire_flame", 4),
+	SOUL_FLAME("soul_flame", 4),
 	SOUL("soul", 5);
 	
     private final String particleName;

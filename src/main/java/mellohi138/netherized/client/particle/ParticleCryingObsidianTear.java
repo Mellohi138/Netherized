@@ -3,6 +3,8 @@ package mellohi138.netherized.client.particle;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleDrip;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -68,7 +70,15 @@ public class ParticleCryingObsidianTear extends ParticleDrip {
         }
     }
 	
+	@Override
     public int getBrightnessForRender(float partialTick) {
         return 240;
+    }
+	
+    @SideOnly(Side.CLIENT)
+    public static class Factory implements IParticleFactory {
+    	public Particle createParticle(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_) {
+    		return new ParticleCryingObsidianTear(worldIn, xCoordIn, yCoordIn, zCoordIn);
+    	}
     }
 }

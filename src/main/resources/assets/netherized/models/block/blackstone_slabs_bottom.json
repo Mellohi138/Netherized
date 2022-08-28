@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "netherized:blocks/blackstone_top",
+        "top": "netherized:blocks/blackstone_top",
+        "side": "netherized:blocks/blackstone_side"
+    }
+}

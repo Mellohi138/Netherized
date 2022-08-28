@@ -1,9 +1,9 @@
 [
 {
-  "modid": "melexpansion",
-  "name": "Mel-Expansion",
-  "description": "A mod which is specially designed to backport some stuff from the future versions along with it's own additional content. Mostly add stuff for the nether update.",
-  "version": "1.0",
+  "modid": "netherized",
+  "name": "Netherized",
+  "description": "A mod which is specially designed to backport the Nether Update along with it's own additional content.",
+  "version": "0.0.5-A",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "N/A",

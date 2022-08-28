@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,9 +66,12 @@ public class EntityFireproofItem extends EntityItem {
      	 }
     }
     
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (this.world.isRemote || this.isDead) return false;
         if (this.isEntityInvulnerable(source)) {
+            return false;
+        } else if (!this.getItem().isEmpty() && this.getItem().getItem() == Items.NETHER_STAR && source.isExplosion()) {
             return false;
         } else if (source.isFireDamage()) {
             return false;
@@ -82,6 +86,7 @@ public class EntityFireproofItem extends EntityItem {
         }
     }
     
+    @Override
     public void onUpdate() {
         if (getItem().getItem().onEntityItemUpdate(this)) return;
         if (this.getItem().isEmpty()) {
@@ -106,7 +111,7 @@ public class EntityFireproofItem extends EntityItem {
 
             if (this.isInsideOfMaterial(Material.LAVA)) {
                 this.motionX *= 0.95F;
-                this.motionY += this.floatInLava(this);
+                this.motionY += this.floatInLava();
                 this.motionZ *= 0.95F;
             } else if (!this.hasNoGravity()) {
                 this.motionY -= 0.03999999910593033D;
@@ -171,8 +176,8 @@ public class EntityFireproofItem extends EntityItem {
         }
     }
     
-    private double floatInLava(EntityItem entity) {
-    	if(entity.motionY < 0.6) {
+    private double floatInLava() {
+    	if(this.motionY < 0.6) {
     		return 5.0E-4;
     	} else {
     		return 0.0;
@@ -188,6 +193,7 @@ public class EntityFireproofItem extends EntityItem {
         return this.isInsideOfMaterial(Material.LAVA);
     }
     
+    @Override
 	protected void entityInit() {
         this.getDataManager().register(ITEM, ItemStack.EMPTY);
     }
@@ -241,11 +247,13 @@ public class EntityFireproofItem extends EntityItem {
             return false;
         }
     }
+    
     @Override
     public void setAgeToCreativeDespawnTime() {
         this.age = 4800;
     }
     
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setShort("Health", (short)this.health);
         compound.setShort("Age", (short)this.age);
@@ -257,6 +265,7 @@ public class EntityFireproofItem extends EntityItem {
         }
     }
     
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         this.health = compound.getShort("Health");
         this.age = compound.getShort("Age");
@@ -274,49 +283,60 @@ public class EntityFireproofItem extends EntityItem {
         if (compound.hasKey("Lifespan")) lifespan = compound.getInteger("Lifespan");
     }
     
+    @Override
     public ItemStack getItem() {
         return (ItemStack)this.getDataManager().get(ITEM);
     }
     
+    @Override
     public void setItem(ItemStack stack) {
         this.getDataManager().set(ITEM, stack);
         this.getDataManager().setDirty(ITEM);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public int getAge() {
         return this.age;
     }
     
+    @Override
     public void setDefaultPickupDelay() {
         this.pickupDelay = 10;
     }
     
+    @Override
     public void setNoPickupDelay() {
         this.pickupDelay = 0;
     }
     
+    @Override
     public void setInfinitePickupDelay() {
         this.pickupDelay = 32767;
     }
     
+    @Override
     public void setPickupDelay(int ticks) {
         this.pickupDelay = ticks;
     }
     
+    @Override
     public boolean cannotPickup() {
         return this.pickupDelay > 0;
     }
     
+    @Override
     public void setNoDespawn() {
         this.age = -6000;
     }
 
+    @Override
     public void makeFakeItem() {
         this.setInfinitePickupDelay();
         this.age = getItem().getItem().getEntityLifespan(getItem(), world) - 1;
     }
     
+    @Override
     public void onCollideWithPlayer(EntityPlayer entityIn) {
         if (!this.world.isRemote) {
             if (this.pickupDelay > 0) return;

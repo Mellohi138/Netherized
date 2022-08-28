@@ -6,10 +6,10 @@ import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class EnchantmentSoulSpeed extends Enchantment {
-	public EnchantmentSoulSpeed(String name, Rarity rarityIn, EnumEnchantmentType typeIn) {
+	public EnchantmentSoulSpeed(String nameIn, Rarity rarityIn, EnumEnchantmentType typeIn) {
 		super(rarityIn, typeIn, new EntityEquipmentSlot[] {EntityEquipmentSlot.FEET});
-		this.setRegistryName(Netherized.MODID, name);
-		this.setName(name);
+		this.setRegistryName(Netherized.MODID, nameIn);
+		this.setName(nameIn);
 	}
 	
     public int getMinEnchantability(int enchantmentLevel) {

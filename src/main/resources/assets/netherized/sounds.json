@@ -11,75 +11,6 @@
         "category": "record",
         "sounds": [{"name" : "netherized:items/records/record_pigstep"}]
     },
-    "entity.strider.chirp": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.chirp",
-        "sounds": [{"name" : "netherized:entity/strider/chirp/strider_chirp_1"},
-                   {"name" : "netherized:entity/strider/chirp/strider_chirp_2"},
-                   {"name" : "netherized:entity/strider/chirp/strider_chirp_3"},
-                   {"name" : "netherized:entity/strider/chirp/strider_chirp_4"},
-                   {"name" : "netherized:entity/strider/chirp/strider_chirp_5"},
-                   {"name" : "netherized:entity/strider/chirp/strider_chirp_6"}]
-    },
-    "entity.strider.death": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.death",
-        "sounds": [{"name" : "netherized:entity/strider/death/strider_death_1"},
-                   {"name" : "netherized:entity/strider/death/strider_death_2"},
-                   {"name" : "netherized:entity/strider/death/strider_death_3"},
-                   {"name" : "netherized:entity/strider/death/strider_death_4"}]
-    },
-    "entity.strider.eat": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.eat",
-        "sounds": [{"name" : "netherized:entity/strider/eat/strider_eat_1"},
-                   {"name" : "netherized:entity/strider/eat/strider_eat_2"},
-                   {"name" : "netherized:entity/strider/eat/strider_eat_3"}]
-    },
-    "entity.strider.hurt": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.hurt",
-        "sounds": [{"name" : "netherized:entity/strider/hurt/strider_hurt_1"},
-                   {"name" : "netherized:entity/strider/hurt/strider_hurt_2"},
-				   {"name" : "netherized:entity/strider/hurt/strider_hurt_3"},
-                   {"name" : "netherized:entity/strider/hurt/strider_hurt_4"}]
-    },
-    "entity.strider.retreat": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.retreat",
-        "sounds": [{"name" : "netherized:entity/strider/retreat/strider_retreat_1"},
-                   {"name" : "netherized:entity/strider/retreat/strider_retreat_2"},
-				   {"name" : "netherized:entity/strider/retreat/strider_retreat_3"},
-                   {"name" : "netherized:entity/strider/retreat/strider_retreat_4"},
-				   {"name" : "netherized:entity/strider/retreat/strider_retreat_5"}]
-    },
-    "entity.strider.step": {
-        "category": "neutral",
-        "sounds": [{"name" : "netherized:entity/strider/step/strider_step_1"},
-                   {"name" : "netherized:entity/strider/step/strider_step_2"},
-				   {"name" : "netherized:entity/strider/step/strider_step_3"},
-                   {"name" : "netherized:entity/strider/step/strider_step_4"},
-				   {"name" : "netherized:entity/strider/step/strider_step_5"}]
-    },
-	"entity.strider.step.lava": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.step.lava",
-        "sounds": [{"name" : "netherized:entity/strider/step/lava/strider_step_lava_1"},
-                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_2"},
-				   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_3"},
-                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_4"},
-                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_5"},
-				   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_6"}]
-    },
-	"entity.strider.warble": {
-        "category": "neutral",
-		"subtitle": "subtitles.entity.strider.warble",
-        "sounds": [{"name" : "netherized:entity/strider/warble/strider_warble_1"},
-                   {"name" : "netherized:entity/strider/warble/strider_warble_2"},
-				   {"name" : "netherized:entity/strider/warble/strider_warble_3"},
-                   {"name" : "netherized:entity/strider/warble/strider_warble_4"},
-				   {"name" : "netherized:entity/strider/warble/strider_warble_5"}]
-    },
     "block.netherrack.break": {
         "category": "block",
 		"subtitle": "subtitles.block.generic.break",
@@ -234,8 +165,7 @@
                    {"name" : "netherized:blocks/basalt/break/basalt_break_2"},
                    {"name" : "netherized:blocks/basalt/break/basalt_break_3"},
                    {"name" : "netherized:blocks/basalt/break/basalt_break_4"},
-                   {"name" : "netherized:blocks/basalt/break/basalt_break_5"},
-                   {"name" : "netherized:blocks/basalt/break/basalt_break_6"}]
+                   {"name" : "netherized:blocks/basalt/break/basalt_break_5"}]
     },
     "block.basalt.fall": {
         "category": "block",
@@ -263,8 +193,7 @@
                    {"name" : "netherized:blocks/basalt/break/basalt_break_2"},
                    {"name" : "netherized:blocks/basalt/break/basalt_break_3"},
                    {"name" : "netherized:blocks/basalt/break/basalt_break_4"},
-                   {"name" : "netherized:blocks/basalt/break/basalt_break_5"},
-                   {"name" : "netherized:blocks/basalt/break/basalt_break_6"}]
+                   {"name" : "netherized:blocks/basalt/break/basalt_break_5"}]
     },
     "block.basalt.step": {
         "category": "block",
@@ -275,6 +204,50 @@
                    {"name" : "netherized:blocks/basalt/step/basalt_step_4"},
                    {"name" : "netherized:blocks/basalt/step/basalt_step_5"},
                    {"name" : "netherized:blocks/basalt/step/basalt_step_6"}]
+    },
+	"block.bone_block.break": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.break",
+        "sounds": [{"name" : "netherized:blocks/bone_block/break/bone_block_break_1"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_2"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_3"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_4"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_5"}]
+    },
+    "block.bone_block.fall": {
+        "category": "block",
+        "sounds": [{"name" : "netherized:blocks/bone_block/step/bone_block_step_1"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_2"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_3"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_4"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_5"}]
+    },
+    "block.bone_block.hit": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.hit",
+        "sounds": [{"name" : "netherized:blocks/bone_block/step/bone_block_step_1"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_2"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_3"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_4"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_5"}]
+    },
+    "block.bone_block.place": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.place",
+        "sounds": [{"name" : "netherized:blocks/bone_block/break/bone_block_break_1"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_2"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_3"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_4"},
+                   {"name" : "netherized:blocks/bone_block/break/bone_block_break_5"}]
+    },
+    "block.bone_block.step": {
+        "category": "block",
+		"subtitle": "subtitles.block.generic.footsteps",
+        "sounds": [{"name" : "netherized:blocks/bone_block/step/bone_block_step_1"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_2"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_3"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_4"},
+                   {"name" : "netherized:blocks/bone_block/step/bone_block_step_5"}]
     },
     "block.nether_nylium.break": {
         "category": "block",
@@ -578,6 +551,12 @@
                    {"name" : "netherized:blocks/lodestone/place/lodestone_place_3"},
                    {"name" : "netherized:blocks/lodestone/place/lodestone_place_4"}]
     },
+	"block.lodestone.lock": {
+        "category": "block",
+		"subtitle": "subtitles.block.lodestone.lock",
+        "sounds": [{"name" : "netherized:blocks/lodestone/lock/lodestone_lock_1"},
+                   {"name" : "netherized:blocks/lodestone/lock/lodestone_lock_2"}]
+    },
     "block.nether_wart.break": {
         "category": "block",
 		"subtitle": "subtitles.block.generic.break",
@@ -736,8 +715,7 @@
                    {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_2"},
                    {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_3"},
                    {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_4"},
-                   {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_5"},
-                   {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_6"}]
+                   {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_5"}]
     },
     "block.ancient_debris.fall": {
         "category": "block",
@@ -765,8 +743,7 @@
                    {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_2"},
                    {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_3"},
                    {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_4"},
-                   {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_5"},
-                   {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_6"}]
+                   {"name" : "netherized:blocks/ancient_debris/break/ancient_debris_break_5"}]
     },
     "block.ancient_debris.step": {
         "category": "block",
@@ -822,5 +799,332 @@
                    {"name" : "netherized:blocks/netherite_block/step/netherite_block_step_4"},
                    {"name" : "netherized:blocks/netherite_block/step/netherite_block_step_5"},
                    {"name" : "netherized:blocks/netherite_block/step/netherite_block_step_6"}]
+    },
+    "entity.piglin.snort": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.snort",
+        "sounds": [{"name" : "netherized:entity/piglin/snort/piglin_snort_1"},
+                   {"name" : "netherized:entity/piglin/snort/piglin_snort_2"},
+                   {"name" : "netherized:entity/piglin/snort/piglin_snort_3"},
+				   {"name" : "netherized:entity/piglin/snort/piglin_snort_4"},
+                   {"name" : "netherized:entity/piglin/snort/piglin_snort_5"}]
+    },
+    "entity.piglin.snort.angry": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.snort.angry",
+        "sounds": [{"name" : "netherized:entity/piglin/snort/angry/piglin_snort_angry_1"},
+                   {"name" : "netherized:entity/piglin/snort/angry/piglin_snort_angry_2"},
+                   {"name" : "netherized:entity/piglin/snort/angry/piglin_snort_angry_3"},
+                   {"name" : "netherized:entity/piglin/snort/angry/piglin_snort_angry_4"}]
+    },
+    "entity.piglin.retreat": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.retreat",
+        "sounds": [{"name" : "netherized:entity/piglin/retreat/piglin_retreat_1"},
+                   {"name" : "netherized:entity/piglin/retreat/piglin_retreat_2"},
+                   {"name" : "netherized:entity/piglin/retreat/piglin_retreat_3"},
+                   {"name" : "netherized:entity/piglin/retreat/piglin_retreat_4"}]
+    },
+    "entity.piglin.hurt": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.hurt",
+        "sounds": [{"name" : "netherized:entity/piglin/hurt/piglin_hurt_1"},
+                   {"name" : "netherized:entity/piglin/hurt/piglin_hurt_2"},
+                   {"name" : "netherized:entity/piglin/hurt/piglin_hurt_3"}]
+    },
+    "entity.piglin.death": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.death",
+        "sounds": [{"name" : "netherized:entity/piglin/death/piglin_death_1"},
+                   {"name" : "netherized:entity/piglin/death/piglin_death_2"},
+                   {"name" : "netherized:entity/piglin/death/piglin_death_3"},
+                   {"name" : "netherized:entity/piglin/death/piglin_death_4"}]
+    },
+    "entity.piglin.step": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:entity/piglin/step/piglin_step_1"},
+                   {"name" : "netherized:entity/piglin/step/piglin_step_2"},
+                   {"name" : "netherized:entity/piglin/step/piglin_step_3"},
+                   {"name" : "netherized:entity/piglin/step/piglin_step_4"},
+                   {"name" : "netherized:entity/piglin/step/piglin_step_5"}]
+    },
+    "entity.piglin.celebrate": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.celebrate",
+        "sounds": [{"name" : "netherized:entity/piglin/celebrate/piglin_celebrate_1"},
+                   {"name" : "netherized:entity/piglin/celebrate/piglin_celebrate_2"},
+                   {"name" : "netherized:entity/piglin/celebrate/piglin_celebrate_3"},
+                   {"name" : "netherized:entity/piglin/celebrate/piglin_celebrate_4"}]
+    },
+    "entity.piglin.snort.envious": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.snort.envious",
+        "sounds": [{"name" : "netherized:entity/piglin/snort/envious/piglin_snort_envious_1"},
+                   {"name" : "netherized:entity/piglin/snort/envious/piglin_snort_envious_2"},
+                   {"name" : "netherized:entity/piglin/snort/envious/piglin_snort_envious_3"},
+                   {"name" : "netherized:entity/piglin/snort/envious/piglin_snort_envious_4"},
+                   {"name" : "netherized:entity/piglin/snort/envious/piglin_snort_envious_5"}]
+    },
+    "entity.piglin.admire": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.admire",
+        "sounds": [{"name" : "netherized:entity/piglin/admire/piglin_admire_1"},
+                   {"name" : "netherized:entity/piglin/admire/piglin_admire_2"}]
+    },
+    "entity.piglin.conversion": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin.conversion",
+        "sounds": [{"name" : "netherized:entity/piglin/conversion/piglin_conversion_1"},
+                   {"name" : "netherized:entity/piglin/conversion/piglin_conversion_2"}]
+    },
+	"entity.hoglin.growl": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.growl",
+        "sounds": [{"name" : "netherized:entity/hoglin/growl/hoglin_growl_1"},
+                   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_2"},
+                   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_3"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_4"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_5"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_6"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_7"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_8"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_9"},
+				   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_10"},
+                   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_11"}]
+    },
+	"entity.hoglin.growl.angry": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.growl.angry",
+        "sounds": [{"name" : "netherized:entity/hoglin/growl/angry/hoglin_growl_angry_1"},
+                   {"name" : "netherized:entity/hoglin/growl/angry/hoglin_growl_angry_2"},
+                   {"name" : "netherized:entity/hoglin/growl/angry/hoglin_growl_angry_3"},
+				   {"name" : "netherized:entity/hoglin/growl/angry/hoglin_growl_angry_4"},
+				   {"name" : "netherized:entity/hoglin/growl/angry/hoglin_growl_angry_5"},
+                   {"name" : "netherized:entity/hoglin/growl/angry/hoglin_growl_angry_6"}]
+    },
+	"entity.hoglin.attack": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.attack",
+        "sounds": [{"name" : "netherized:entity/hoglin/attack/hoglin_attack_1"},
+                   {"name" : "netherized:entity/hoglin/attack/hoglin_attack_2"}]
+    },
+	"entity.hoglin.retreat": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.retreat",
+        "sounds": [{"name" : "netherized:entity/hoglin/retreat/hoglin_retreat_1"},
+                   {"name" : "netherized:entity/hoglin/retreat/hoglin_retreat_2"},
+                   {"name" : "netherized:entity/hoglin/retreat/hoglin_retreat_3"},
+                   {"name" : "netherized:entity/hoglin/growl/hoglin_growl_11"}]
+    },
+	"entity.hoglin.conversion": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.conversion",
+        "sounds": [{"name" : "netherized:entity/hoglin/conversion/hoglin_conversion_1"},
+                   {"name" : "netherized:entity/hoglin/conversion/hoglin_conversion_2"}]
+    },
+	"entity.hoglin.step": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:entity/hoglin/step/hoglin_step_1"},
+                   {"name" : "netherized:entity/hoglin/step/hoglin_step_2"},
+                   {"name" : "netherized:entity/hoglin/step/hoglin_step_3"},
+                   {"name" : "netherized:entity/hoglin/step/hoglin_step_4"},
+				   {"name" : "netherized:entity/hoglin/step/hoglin_step_5"},
+                   {"name" : "netherized:entity/hoglin/step/hoglin_step_6"}]
+    },
+	"entity.hoglin.hurt": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.hurt",
+        "sounds": [{"name" : "netherized:entity/hoglin/hurt/hoglin_hurt_1"},
+                   {"name" : "netherized:entity/hoglin/hurt/hoglin_hurt_2"},
+                   {"name" : "netherized:entity/hoglin/hurt/hoglin_hurt_3"},
+                   {"name" : "netherized:entity/hoglin/hurt/hoglin_hurt_4"}]
+    },
+	"entity.hoglin.death": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.hoglin.death",
+        "sounds": [{"name" : "netherized:entity/hoglin/death/hoglin_death_1"},
+                   {"name" : "netherized:entity/hoglin/death/hoglin_death_2"},
+                   {"name" : "netherized:entity/hoglin/death/hoglin_death_3"}]
+    },
+	"entity.piglin_brute.snort": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin_brute.snort",
+        "sounds": [{"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_1"},
+                   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_2"},
+                   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_3"},
+				   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_4"},
+				   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_5"},
+				   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_6"},
+				   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_7"},
+				   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_8"},
+                   {"name" : "netherized:entity/piglin_brute/snort/piglin_brute_snort_9"}]
+    },
+    "entity.piglin_brute.snort.angry": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin_brute.snort.angry",
+        "sounds": [{"name" : "netherized:entity/piglin_brute/snort/angry/piglin_brute_snort_angry_1"},
+                   {"name" : "netherized:entity/piglin_brute/snort/angry/piglin_brute_snort_angry_2"},
+                   {"name" : "netherized:entity/piglin_brute/snort/angry/piglin_brute_snort_angry_3"},
+				   {"name" : "netherized:entity/piglin_brute/snort/angry/piglin_brute_snort_angry_4"},
+                   {"name" : "netherized:entity/piglin_brute/snort/angry/piglin_brute_snort_angry_5"}]
+    },
+    "entity.piglin_brute.hurt": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin_brute.hurt",
+        "sounds": [{"name" : "netherized:entity/piglin_brute/hurt/piglin_brute_hurt_1"},
+                   {"name" : "netherized:entity/piglin_brute/hurt/piglin_brute_hurt_2"},
+				   {"name" : "netherized:entity/piglin_brute/hurt/piglin_brute_hurt_3"},
+                   {"name" : "netherized:entity/piglin_brute/hurt/piglin_brute_hurt_4"}]
+    },
+    "entity.piglin_brute.death": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin_brute.death",
+        "sounds": [{"name" : "netherized:entity/piglin_brute/death/piglin_brute_death_1"},
+                   {"name" : "netherized:entity/piglin_brute/death/piglin_brute_death_2"},
+                   {"name" : "netherized:entity/piglin_brute/death/piglin_brute_death_3"}]
+    },
+    "entity.piglin_brute.step": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:entity/piglin_brute/step/piglin_brute_step_1"},
+                   {"name" : "netherized:entity/piglin_brute/step/piglin_brute_step_2"},
+                   {"name" : "netherized:entity/piglin_brute/step/piglin_brute_step_3"},
+                   {"name" : "netherized:entity/piglin_brute/step/piglin_brute_step_4"},
+                   {"name" : "netherized:entity/piglin_brute/step/piglin_brute_step_5"}]
+    },
+    "entity.piglin_brute.conversion": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.piglin_brute.conversion",
+        "sounds": [{"name" : "netherized:entity/piglin/conversion/piglin_conversion_1"},
+                   {"name" : "netherized:entity/piglin/conversion/piglin_conversion_2"}]
+    },
+	"entity.zoglin.growl": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.zoglin.growl",
+        "sounds": [{"name" : "netherized:entity/zoglin/growl/zoglin_growl_1"},
+                   {"name" : "netherized:entity/zoglin/growl/zoglin_growl_2"},
+                   {"name" : "netherized:entity/zoglin/growl/zoglin_growl_3"},
+				   {"name" : "netherized:entity/zoglin/growl/zoglin_growl_4"},
+				   {"name" : "netherized:entity/zoglin/growl/zoglin_growl_5"},
+                   {"name" : "netherized:entity/zoglin/growl/zoglin_growl_6"}]
+    },
+	"entity.zoglin.growl.angry": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.zoglin.growl.angry",
+        "sounds": [{"name" : "netherized:entity/zoglin/growl/angry/zoglin_growl_angry_1"},
+                   {"name" : "netherized:entity/zoglin/growl/angry/zoglin_growl_angry_2"},
+                   {"name" : "netherized:entity/zoglin/growl/angry/zoglin_growl_angry_3"}]
+    },
+	"entity.zoglin.attack": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.zoglin.attack",
+        "sounds": [{"name" : "netherized:entity/zoglin/attack/zoglin_attack_1"},
+                   {"name" : "netherized:entity/zoglin/attack/zoglin_attack_2"}]
+    },
+	"entity.zoglin.step": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:entity/zoglin/step/zoglin_step_1"},
+                   {"name" : "netherized:entity/zoglin/step/zoglin_step_2"},
+                   {"name" : "netherized:entity/zoglin/step/zoglin_step_3"},
+                   {"name" : "netherized:entity/zoglin/step/zoglin_step_4"},
+                   {"name" : "netherized:entity/zoglin/step/zoglin_step_5"}]
+    },
+	"entity.zoglin.hurt": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.zoglin.hurt",
+        "sounds": [{"name" : "netherized:entity/zoglin/hurt/zoglin_hurt_1"},
+                   {"name" : "netherized:entity/zoglin/hurt/zoglin_hurt_2"},
+                   {"name" : "netherized:entity/zoglin/hurt/zoglin_hurt_3"}]
+    },
+	"entity.zoglin.death": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.zoglin.death",
+        "sounds": [{"name" : "netherized:entity/zoglin/death/zoglin_death_1"},
+                   {"name" : "netherized:entity/zoglin/death/zoglin_death_2"},
+                   {"name" : "netherized:entity/zoglin/death/zoglin_death_3"}]
+    },
+    "entity.strider.chirp": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.chirp",
+        "sounds": [{"name" : "netherized:entity/strider/chirp/strider_chirp_1"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_2"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_3"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_4"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_5"},
+                   {"name" : "netherized:entity/strider/chirp/strider_chirp_6"}]
+    },
+    "entity.strider.death": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.death",
+        "sounds": [{"name" : "netherized:entity/strider/death/strider_death_1"},
+                   {"name" : "netherized:entity/strider/death/strider_death_2"},
+                   {"name" : "netherized:entity/strider/death/strider_death_3"},
+                   {"name" : "netherized:entity/strider/death/strider_death_4"}]
+    },
+    "entity.strider.eat": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.eat",
+        "sounds": [{"name" : "netherized:entity/strider/eat/strider_eat_1"},
+                   {"name" : "netherized:entity/strider/eat/strider_eat_2"},
+                   {"name" : "netherized:entity/strider/eat/strider_eat_3"}]
+    },
+    "entity.strider.hurt": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.hurt",
+        "sounds": [{"name" : "netherized:entity/strider/hurt/strider_hurt_1"},
+                   {"name" : "netherized:entity/strider/hurt/strider_hurt_2"},
+				   {"name" : "netherized:entity/strider/hurt/strider_hurt_3"},
+                   {"name" : "netherized:entity/strider/hurt/strider_hurt_4"}]
+    },
+    "entity.strider.retreat": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.retreat",
+        "sounds": [{"name" : "netherized:entity/strider/retreat/strider_retreat_1"},
+                   {"name" : "netherized:entity/strider/retreat/strider_retreat_2"},
+				   {"name" : "netherized:entity/strider/retreat/strider_retreat_3"},
+                   {"name" : "netherized:entity/strider/retreat/strider_retreat_4"},
+				   {"name" : "netherized:entity/strider/retreat/strider_retreat_5"}]
+    },
+    "entity.strider.step": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:entity/strider/step/strider_step_1"},
+                   {"name" : "netherized:entity/strider/step/strider_step_2"},
+				   {"name" : "netherized:entity/strider/step/strider_step_3"},
+                   {"name" : "netherized:entity/strider/step/strider_step_4"},
+				   {"name" : "netherized:entity/strider/step/strider_step_5"}]
+    },
+	"entity.strider.step.lava": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.step.lava",
+        "sounds": [{"name" : "netherized:entity/strider/step/lava/strider_step_lava_1"},
+                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_2"},
+				   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_3"},
+                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_4"},
+                   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_5"},
+				   {"name" : "netherized:entity/strider/step/lava/strider_step_lava_6"}]
+    },
+	"entity.strider.warble": {
+        "category": "neutral",
+		"subtitle": "subtitles.entity.strider.warble",
+        "sounds": [{"name" : "netherized:entity/strider/warble/strider_warble_1"},
+                   {"name" : "netherized:entity/strider/warble/strider_warble_2"},
+				   {"name" : "netherized:entity/strider/warble/strider_warble_3"},
+                   {"name" : "netherized:entity/strider/warble/strider_warble_4"},
+				   {"name" : "netherized:entity/strider/warble/strider_warble_5"}]
+    },
+	"particle.soul.scream": {
+        "category": "neutral",
+        "sounds": [{"name" : "netherized:particle/soul/scream/soul_scream_1"},
+                   {"name" : "netherized:particle/soul/scream/soul_scream_2"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_3"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_4"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_5"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_6"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_7"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_8"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_9"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_10"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_11"},
+				   {"name" : "netherized:particle/soul/scream/soul_scream_12"},
+                   {"name" : "netherized:particle/soul/scream/soul_scream_13"}]
     }
 }

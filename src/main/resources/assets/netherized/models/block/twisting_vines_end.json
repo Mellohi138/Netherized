@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "netherized:blocks/twisting_vines_top"
+    }
+}

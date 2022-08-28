@@ -1,8 +1,8 @@
 package mellohi138.netherized.client.render.entity;
 
 import mellohi138.netherized.Netherized;
-import mellohi138.netherized.client.model.ModelStrider;
-import mellohi138.netherized.client.render.entity.layer.LayerSaddle;
+import mellohi138.netherized.client.model.entity.ModelStrider;
+import mellohi138.netherized.client.render.entity.layer.LayerStriderSaddle;
 import mellohi138.netherized.objects.entity.passive.EntityStrider;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -18,7 +18,7 @@ public class RenderStrider extends RenderLiving<EntityStrider> {
     
 	public RenderStrider(RenderManager rendermanagerIn) {
 		super(rendermanagerIn, new ModelStrider(), 0.5F);
-		this.addLayer(new LayerSaddle(this));
+		this.addLayer(new LayerStriderSaddle(this));
 	}
 
 	@Override
