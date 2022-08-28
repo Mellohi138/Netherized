@@ -65,6 +65,7 @@ public class ModelHoveringInferno extends ModelBase {
    		this.shieldSet.render(scale);
    }
     
+    //Special thanks to DelirusCurx for the shield rotation code
     @Override
     public void setLivingAnimations(EntityLivingBase entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTickTime) {
     	super.setLivingAnimations(entityLivingBaseIn, limbSwing, limbSwingAmount, partialTickTime);

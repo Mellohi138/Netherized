@@ -152,6 +152,7 @@ public class BlockNetherVines extends Block implements IPlantable {
 			if(player.motionY < -0.15F) {
 				player.motionY = -0.15F;
 			}
+			//TODO: Prevent this from working when chat is open
 			if(GameSettings.isKeyDown(mc.gameSettings.keyBindJump) && player.motionY < 0.2F) {
 				if(player.isSneaking()) {
 					player.motionY = 0.0F;
