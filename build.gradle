@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.12.2-0.0.5A'
+version = '1.12.2-0.0.7A'
 group = 'mellohi138.netherized'
 archivesBaseName = 'Netherized'
 
