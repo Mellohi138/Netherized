@@ -4,24 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mellohi138.netherized.Netherized;
+import mellohi138.netherized.world.biome.BiomeBase;
+import mellohi138.netherized.world.biome.BiomeCrimsonForest;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.BiomeProperties;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = Netherized.MODID)
 public class NetherizedBiomes {
-	public static final List<Biome> BIOME_LIST = new ArrayList<Biome>();
+	public static final List<BiomeBase> BIOME_LIST = new ArrayList<BiomeBase>();
 	
-	private static Biome addBiome(Biome biomeIn) {
+	public static BiomeBase CRIMSON_FOREST = registerBiome(new BiomeCrimsonForest("crimson_forest", new BiomeProperties("Crimson Forest").setTemperature(2.0F).setRainfall(0.0F).setRainDisabled().setWaterColor(4159204)));
+	
+	private static BiomeBase registerBiome(BiomeBase biomeIn, Type... types) {
 		BIOME_LIST.add(biomeIn);
 		return biomeIn;
 	}
-	
+	   
 	@SubscribeEvent
 	public static void registerBiomes(RegistryEvent.Register<Biome> event) {
-		for(Biome biomeIn : BIOME_LIST) {
+		for(BiomeBase biomeIn : BIOME_LIST) {
 			event.getRegistry().register(biomeIn);
+			biomeIn.setTypes();
+			BiomeManager.addSpawnBiome(biomeIn);
 		}
 	}
 }

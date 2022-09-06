@@ -1,8 +1,8 @@
 package mellohi138.netherized.util;
 
 import mellohi138.netherized.Netherized;
+import mellohi138.netherized.init.NetherizedBlocks;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -21,7 +21,7 @@ public class NetherizedCreativeTabs extends CreativeTabs {
     	case 0:
     		return new ItemStack(Items.GOLD_INGOT);
     	case 1:
-    		return new ItemStack(Blocks.NETHERRACK);
+    		return new ItemStack(NetherizedBlocks.CRIMSON_NYLIUM);
     	}
     	return new ItemStack(Items.AIR);
     }

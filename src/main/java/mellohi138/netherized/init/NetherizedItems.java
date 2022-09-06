@@ -42,13 +42,13 @@ public class NetherizedItems {
     
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-		for(Item itemIn : NetherizedItems.ITEM_LIST) {
+		for(Item itemIn : ITEM_LIST) {
 			event.getRegistry().register(itemIn);
 		}
     }
     
 	private static Item addItem(Item item) {
-		NetherizedItems.ITEM_LIST.add(item);
+		ITEM_LIST.add(item);
 		return item;
 	}
 }

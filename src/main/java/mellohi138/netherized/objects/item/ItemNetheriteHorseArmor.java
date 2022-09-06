@@ -3,7 +3,7 @@ package mellohi138.netherized.objects.item;
 import java.util.UUID;
 
 import mellohi138.netherized.Netherized;
-import mellohi138.netherized.util.config.NetherizedConfig;
+import mellohi138.netherized.util.config.NetherizedItemConfig;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public class ItemNetheriteHorseArmor extends Item {
 	public static final UUID KNOCKBACK_RESISTANCE_MODIFIER = UUID.fromString("ba912d2b-9413-3171-be0e-5b384abadf2a");
-	public static final float KNOCKBACK_RESISTANCE_BONUS = NetherizedConfig.netheriteHorseArmorKnockbackResistance;
+	public static final float KNOCKBACK_RESISTANCE_BONUS = NetherizedItemConfig.netheriteConfig.netheriteHorseArmorKnockbackResistance;
 	private final HorseArmorType armorType;
 	
 	public ItemNetheriteHorseArmor(String name, HorseArmorType armorType, CreativeTabs tab) {

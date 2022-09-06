@@ -1,29 +1,28 @@
-package mellohi138.netherized.world.gen;
-
-import com.google.common.base.Predicate;
+package mellohi138.netherized.util;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockStone;
+import com.google.common.base.Predicate;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class WorldGenMinableNoAir extends WorldGenMinable {
+public class WorldGenMinableNoAir extends WorldGenerator {
     private final IBlockState oreBlock;
     /** The number of blocks to generate. */
     private final int numberOfBlocks;
     private final Predicate<IBlockState> predicate;
 
     public WorldGenMinableNoAir(IBlockState state, int blockCount) {
-        this(state, blockCount, new WorldGenMinableNoAir.StonePredicate());
+        this(state, blockCount, new WorldGenMinableNoAir.NetherrackPredicate());
     }
 
     public WorldGenMinableNoAir(IBlockState state, int blockCount, Predicate<IBlockState> predicate) {
-    	super(state, blockCount, predicate);
+    	super();
         this.oreBlock = state;
         this.numberOfBlocks = blockCount;
         this.predicate = predicate;
@@ -77,19 +76,14 @@ public class WorldGenMinableNoAir extends WorldGenMinable {
         }
         return true;
     }
-    static class StonePredicate implements Predicate<IBlockState> {
-            private StonePredicate() {
-            }
-            public boolean apply(IBlockState p_apply_1_) {
-                if (p_apply_1_ != null && p_apply_1_.getBlock() == Blocks.STONE) {
-                    BlockStone.EnumType blockstone$enumtype = (BlockStone.EnumType)p_apply_1_.getValue(BlockStone.VARIANT);
-                    return blockstone$enumtype.isNatural();
-                }
-                else {
-                    return false;
-                }
-            }
-        }
+    
+    private static class NetherrackPredicate implements Predicate<IBlockState> {
+    	private NetherrackPredicate() {
+    	}
+    	public boolean apply(IBlockState state) {   
+    		return state != null && state.getBlock() == Blocks.NETHERRACK;
+    	}
+    }
     
 	private static boolean isAdjacentToAir(World worldIn, BlockPos pos) {     
 		for(BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {

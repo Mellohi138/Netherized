@@ -3,7 +3,6 @@ package mellohi138.netherized.init;
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.objects.entity.*;
 import mellohi138.netherized.objects.entity.passive.*;
-import mellohi138.netherized.objects.entity.neutral.*;
 import mellohi138.netherized.objects.entity.hostile.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

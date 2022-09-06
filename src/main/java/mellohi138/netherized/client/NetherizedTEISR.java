@@ -1,4 +1,4 @@
-package mellohi138.netherized.client.init;
+package mellohi138.netherized.client;
 
 import mellohi138.netherized.init.NetherizedItems;
 import mellohi138.netherized.util.interfaces.ITEISRModel;

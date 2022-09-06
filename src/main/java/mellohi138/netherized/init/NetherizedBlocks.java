@@ -4,33 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mellohi138.netherized.Netherized;
-import mellohi138.netherized.objects.block.BlockBase;
-import mellohi138.netherized.objects.block.BlockButtonBase;
-import mellohi138.netherized.objects.block.BlockChain;
-import mellohi138.netherized.objects.block.BlockCryingObsidian;
-import mellohi138.netherized.objects.block.BlockDoorBase;
-import mellohi138.netherized.objects.block.BlockFenceBase;
-import mellohi138.netherized.objects.block.BlockFenceGateBase;
-import mellohi138.netherized.objects.block.BlockGlowingObsidian;
-import mellohi138.netherized.objects.block.BlockInfernoReactor;
-import mellohi138.netherized.objects.block.BlockLodestone;
-import mellohi138.netherized.objects.block.BlockNetherFungus;
-import mellohi138.netherized.objects.block.BlockNetherNylium;
-import mellohi138.netherized.objects.block.BlockNetherOre;
-import mellohi138.netherized.objects.block.BlockNetherRoots;
-import mellohi138.netherized.objects.block.BlockNetherVines;
-import mellohi138.netherized.objects.block.BlockPressurePlateBase;
-import mellohi138.netherized.objects.block.BlockRespawnAnchor;
-import mellohi138.netherized.objects.block.BlockRotatedPillarBase;
-import mellohi138.netherized.objects.block.BlockSlabsBase;
-import mellohi138.netherized.objects.block.BlockSoulFire;
-import mellohi138.netherized.objects.block.BlockSoulTorch;
-import mellohi138.netherized.objects.block.BlockStairsBase;
-import mellohi138.netherized.objects.block.BlockWallsBase;
-import mellohi138.netherized.objects.block.tileentity.TileEntityInfernoReactor;
-import mellohi138.netherized.objects.item.block.ItemDoorBase;
-import mellohi138.netherized.objects.item.block.ItemSlabBase;
-import mellohi138.netherized.util.ModUtils;
+import mellohi138.netherized.enums.EnumNetherForestType;
+import mellohi138.netherized.objects.item.block.*;
+import mellohi138.netherized.util.config.NetherizedGeneralConfig;
+import mellohi138.netherized.objects.block.*;
+import mellohi138.netherized.objects.block.reregistered.*;
+import mellohi138.netherized.objects.block.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockSlab;
@@ -80,24 +59,24 @@ public class NetherizedBlocks {
 	public static final Block POLISHED_BLACKSTONE_BUTTON = addBlock(new BlockButtonBase("polished_blackstone_button", Netherized.NETHERIZED_BLOCKS));
 	
 	//Nether Vegetation	
-	public static final Block CRIMSON_NYLIUM = addBlock(new BlockNetherNylium("crimson_nylium", Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY, "pickaxe", 0, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
-	public static final Block WARPED_NYLIUM = addBlock(new BlockNetherNylium("warped_nylium", Material.ROCK, MapColor.GREEN_STAINED_HARDENED_CLAY, "pickaxe", 0, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
+	public static final Block CRIMSON_NYLIUM = addBlock(new BlockNetherNylium("crimson_nylium", Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY, "pickaxe", 0, EnumNetherForestType.CRIMSON, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
+	public static final Block WARPED_NYLIUM = addBlock(new BlockNetherNylium("warped_nylium", Material.ROCK, MapColor.GREEN_STAINED_HARDENED_CLAY, "pickaxe", 0, EnumNetherForestType.WARPED, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
 	
-	public static final Block CRIMSON_ROOTS = addBlock(new BlockNetherRoots("crimson_roots", Material.PLANTS, MapColor.RED_STAINED_HARDENED_CLAY, NetherizedSounds.SOUND_TYPE_NETHER_ROOTS, Netherized.NETHERIZED_BLOCKS, 0));
-	public static final Block WARPED_ROOTS = addBlock(new BlockNetherRoots("warped_roots", Material.PLANTS, MapColor.RED_STAINED_HARDENED_CLAY, NetherizedSounds.SOUND_TYPE_NETHER_ROOTS, Netherized.NETHERIZED_BLOCKS, 1));
-	public static final Block WARPED_SPROUTS = addBlock(new BlockNetherRoots("warped_sprouts", Material.PLANTS, MapColor.RED_STAINED_HARDENED_CLAY, NetherizedSounds.SOUND_TYPE_WARPED_SPROUTS, Netherized.NETHERIZED_BLOCKS, 1));
+	public static final Block CRIMSON_ROOTS = addBlock(new BlockNetherRoots("crimson_roots", Material.PLANTS, MapColor.RED_STAINED_HARDENED_CLAY, EnumNetherForestType.CRIMSON, NetherizedSounds.SOUND_TYPE_NETHER_ROOTS, Netherized.NETHERIZED_BLOCKS));
+	public static final Block WARPED_ROOTS = addBlock(new BlockNetherRoots("warped_roots", Material.PLANTS, MapColor.GREEN_STAINED_HARDENED_CLAY, EnumNetherForestType.WARPED, NetherizedSounds.SOUND_TYPE_NETHER_ROOTS, Netherized.NETHERIZED_BLOCKS));
+	public static final Block WARPED_SPROUTS = addBlock(new BlockNetherRoots("warped_sprouts", Material.PLANTS, MapColor.GREEN_STAINED_HARDENED_CLAY, EnumNetherForestType.WARPED, NetherizedSounds.SOUND_TYPE_WARPED_SPROUTS, Netherized.NETHERIZED_BLOCKS));
 	
-	public static final Block CRIMSON_FUNGUS = addBlock(new BlockNetherFungus("crimson_fungus", Material.PLANTS, MapColor.NETHERRACK, NetherizedSounds.SOUND_TYPE_NETHER_FUNGUS, Netherized.NETHERIZED_BLOCKS, 0));
-	public static final Block WARPED_FUNGUS = addBlock(new BlockNetherFungus("warped_fungus", Material.PLANTS, MapColor.CYAN, NetherizedSounds.SOUND_TYPE_NETHER_FUNGUS, Netherized.NETHERIZED_BLOCKS, 1));
+	public static final Block CRIMSON_FUNGUS = addBlock(new BlockNetherFungus("crimson_fungus", Material.PLANTS, MapColor.NETHERRACK, EnumNetherForestType.CRIMSON, NetherizedSounds.SOUND_TYPE_NETHER_FUNGUS, Netherized.NETHERIZED_BLOCKS));
+	public static final Block WARPED_FUNGUS = addBlock(new BlockNetherFungus("warped_fungus", Material.PLANTS, MapColor.CYAN, EnumNetherForestType.WARPED, NetherizedSounds.SOUND_TYPE_NETHER_FUNGUS, Netherized.NETHERIZED_BLOCKS));
 	
-	public static final Block WEEPING_VINES = addBlock(new BlockNetherVines("weeping_vines", Material.PLANTS, MapColor.RED, EnumFacing.DOWN, ModUtils.WEEPING_VINES_AABB, SoundType.PLANT, Netherized.NETHERIZED_BLOCKS, 0));
-	public static final Block TWISTING_VINES = addBlock(new BlockNetherVines("twisting_vines", Material.PLANTS, MapColor.CYAN, EnumFacing.UP, ModUtils.TWISTING_VINES_AABB, SoundType.PLANT, Netherized.NETHERIZED_BLOCKS, 1));
+	public static final Block WEEPING_VINES = addBlock(new BlockNetherVines("weeping_vines", Material.PLANTS, MapColor.RED, EnumNetherForestType.CRIMSON, EnumFacing.DOWN, SoundType.PLANT, Netherized.NETHERIZED_BLOCKS));
+	public static final Block TWISTING_VINES = addBlock(new BlockNetherVines("twisting_vines", Material.PLANTS, MapColor.CYAN, EnumNetherForestType.WARPED, EnumFacing.UP, SoundType.PLANT, Netherized.NETHERIZED_BLOCKS));
 	
-	public static final Block WEEPING_VINES_END = addBlock(new BlockNetherVines.BlockNetherVinesEnd("weeping_vines_end", Material.PLANTS, MapColor.NETHERRACK, EnumFacing.DOWN, ModUtils.WEEPING_VINES_AABB, SoundType.PLANT, 0), true);
-	public static final Block TWISTING_VINES_END = addBlock(new BlockNetherVines.BlockNetherVinesEnd("twisting_vines_end", Material.PLANTS, MapColor.CYAN, EnumFacing.UP, ModUtils.TWISTING_VINES_AABB, SoundType.PLANT, 1), true); 
+	public static final Block WEEPING_VINES_END = addBlock(new BlockNetherVines.BlockNetherVinesEnd("weeping_vines_end", Material.PLANTS, MapColor.NETHERRACK, EnumNetherForestType.CRIMSON, EnumFacing.DOWN, SoundType.PLANT), true);
+	public static final Block TWISTING_VINES_END = addBlock(new BlockNetherVines.BlockNetherVinesEnd("twisting_vines_end", Material.PLANTS, MapColor.CYAN, EnumNetherForestType.WARPED, EnumFacing.UP, SoundType.PLANT), true); 
 	
-	public static final Block CRIMSON_STEM = addBlock(new BlockRotatedPillarBase("crimson_stem", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(2.0F));
-	public static final Block WARPED_STEM = addBlock(new BlockRotatedPillarBase("warped_stem", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(2.0F));
+	public static final Block CRIMSON_STEM = addBlock(new BlockLogBase("crimson_stem", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setResistance(2.0F));
+	public static final Block WARPED_STEM = addBlock(new BlockLogBase("warped_stem", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setResistance(2.0F));
 	
 	public static final Block WARPED_WART_BLOCK = addBlock(new BlockBase("warped_wart_block", Material.GRASS, MapColor.CYAN, null, 0, NetherizedSounds.SOUND_TYPE_NETHER_WART, Netherized.NETHERIZED_BLOCKS).setHardness(1.0F));
 	public static final Block SHROOMLIGHT = addBlock(new BlockBase("shroomlight", Material.GRASS, MapColor.RED, "axe", 0, NetherizedSounds.SOUND_TYPE_SHROOMLIGHT, Netherized.NETHERIZED_BLOCKS).setHardness(1.0F).setLightLevel(1F));
@@ -138,13 +117,16 @@ public class NetherizedBlocks {
 	
 	@SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {	
-		for(Block blockIn : NetherizedBlocks.BLOCK_LIST) {
+		for(Block blockIn : BLOCK_LIST) {
 			event.getRegistry().register(blockIn);
+		}
+		if(NetherizedGeneralConfig.overrideSoulSandWithSoulSpeed) {
+			event.getRegistry().register(new BlockNewSoulSand());
 		}
     }
     
     private static Block addBlock(Block blockIn, boolean blockOnly) {
-    	NetherizedBlocks.BLOCK_LIST.add(blockIn);
+    	BLOCK_LIST.add(blockIn);
 		if(!blockOnly) {
 	    	NetherizedItems.ITEM_LIST.add(new ItemBlock(blockIn).setRegistryName(blockIn.getRegistryName()));
 		}
@@ -157,7 +139,7 @@ public class NetherizedBlocks {
     
     private static Block addSlab(BlockSlab halfSlab, BlockSlab doubleSlab) {
 		NetherizedItems.ITEM_LIST.add(new ItemSlabBase(halfSlab, doubleSlab));
-		NetherizedBlocks.BLOCK_LIST.add(doubleSlab);
+		BLOCK_LIST.add(doubleSlab);
     	return addBlock(halfSlab, true);
     }
     

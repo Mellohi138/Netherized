@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.util.ModUtils;
-import mellohi138.netherized.util.config.NetherizedConfig;
+import mellohi138.netherized.util.config.NetherizedItemConfig;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -46,13 +46,13 @@ public class ItemBruteAxe extends ItemAxe {
 				boolean isCritical = player.swingProgress == 0 && player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding() && !player.isSprinting();
 				
 				if(isCritical) {
-					float criticalDamage = ModUtils.calculatePrecentage(target.getHealth(), NetherizedConfig.bruteAxeDamage * 1.5F);
+					float criticalDamage = ModUtils.calculatePrecentage(target.getHealth(), NetherizedItemConfig.bruteAxeConfig.bruteAxeDamage * 1.5F);
 					target.attackEntityFrom(DamageSource.causePlayerDamage(player), criticalDamage);
 					target.knockBack(target, 0.5F, player.posX - target.posX, player.posZ - target.posZ);
 					player.getCooldownTracker().setCooldown(this, 300);
 				} else {
 					float swingProgress = 1.0F - attacker.swingProgress;
-					float damage = ModUtils.calculatePrecentage(target.getHealth(), swingProgress * NetherizedConfig.bruteAxeDamage);
+					float damage = ModUtils.calculatePrecentage(target.getHealth(), swingProgress * NetherizedItemConfig.bruteAxeConfig.bruteAxeDamage);
 					
 					target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
 					player.getCooldownTracker().setCooldown(this, (int) (swingProgress * 200));

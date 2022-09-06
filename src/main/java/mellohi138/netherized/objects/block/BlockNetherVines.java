@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import mellohi138.netherized.Netherized;
+import mellohi138.netherized.enums.EnumNetherForestType;
 import mellohi138.netherized.init.NetherizedBlocks;
 import mellohi138.netherized.util.ModUtils;
 import mellohi138.netherized.util.interfaces.ICustomRenderer;
@@ -25,7 +26,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -44,21 +44,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockNetherVines extends Block implements IPlantable {
+	private static final AxisAlignedBB WEEPING_VINES_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
+	private static final AxisAlignedBB TWISTING_VINES_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
+	private final EnumNetherForestType forestType;
 	protected final EnumFacing side;
-	protected final AxisAlignedBB shape;
-	protected final int plantID;
 	
-	public BlockNetherVines(String name, Material blockMaterialIn, MapColor blockMapColorIn, EnumFacing side, AxisAlignedBB shape, SoundType type, CreativeTabs tab, int ID) {
+	public BlockNetherVines(String name, Material blockMaterialIn, MapColor blockMapColorIn, EnumNetherForestType forestTypeIn, EnumFacing sideIn, SoundType type, CreativeTabs tab) {
 		super(blockMaterialIn, blockMapColorIn);
 		this.setTranslationKey(name);
 		this.setRegistryName(Netherized.MODID, name);
 		this.setCreativeTab(tab);
 		this.setSoundType(type);
 		
-		this.side = side;
-		this.shape = shape;
-		this.plantID = ID;
 		this.setTickRandomly(true);
+		
+		this.side = sideIn;
+		this.forestType = forestTypeIn;
 	}
 	
 	@Override
@@ -68,11 +69,11 @@ public class BlockNetherVines extends Block implements IPlantable {
     }
 	
     protected boolean canSustainBush(IBlockState state) {
-		switch(this.plantID) {
-		case 0 :
-			return state.getBlock() == Blocks.NETHER_WART_BLOCK;
-		case 1 :
-			return state.getBlock() == NetherizedBlocks.WARPED_NYLIUM;
+		switch(this.forestType) {
+		case CRIMSON:
+			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, 4);
+		case WARPED:
+			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, 0);
 		}
 		return false;
     }
@@ -109,7 +110,13 @@ public class BlockNetherVines extends Block implements IPlantable {
     
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return this.shape;
+    	switch(this.forestType) {
+    	case CRIMSON:
+    		return WEEPING_VINES_AABB;
+    	case WARPED:
+    		return TWISTING_VINES_AABB;
+    	}
+        return NULL_AABB;
     }
     
     @Override
@@ -176,10 +183,10 @@ public class BlockNetherVines extends Block implements IPlantable {
     }
 	
 	private IBlockState getGrowingVine() {
-		switch(this.plantID) {
-		case 0:
+		switch(this.forestType) {
+		case CRIMSON:
 			return NetherizedBlocks.WEEPING_VINES_END.getDefaultState();
-		case 1:
+		case WARPED:
 			return NetherizedBlocks.TWISTING_VINES_END.getDefaultState();
 		}
 		return this.getDefaultState();
@@ -189,8 +196,8 @@ public class BlockNetherVines extends Block implements IPlantable {
 		protected static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
 		private final float growthChance = 0.1F;
 		
-		public BlockNetherVinesEnd(String name, Material blockMaterialIn, MapColor blockMapColorIn, EnumFacing side,  AxisAlignedBB shape, SoundType type, int ID) {
-			super(name, blockMaterialIn, blockMapColorIn, side, shape, type, null, ID);
+		public BlockNetherVinesEnd(String name, Material blockMaterialIn, MapColor blockMapColorIn, EnumNetherForestType forestTypeIn, EnumFacing side, SoundType type) {
+			super(name, blockMaterialIn, blockMapColorIn, forestTypeIn, side, type, null);
 			this.setTranslationKey(this.getBodyVine().getBlock().getRegistryName().getPath());
 			
 	        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
@@ -274,10 +281,10 @@ public class BlockNetherVines extends Block implements IPlantable {
 		}
 		
 	    private IBlockState getBodyVine() {
-	    	switch(this.plantID) {
-	    	case 0:
+	    	switch(super.forestType) {
+	    	case CRIMSON:
 	    		return NetherizedBlocks.WEEPING_VINES.getDefaultState();
-	    	case 1:
+	    	case WARPED:
 	    		return NetherizedBlocks.TWISTING_VINES.getDefaultState();
 	    	}
 	    	return this.getDefaultState();

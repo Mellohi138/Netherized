@@ -1,26 +1,34 @@
 package mellohi138.netherized.enums;
 
+import mellohi138.netherized.client.particle.*;
+import net.minecraft.client.particle.IParticleFactory;
+
 public enum EnumNetherizedParticles {
-	REVERSED_PORTAL("reversed_portal", 0),
-	CRYING_OBSIDIAN_TEAR("crying_obsidian_tear", 1),
-	CRIMSON_SPORE("crimson_spore", 2),
-	WARPED_SPORE("warped_spore", 3),
-	SOUL_FLAME("soul_flame", 4),
-	SOUL("soul", 5);
-	
-    private final String particleName;
-    private final int particleID;
-
-    private EnumNetherizedParticles(String particleNameIn, int particleIDIn) {
-        this.particleName = particleNameIn;
-        this.particleID = particleIDIn;
-    }
-
-    public String getParticleName() {
-        return this.particleName;
-    }
-
-    public int getParticleID() {
-        return this.particleID;
+	REVERSED_PORTAL(),
+	CRYING_OBSIDIAN_TEAR(),
+	CRIMSON_SPORE(),
+	WARPED_SPORE(),
+	WHITE_ASH(),
+	SOUL_FLAME(),
+	SOUL();
+    
+    public IParticleFactory getParticleFactory() {
+    	switch(this) {
+		case REVERSED_PORTAL:
+			return new ParticleReversedPortal.Factory();
+		case CRYING_OBSIDIAN_TEAR:
+			return new ParticleCryingObsidianTear.Factory();
+		case CRIMSON_SPORE:
+			return new ParticleNetherAmbience.CrimsonFactory();
+		case WARPED_SPORE:
+			return new ParticleNetherAmbience.WarpedFactory();
+		case WHITE_ASH:
+			return new ParticleNetherAmbience.BasaltFactory();
+		case SOUL_FLAME:
+			return new ParticleSoulFlame.Factory();
+		case SOUL:
+			return new ParticleSoul.Factory();
+    	}
+		return null;
     }
 }

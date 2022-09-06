@@ -2,26 +2,53 @@ package mellohi138.netherized.util;
 
 import java.util.Random;
 
-import mellohi138.netherized.util.config.NetherizedConfig;
+import mellohi138.netherized.enums.EnumNetherForestType;
+import mellohi138.netherized.init.NetherizedEnchantments;
+import mellohi138.netherized.util.config.NetherizedGeneralConfig;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ModUtils {
-	public static final AxisAlignedBB WEEPING_VINES_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
-	public static final AxisAlignedBB TWISTING_VINES_AABB = new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
-	
 	/**
 	 * Immunity checker. Code copied and edited from IaF ROtN Edition's Myrmex Workers. Credit goes to SandwichHorror, Democat, and Asterixxx
 	*/
 	public static boolean isFireproof(Item item) {
-		for (String itemName : NetherizedConfig.fireproofItemList) {
+		for (String itemName : NetherizedGeneralConfig.fireproofItemList) {
 			if (ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName)) == item) {
-				return !NetherizedConfig.fireproofItemBlacklist;
+				return !NetherizedGeneralConfig.fireproofItemBlacklist;
 			}
 		}
-		return NetherizedConfig.fireproofItemBlacklist;
+		return NetherizedGeneralConfig.fireproofItemBlacklist;
+	}
+	
+	public static boolean isHoeWhitelisted(Block block) {
+		for (String blockName : NetherizedGeneralConfig.hoeWhitelistedBlocks) {
+			if (ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)) == block || block instanceof BlockLeaves) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean getSoulBlocks(Block block) {
+		for (String blockName : NetherizedGeneralConfig.soulBlocks) {
+			if (ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockName)) == block) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean hasSoulSpeed(EntityLivingBase entityIn) {
+		return EnchantmentHelper.getMaxEnchantmentLevel(NetherizedEnchantments.SOUL_SPEED, entityIn) > 0;
 	}
 	
 	/**
@@ -45,5 +72,46 @@ public class ModUtils {
 			d0 *= 0.826D;
 		} 
 		return i;
+	}
+
+	/*
+	 * Extra MathHelper function, taken from 1.16 forge.
+	 */
+	public static int nextInt(Random random, int minimum, int maximum) {    
+		return minimum >= maximum ? minimum : random.nextInt(maximum - minimum + 1) + minimum;
+	}
+	
+	/*
+	 * Grows Nether vegetation, code taken from 1.16 Forge
+	 */
+	public static boolean growNetherVegetation(World worldIn, Random rand, BlockPos pos, EnumNetherForestType forestType ) {
+		Block block = worldIn.getBlockState(pos.down()).getBlock();
+		if(block == forestType.getVegetationBlocks(forestType, 0)) {
+			int i = pos.getY();
+			if(i >= 1 && i + 1 < worldIn.getHeight()) {
+				int j = 0;
+				
+				for(int k = 0; k < 9; ++k) {
+					BlockPos newPos = pos.add(rand.nextInt(3) - rand.nextInt(3), rand.nextInt(1), rand.nextInt(3) - rand.nextInt(3));
+					IBlockState newState = null;
+					if(rand.nextInt(23) == 0) {
+						newState = forestType.getVegetationBlocks(forestType.getOpposite(), 2).getDefaultState();
+					} else if(rand.nextInt(11) == 0) {
+						newState = forestType.getVegetationBlocks(forestType, 2).getDefaultState();
+					} else if(rand.nextInt(3) == 0) {
+						newState = forestType.getVegetationBlocks(forestType, 1).getDefaultState();
+					}
+					
+					if(newState != null) {
+						if(worldIn.isAirBlock(newPos) && newPos.getY() > 0 && worldIn.getBlockState(newPos.down()).getBlock() == forestType.getVegetationBlocks(forestType, 0)) {
+							worldIn.setBlockState(newPos, newState);
+							++j;
+						}
+					}
+				}
+				return j > 0;
+			}
+		}
+		return false;
 	}
 }

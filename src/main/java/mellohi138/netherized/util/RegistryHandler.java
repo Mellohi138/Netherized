@@ -1,13 +1,12 @@
 package mellohi138.netherized.util;
 
-import mellohi138.netherized.client.init.ClientModelRegistry;
-import mellohi138.netherized.events.EventRegistry;
 import mellohi138.netherized.init.NetherizedBlocks;
 import mellohi138.netherized.init.NetherizedItems;
 import mellohi138.netherized.init.NetherizedSounds;
+import mellohi138.netherized.world.NetherizedWorldGen;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.init.Blocks;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class RegistryHandler {
@@ -29,9 +28,8 @@ public class RegistryHandler {
 		EntityEnderman.setCarriable(NetherizedBlocks.SHROOMLIGHT, true);
 	}
 	
-	public static void registerModEvents() {
-    	MinecraftForge.EVENT_BUS.register(new ClientModelRegistry());
-    	MinecraftForge.EVENT_BUS.register(new EventRegistry());
+	public static void registerWorldGenerators() {
+		GameRegistry.registerWorldGenerator(new NetherizedWorldGen(), 0);
 	}
 	
 	public static void registerOreDict() {

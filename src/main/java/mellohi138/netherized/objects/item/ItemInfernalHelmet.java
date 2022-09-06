@@ -8,7 +8,7 @@ import com.google.common.collect.Multimap;
 
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.client.model.armor.ModelInfernalHelmet;
-import mellohi138.netherized.util.config.NetherizedConfig;
+import mellohi138.netherized.util.config.NetherizedItemConfig;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -34,7 +34,7 @@ public class ItemInfernalHelmet extends ItemArmor {
 		this.setRegistryName(Netherized.MODID, name);
 		this.setCreativeTab(tab);
 		
-		this.knockbackResistance = new AttributeModifier("infernoKnockbackResistance", NetherizedConfig.infernoKnockbackResistance, 0);
+		this.knockbackResistance = new AttributeModifier("infernoKnockbackResistance", NetherizedItemConfig.infernalConfig.infernoKnockbackResistance, 0);
 	}
 	
 	@Override

@@ -96,6 +96,9 @@ entity.zoglin.name=Zoglin
 entity.strider.name=Strider
 entity.hovering_inferno.name=Hovering Inferno
 
+//Enchantments
+enchantment.soul_speed=Soul Speed
+
 //Creative Tabs
 itemGroup.netherized_items=Netherized Items
 itemGroup.netherized_blocks=Netherized Blocks

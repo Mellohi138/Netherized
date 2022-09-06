@@ -3,6 +3,6 @@
         "axis=y":    { "model": "netherized:warped_stem" },
         "axis=z":     { "model": "netherized:warped_stem", "x": 90 },
         "axis=x":     { "model": "netherized:warped_stem", "x": 90, "y": 90 },
-        "axis=none":   { "model": "netherized:warped_stem" }
+        "axis=none":   { "model": "netherized:warped_bark" }
     }
 }

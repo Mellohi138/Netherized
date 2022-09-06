@@ -2,6 +2,8 @@ package mellohi138.netherized.objects.block;
 
 import java.util.Random;
 
+import mellohi138.netherized.enums.EnumNetherForestType;
+import mellohi138.netherized.util.ModUtils;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -14,8 +16,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockNetherNylium extends BlockBase implements IGrowable {
-	public BlockNetherNylium(String name, Material material, MapColor color, String usedTool, int toolStrength, SoundType soundType, CreativeTabs tab) {
+	private final EnumNetherForestType forestType;
+	
+	public BlockNetherNylium(String name, Material material, MapColor color, String usedTool, int toolStrength, EnumNetherForestType forestTypeIn, SoundType soundType, CreativeTabs tab) {
 		super(name, material, color, usedTool, toolStrength, soundType, tab, false);
+		
+		this.forestType = forestTypeIn;
 	}
 	
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
@@ -33,18 +39,7 @@ public class BlockNetherNylium extends BlockBase implements IGrowable {
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		/*
-	      IBlockState blockstate = worldIn.getBlockState(pos);
-	      BlockPos blockpos = pos.up();
-	      if (this == BlockInit.CRIMSON_NYLIUM) {
-	         NetherVegetationFeature.func_236325_a_(worldIn, rand, blockpos, Features.Configs.CRIMSON_FOREST_VEGETATION_CONFIG, 3, 1);
-	      } else if (this == BlockInit.WARPED_NYLIUM) {
-	         NetherVegetationFeature.func_236325_a_(worldIn, rand, blockpos, Features.Configs.WARPED_FOREST_VEGETATION_CONFIG, 3, 1);
-	         NetherVegetationFeature.func_236325_a_(worldIn, rand, blockpos, Features.Configs.NETHER_SPROUTS_CONFIG, 3, 1);
-	         if (rand.nextInt(8) == 0) {
-	            TwistingVineFeature.func_236423_a_(worldIn, rand, blockpos, 3, 1, 2);
-	         }
-	      } */
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {	
+		ModUtils.growNetherVegetation(worldIn, rand, pos.up(), this.forestType);
 	}
 }

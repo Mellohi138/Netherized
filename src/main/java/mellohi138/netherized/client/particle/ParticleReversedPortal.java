@@ -20,7 +20,7 @@ public class ParticleReversedPortal extends ParticlePortal {
 
     public void renderParticle(BufferBuilder bufferIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
         float f1 = 1.0F - ((float)this.particleAge + partialTicks) / ((float)this.particleMaxAge * 1.5F);
-        this.particleScale = this.particleScale * f1;
+        this.particleScale *= f1;
         
         super.renderParticle(bufferIn, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
     }

@@ -1112,7 +1112,7 @@
 				   {"name" : "netherized:entity/strider/warble/strider_warble_5"}]
     },
 	"particle.soul.scream": {
-        "category": "neutral",
+		"category": "ambient",
         "sounds": [{"name" : "netherized:particle/soul/scream/soul_scream_1"},
                    {"name" : "netherized:particle/soul/scream/soul_scream_2"},
 				   {"name" : "netherized:particle/soul/scream/soul_scream_3"},

@@ -1,4 +1,4 @@
-package mellohi138.netherized.client.init;
+package mellohi138.netherized.client;
 
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;

@@ -26,7 +26,7 @@ public class Netherized {
 	
     public static final String MODID = "netherized";
     public static final String MODNAME = "Netherized";
-    public static final String VERSION = "0.0.5-A";
+    public static final String VERSION = "0.0.6-A";
     
     public static final String CLIENT_PROXY = "mellohi138.netherized.proxy.ClientProxy";
     public static final String SERVER_PROXY = "mellohi138.netherized.proxy.CommonProxy";
@@ -37,7 +37,9 @@ public class Netherized {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
     	LOGGER = event.getModLog();
-    	RegistryHandler.registerModEvents();
+    	RegistryHandler.registerWorldGenerators();
+    	RegistryHandler.registerBlockSounds();
+    	RegistryHandler.registerMobUtils();
     	
     	PROXY.preInit();
     } 
@@ -45,8 +47,6 @@ public class Netherized {
 	@EventHandler
     public void init(FMLInitializationEvent event) {
     	RegistryHandler.registerOreDict();
-    	RegistryHandler.registerBlockSounds();
-    	RegistryHandler.registerMobUtils();
     	
 		PROXY.init();
     }

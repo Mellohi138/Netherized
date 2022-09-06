@@ -1,9 +1,8 @@
-package mellohi138.netherized.client.init;
+package mellohi138.netherized.client;
 
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.init.NetherizedBlocks;
 import mellohi138.netherized.init.NetherizedItems;
-import mellohi138.netherized.init.NetherizedParticles;
 import mellohi138.netherized.util.interfaces.ICustomRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -38,8 +37,6 @@ public class ClientModelRegistry {
 	
 	@SubscribeEvent
     public static void onTextureStitch(TextureStitchEvent event) {
-		for(ResourceLocation particleName : NetherizedParticles.PARTICLE_LIST) {
-			event.getMap().registerSprite(particleName);
-		}
+		event.getMap().registerSprite(new ResourceLocation(Netherized.MODID, "particles/soul_flame"));
 	}
 }
