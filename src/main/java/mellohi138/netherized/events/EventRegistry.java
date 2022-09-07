@@ -151,6 +151,19 @@ public class EventRegistry {
 		}
 	}
 	
+	@SubscribeEvent
+	public static void convertSoulFireToFire(BlockEvent event) {
+		World worldIn = event.getWorld();
+		BlockPos pos = event.getPos();
+		
+		if(event.getState().getBlock() == NetherizedBlocks.SOUL_FIRE) {
+	    	IBlockState soil = worldIn.getBlockState(pos.down());
+	    	if(!ModUtils.getSoulBlocks(soil.getBlock())) {
+	    		worldIn.setBlockState(pos, Blocks.FIRE.getDefaultState());
+	    	}
+		}
+	}
+	
 	
 	@SubscribeEvent
 	public static void addHoeHarvesting(PlayerEvent.BreakSpeed event) {
