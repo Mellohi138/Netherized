@@ -93,34 +93,30 @@ public class EventRegistry {
 	@SubscribeEvent
 	public static void adjustSoulSpeedUponBootChange(LivingEquipmentChangeEvent event) {
 		EntityLivingBase entityIn = event.getEntityLiving();
+    	IAttributeInstance attributeIn = entityIn.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 		
-		if(entityIn instanceof EntityPlayer) {
-			EntityPlayer playerIn = (EntityPlayer)entityIn;	
-	    	IAttributeInstance attributeIn = playerIn.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
-			
-	    	IBlockState state = playerIn.world.getBlockState(new BlockPos(playerIn.posX, playerIn.posY - 0.5D, playerIn.posZ));
-	    	
-	    	if(event.getSlot() == EntityEquipmentSlot.FEET) {
-				if(!ModUtils.hasSoulSpeed(playerIn)) {
+    	IBlockState state = entityIn.world.getBlockState(new BlockPos(entityIn.posX, entityIn.posY - 0.5D, entityIn.posZ));
+    	
+    	if(event.getSlot() == EntityEquipmentSlot.FEET) {
+			if(!ModUtils.hasSoulSpeed(entityIn)) {
+	    		if(attributeIn.getModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER) != null) {
+	    			attributeIn.removeModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER);
+	    		}
+			} else {
+				if(ModUtils.getSoulBlocks(state.getBlock())) {
+					//Adjusting the speed, just incase the switched equipment has a different level than the original one
 		    		if(attributeIn.getModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER) != null) {
 		    			attributeIn.removeModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER);
 		    		}
-				} else {
-					if(ModUtils.getSoulBlocks(state.getBlock())) {
-						//Adjusting the speed, just incase the switched equipment has a different level than the original one
-			    		if(attributeIn.getModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER) != null) {
-			    			attributeIn.removeModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER);
-			    		}
-		            	int i = EnchantmentHelper.getEnchantmentLevel(NetherizedEnchantments.SOUL_SPEED, playerIn.getItemStackFromSlot(EntityEquipmentSlot.FEET));
-		                float speed = (i * 0.105F) + 1.3F;
-		                
-		                if(!playerIn.world.isRemote && attributeIn.getModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER) == null) {
-		                	attributeIn.applyModifier(new AttributeModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER, "soul_speed_modifier", speed, 1).setSaved(false));;	
-		                }
-					}
+	            	int i = EnchantmentHelper.getEnchantmentLevel(NetherizedEnchantments.SOUL_SPEED, entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET));
+	                float speed = (i * 0.105F) + 1.3F;
+	                
+	                if(!entityIn.world.isRemote && attributeIn.getModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER) == null) {
+	                	attributeIn.applyModifier(new AttributeModifier(EnchantmentSoulSpeed.SOUL_SPEED_MODIFIER, "soul_speed_modifier", speed, 1).setSaved(false));;	
+	                }
 				}
-	    	}
-		}
+			}
+    	}
 	}
 	
 	@SubscribeEvent
