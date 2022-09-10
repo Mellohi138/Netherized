@@ -33,10 +33,10 @@ public class BlockLogBase extends BlockLog {
 		
 		switch(meta) {
 		case 1:
-			state = state.withProperty(LOG_AXIS, EnumAxis.Y);
+			state = state.withProperty(LOG_AXIS, EnumAxis.X);
 			break;
 		case 2:
-			state = state.withProperty(LOG_AXIS, EnumAxis.X);
+			state = state.withProperty(LOG_AXIS, EnumAxis.Y);
 			break;
 		case 3:
 			state = state.withProperty(LOG_AXIS, EnumAxis.Z);
@@ -54,11 +54,11 @@ public class BlockLogBase extends BlockLog {
 		
 		switch(state.getValue(LOG_AXIS)) {
 		case X:
-			i = 2;
+			i = 1;
 			break;
 			
 		case Y:
-			i = 1;
+			i = 2;
 			break;
 			
 		case Z:

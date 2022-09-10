@@ -78,7 +78,7 @@ public class BlockNetherRoots extends BlockBush implements IShearable {
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         IBlockState soil = worldIn.getBlockState(pos.down());
         
-        return soil.getBlock() == this.forestType.getVegetationBlocks(this.forestType, "nylium");
+        return soil.getBlock() == this.forestType.getVegetationBlocks("nylium");
     }
     
     @Override

@@ -78,6 +78,7 @@ public class NetherizedBlocks {
 	public static final Block CRIMSON_STEM = addBlock(new BlockLogBase("crimson_stem", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setResistance(2.0F));
 	public static final Block WARPED_STEM = addBlock(new BlockLogBase("warped_stem", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, "axe", 0, NetherizedSounds.SOUND_TYPE_NETHER_STEM, Netherized.NETHERIZED_BLOCKS).setResistance(2.0F));
 	
+	public static final Block CRIMSON_WART_BLOCK = addBlock(new BlockBase("crimson_wart_block", Material.GRASS, MapColor.RED, null, 0, NetherizedSounds.SOUND_TYPE_NETHER_WART, Netherized.NETHERIZED_BLOCKS).setHardness(1.0F));
 	public static final Block WARPED_WART_BLOCK = addBlock(new BlockBase("warped_wart_block", Material.GRASS, MapColor.CYAN, null, 0, NetherizedSounds.SOUND_TYPE_NETHER_WART, Netherized.NETHERIZED_BLOCKS).setHardness(1.0F));
 	public static final Block SHROOMLIGHT = addBlock(new BlockBase("shroomlight", Material.GRASS, MapColor.RED, "axe", 0, NetherizedSounds.SOUND_TYPE_SHROOMLIGHT, Netherized.NETHERIZED_BLOCKS).setHardness(1.0F).setLightLevel(1F));
 	

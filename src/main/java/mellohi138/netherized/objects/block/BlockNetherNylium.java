@@ -41,5 +41,8 @@ public class BlockNetherNylium extends BlockBase implements IGrowable {
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {	
 		ModUtils.growNetherVegetation(worldIn, rand, pos.up(), this.forestType);
+		if(this.forestType == EnumNetherForestType.WARPED) {
+			
+		}
 	}
 }

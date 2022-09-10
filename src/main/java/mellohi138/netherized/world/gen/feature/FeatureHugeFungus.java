@@ -3,15 +3,22 @@ package mellohi138.netherized.world.gen.feature;
 import java.util.Random;
 
 import mellohi138.netherized.enums.EnumNetherForestType;
+import mellohi138.netherized.init.NetherizedBlocks;
+import mellohi138.netherized.util.ModUtils;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+/**
+ * Code, again, taken from 1.16. No rights owned to it.
+ */
+@SuppressWarnings("deprecation")
 public class FeatureHugeFungus extends WorldGenerator {
 	private final EnumNetherForestType forestType;
 	
@@ -25,96 +32,154 @@ public class FeatureHugeFungus extends WorldGenerator {
 		this.forestType = forestTypeIn;
 	}
 	
-    protected boolean canGrowInto(Block blockType) {
-        Material material = blockType.getDefaultState().getMaterial();
-        return material == Material.AIR || material == Material.LEAVES || blockType == Blocks.GRASS || blockType == Blocks.DIRT || blockType == Blocks.LOG || blockType == Blocks.LOG2 || blockType == Blocks.SAPLING || blockType == Blocks.VINE;
-    }
-	
-    public boolean isReplaceable(World world, BlockPos pos) {
-        net.minecraft.block.state.IBlockState state = world.getBlockState(pos);
-        return state.getBlock().isAir(state, world, pos) || state.getBlock().isLeaves(state, world, pos) || state.getBlock().isWood(world, pos) || canGrowInto(state.getBlock());
+    private boolean isReplaceable(World world, BlockPos pos, boolean isStem) {
+        IBlockState state = world.getBlockState(pos);
+        return state.getMaterial().isReplaceable() || isStem && state.getMaterial() == Material.PLANTS;
     }
 	
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos pos) {
-		Block nylium = this.forestType.getVegetationBlocks(this.forestType, "nylium");
-		Block soil = worldIn.getBlockState(pos.down()).getBlock();
-		if(nylium == soil) {
-	        int i = rand.nextInt(3) + 5;
-
-	        boolean flag = true;
-
-	        if (pos.getY() >= 1 && pos.getY() + i + 1 <= 256) {
-	            for (int j = pos.getY(); j <= pos.getY() + 1 + i; ++j) {
-	                int k = 1;
-
-	                if (j == pos.getY()) {
-	                    k = 0;
-	                }
-
-	                if (j >= pos.getY() + 1 + i - 2) {
-	                    k = 2;
-	                }
-
-	                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-	                for (int l = pos.getX() - k; l <= pos.getX() + k && flag; ++l) {
-	                    for (int i1 = pos.getZ() - k; i1 <= pos.getZ() + k && flag; ++i1) {
-	                        if (j >= 0 && j < worldIn.getHeight()) {
-	                            if (!this.isReplaceable(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) {
-	                                flag = false;
-	                            }
-	                        } else {
-	                            flag = false;
-	                        }
-	                    }
-	                }
-	            }
-
-	            if (!flag) {
-	                return false;
-	            } else {
-	                if (pos.getY() < worldIn.getHeight() - i - 1) {
-	                    for (int i2 = pos.getY() - 3 + i; i2 <= pos.getY() + i; ++i2) {
-	                        int k2 = i2 - (pos.getY() + i);
-	                        int l2 = 1 - k2 / 2;
-
-	                        for (int i3 = pos.getX() - l2; i3 <= pos.getX() + l2; ++i3) {
-	                            int j1 = i3 - pos.getX();
-
-	                            for (int k1 = pos.getZ() - l2; k1 <= pos.getZ() + l2; ++k1) {
-	                                int l1 = k1 - pos.getZ();
-
-	                                if (Math.abs(j1) != l2 || Math.abs(l1) != l2 || rand.nextInt(2) != 0 && k2 != 0) {
-	                                    BlockPos blockpos = new BlockPos(i3, i2, k1);
-	                                    IBlockState state2 = worldIn.getBlockState(blockpos);
-
-	                                    if (state2.getBlock().isAir(state2, worldIn, blockpos) || state2.getBlock().isAir(state2, worldIn, blockpos)) {
-	                                        this.setBlockAndNotifyAdequately(worldIn, blockpos, this.forestType.getVegetationBlocks(this.forestType, "wart").getDefaultState());
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    }
-
-	                    for (int j2 = 0; j2 < i; ++j2) {
-	                        BlockPos upN = pos.up(j2);
-	                        IBlockState state2 = worldIn.getBlockState(upN);
-
-	                        if (state2.getBlock().isAir(state2, worldIn, upN) || state2.getBlock().isLeaves(state2, worldIn, upN)) {
-	                            this.setBlockAndNotifyAdequately(worldIn, pos.up(j2), this.forestType.getVegetationBlocks(this.forestType, "stem").getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
-	                        }
-	                    }
-
-	                    return true;
-	                } else {
-	                    return false;
-	                }
-	            }
-	        } else {
-	            return false;
-	        }
+		Block block = this.forestType.getVegetationBlocks("nylium");
+		BlockPos blockpos = null;
+		Block block1 = worldIn.getBlockState(pos.down()).getBlock();
+	      
+		if (block1 == block) {
+			blockpos = pos;
+		}
+	      
+		if (blockpos != null) {
+			int i = ModUtils.nextInt(rand, 4, 13);
+			if (rand.nextInt(12) == 0) {
+				i *= 2;
+			}
+			
+			if (blockpos.getY() + i + 1 < worldIn.getHeight()) {         
+				boolean flag = rand.nextFloat() < 0.06F;
+				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
+				this.generateStems(worldIn, rand, blockpos, i, flag);
+				this.generateFungusHat(worldIn, rand, blockpos, i, flag);
+				return true;
+			}
 		}
 		return false;
 	}
- }
+
+	private void generateStems(World worldIn, Random rand, BlockPos pos, int nextInt, boolean randFlag) {
+		IBlockState blockstate = this.forestType.getVegetationBlocks("stem").getStateFromMeta(2);
+		int i = randFlag ? 1 : 0;
+		if(i == 1) {
+			for(BlockPos blockPos : BlockPos.getAllInBox(pos.add(-1, -1, -1), pos.add(1, -1, 1))) {
+				if(worldIn.getBlockState(blockPos).getBlock() != this.forestType.getVegetationBlocks("nylium")) {
+					i = 0;
+				}
+			}
+		}
+		
+		for(int j = -i; j <= i; ++j) {
+			for(int k = -i; k <= i; ++k) {
+				boolean flag = randFlag && MathHelper.abs(j) == i && MathHelper.abs(k) == i;
+				for(int l = 0; l < nextInt; ++l) {
+					BlockPos.MutableBlockPos mutablePos = ModUtils.setMutableOffset(pos, j, l, k);
+					if (this.isReplaceable(worldIn, mutablePos, true)) {
+						worldIn.setBlockState(mutablePos, blockstate, 3);
+						if (flag) {
+							if (rand.nextFloat() < 0.1F) {
+								worldIn.setBlockState(mutablePos, blockstate);
+							}
+						} else {
+							worldIn.setBlockState(mutablePos, blockstate);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void generateFungusHat(World worldIn, Random rand, BlockPos pos, int nextInt, boolean randFlag) {
+		boolean flag = this.forestType == EnumNetherForestType.CRIMSON;
+		int i = Math.min(rand.nextInt(1 + nextInt / 3) + 5, nextInt);
+		int j = nextInt - i;
+	      
+		for(int k = j; k <= nextInt; ++k) {
+			int l = k < nextInt - rand.nextInt(3) ? 2 : 1;
+			if (i > 8 && k < j + 4) {
+				l = 3;
+			}
+			
+			if (randFlag) {
+				++l;
+			}
+			
+			for(int i1 = -l; i1 <= l; ++i1) {
+				for(int j1 = -l; j1 <= l; ++j1) {
+					boolean flag1 = i1 == -l || i1 == l;
+					boolean flag2 = j1 == -l || j1 == l;
+					boolean flag3 = !flag1 && !flag2 && k != nextInt;
+					boolean flag4 = flag1 && flag2;
+					boolean flag5 = k < j + 3;
+					BlockPos.MutableBlockPos mutablePos = ModUtils.setMutableOffset(pos, i1, k, j1);
+					
+					if (this.isReplaceable(worldIn, mutablePos, false)) {
+						if (!worldIn.isAirBlock(mutablePos.down())) {
+							worldIn.destroyBlock(mutablePos, true);
+						}
+						if (flag5) {
+							if (!flag3) {
+								this.generateHatWithVines(worldIn, rand, mutablePos, flag);
+							}
+						} else if (flag3) {
+							this.generateFungus(worldIn, rand, mutablePos, 0.1F, 0.2F, flag ? 0.1F : 0.0F);
+						} else if (flag4) {
+							this.generateFungus(worldIn, rand, mutablePos, 0.01F, 0.7F, flag ? 0.083F : 0.0F);
+						} else {
+							this.generateFungus(worldIn, rand, mutablePos, 5.0E-4F, 0.98F, flag ? 0.07F : 0.0F);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void generateFungus(World worldIn, Random rand, BlockPos.MutableBlockPos mutablePos, float f, float g, float h) {
+		if (rand.nextFloat() < f) {
+			worldIn.setBlockState(mutablePos, NetherizedBlocks.SHROOMLIGHT.getDefaultState());
+		} else if (rand.nextFloat() < g) {
+			worldIn.setBlockState(mutablePos, this.forestType.getVegetationBlocks("wart").getDefaultState());
+			if (rand.nextFloat() < h) {
+				placeWeepingVine(mutablePos, worldIn, rand);
+			}
+		}
+	}
+
+	private void generateHatWithVines(World worldIn, Random rand, BlockPos pos, boolean isCrimson) {  
+		if (worldIn.getBlockState(pos.down()) == this.forestType.getVegetationBlocks("wart").getDefaultState()) {
+			worldIn.setBlockState(pos, this.forestType.getVegetationBlocks("wart").getDefaultState());
+		} else if ((double)rand.nextFloat() < 0.15D) {
+			worldIn.setBlockState(pos, this.forestType.getVegetationBlocks("wart").getDefaultState());
+			if (isCrimson && rand.nextInt(11) == 0) {
+				placeWeepingVine(pos, worldIn, rand);
+			}
+		}
+	}
+	
+	private static void placeWeepingVine(BlockPos pos, World worldIn, Random rand) {  
+		BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos(pos).move(EnumFacing.DOWN);
+		if (worldIn.isAirBlock(mutablePos)) {
+			int i = ModUtils.nextInt(rand, 1, 5);
+			
+			if (rand.nextInt(7) == 0) {
+				i *= 2;
+			}
+			
+			for(int e = 0; e <= i; ++e) {
+				if (e == i || !worldIn.isAirBlock(mutablePos.down())) {
+					worldIn.setBlockState(mutablePos, NetherizedBlocks.WEEPING_VINES_END.getStateFromMeta(ModUtils.nextInt(rand, 13, 15)));
+					break;
+				}
+				
+				worldIn.setBlockState(mutablePos, NetherizedBlocks.WEEPING_VINES.getDefaultState(), 2);
+				mutablePos.move(EnumFacing.DOWN);
+			}
+		}
+	}
+}

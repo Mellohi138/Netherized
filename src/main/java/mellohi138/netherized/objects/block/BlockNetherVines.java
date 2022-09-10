@@ -26,6 +26,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -71,9 +72,9 @@ public class BlockNetherVines extends Block implements IPlantable {
     protected boolean canSustainBush(IBlockState state) {
 		switch(this.forestType) {
 		case CRIMSON:
-			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, "wart");
+			return state.getBlock() == forestType.getVegetationBlocks("wart") || state.getBlock() == Blocks.NETHERRACK;
 		case WARPED:
-			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, "nylium");
+			return state.getBlock() == forestType.getVegetationBlocks("nylium");
 		}
 		return false;
     }
@@ -89,13 +90,13 @@ public class BlockNetherVines extends Block implements IPlantable {
 	
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		super.updateTick(worldIn, pos, state, rand);
 		this.checkAndDropBlock(worldIn, pos, state);
+		super.updateTick(worldIn, pos, state, rand);
 	}
 	
 	@Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		worldIn.setBlockState(pos, this.getGrowingVine());
+		worldIn.setBlockState(pos, this.getGrowingVine());	
     }
 	
     protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state) {
@@ -228,6 +229,7 @@ public class BlockNetherVines extends Block implements IPlantable {
 		@Override
 		public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 			this.checkAndDropBlock(worldIn, pos, state);
+	        
             BlockPos blockPos = pos.offset(this.side);
             
 	        if (state.getValue(AGE) < 15 && ForgeHooks.onCropsGrowPre(worldIn, blockPos, worldIn.getBlockState(blockPos), rand.nextFloat() < this.growthChance)) {
@@ -252,14 +254,14 @@ public class BlockNetherVines extends Block implements IPlantable {
 	    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 	    	this.checkAndDropBlock(worldIn, pos, state);
 	    	
-	        if(worldIn.getBlockState(pos.offset(this.side)).getBlock() == this) {
+	        if(worldIn.getBlockState(pos.offset(this.side)).getBlock() == this || worldIn.getBlockState(pos.offset(this.side)).getBlock() == this.getBodyVine().getBlock()) {
 	            worldIn.setBlockState(pos, this.getBodyVine());
 	        }
 	    }
 	    
 		@Override
 		public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-			return true;
+			return worldIn.isAirBlock(pos.offset(this.side));
 		}
 
 		@Override

@@ -46,6 +46,7 @@ public class NetherizedGeneralConfig {
     		"minecraft:hay_block",
     		"minecraft:nether_wart_block",
     		"minecraft:sponge",
+    		Netherized.MODID + ":crimson_wart_block",
     		Netherized.MODID + ":warped_wart_block",
     		Netherized.MODID + ":shroomlight"
     };
