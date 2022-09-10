@@ -71,9 +71,9 @@ public class BlockNetherVines extends Block implements IPlantable {
     protected boolean canSustainBush(IBlockState state) {
 		switch(this.forestType) {
 		case CRIMSON:
-			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, 4);
+			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, "wart");
 		case WARPED:
-			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, 0);
+			return state.getBlock() == forestType.getVegetationBlocks(this.forestType, "nylium");
 		}
 		return false;
     }

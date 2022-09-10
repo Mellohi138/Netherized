@@ -84,8 +84,8 @@ public class EntityHoveringInferno extends EntityBlaze {
     }
     
     protected void entityInit() {
-        super.entityInit();
         this.dataManager.register(IS_SHIELDING, Boolean.valueOf(false));
+        super.entityInit();
     }
     
     @Override
@@ -114,7 +114,7 @@ public class EntityHoveringInferno extends EntityBlaze {
     }
 
     public boolean isShielding() {
-        return this.dataManager.get(IS_SHIELDING);
+        return this.dataManager.get(IS_SHIELDING).booleanValue();
     }
     
     @Override

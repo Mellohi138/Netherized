@@ -18,32 +18,32 @@ public enum EnumNetherForestType {
     	return null;
     }
     
-    public Block getVegetationBlocks(EnumNetherForestType forestType, int blockID) {
+    public Block getVegetationBlocks(EnumNetherForestType forestType, String blockID) {
     	switch(forestType) {
     	case CRIMSON:
     		switch(blockID) {
-    		case 0:
+    		case "nylium":
     			return NetherizedBlocks.CRIMSON_NYLIUM;
-    		case 1:
+    		case "roots":
     			return NetherizedBlocks.CRIMSON_ROOTS;
-    		case 2:
+    		case "fungus":
     			return NetherizedBlocks.CRIMSON_FUNGUS;
-    		case 3:
+    		case "stem":
     			return NetherizedBlocks.CRIMSON_STEM;
-    		case 4:
+    		case "wart":
     			return Blocks.NETHER_WART_BLOCK;
     		}
     	case WARPED:
     		switch(blockID) {
-    		case 0:
+    		case "nylium":
     			return NetherizedBlocks.WARPED_NYLIUM;
-    		case 1:
+    		case "roots":
     			return NetherizedBlocks.WARPED_ROOTS;
-    		case 2:
+    		case "fungus":
     			return NetherizedBlocks.WARPED_FUNGUS;
-    		case 3:
+    		case "stem":
     			return NetherizedBlocks.WARPED_STEM;
-    		case 4:
+    		case "wart":
     			return NetherizedBlocks.WARPED_WART_BLOCK;
     		}
     	}

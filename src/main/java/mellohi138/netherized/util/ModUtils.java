@@ -86,7 +86,7 @@ public class ModUtils {
 	 */
 	public static boolean growNetherVegetation(World worldIn, Random rand, BlockPos pos, EnumNetherForestType forestType ) {
 		Block block = worldIn.getBlockState(pos.down()).getBlock();
-		if(block == forestType.getVegetationBlocks(forestType, 0)) {
+		if(block == forestType.getVegetationBlocks(forestType, "nylium")) {
 			int i = pos.getY();
 			if(i >= 1 && i + 1 < worldIn.getHeight()) {
 				int j = 0;
@@ -95,15 +95,15 @@ public class ModUtils {
 					BlockPos newPos = pos.add(rand.nextInt(3) - rand.nextInt(3), rand.nextInt(1), rand.nextInt(3) - rand.nextInt(3));
 					IBlockState newState = null;
 					if(rand.nextInt(23) == 0) {
-						newState = forestType.getVegetationBlocks(forestType.getOpposite(), 2).getDefaultState();
+						newState = forestType.getVegetationBlocks(forestType.getOpposite(), "fungus").getDefaultState();
 					} else if(rand.nextInt(11) == 0) {
-						newState = forestType.getVegetationBlocks(forestType, 2).getDefaultState();
+						newState = forestType.getVegetationBlocks(forestType, "fungus").getDefaultState();
 					} else if(rand.nextInt(3) == 0) {
-						newState = forestType.getVegetationBlocks(forestType, 1).getDefaultState();
+						newState = forestType.getVegetationBlocks(forestType, "roots").getDefaultState();
 					}
 					
 					if(newState != null) {
-						if(worldIn.isAirBlock(newPos) && newPos.getY() > 0 && worldIn.getBlockState(newPos.down()).getBlock() == forestType.getVegetationBlocks(forestType, 0)) {
+						if(worldIn.isAirBlock(newPos) && newPos.getY() > 0 && worldIn.getBlockState(newPos.down()).getBlock() == forestType.getVegetationBlocks(forestType, "nylium")) {
 							worldIn.setBlockState(newPos, newState);
 							++j;
 						}

@@ -66,15 +66,15 @@ public class BlockNetherFungus extends BlockBush implements IGrowable {
     
 	@Override
 	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		//IBlockState soil = worldIn.getBlockState(pos.down());
-		return false;
-		//return soil.getBlock() == forestType.getVegetationBlocks(this.forestType, 0);
+		IBlockState soil = worldIn.getBlockState(pos.down());
+		//return false;
+		return soil.getBlock() == forestType.getVegetationBlocks(this.forestType, "nylium");
 	}
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		//return (double)rand.nextFloat() < 0.4D;
-		return false;
+		return (double)rand.nextFloat() < 0.4D;
+		//return false;
 	}
 
 	@Override
