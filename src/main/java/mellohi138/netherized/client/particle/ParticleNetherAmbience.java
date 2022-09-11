@@ -39,7 +39,7 @@ public class ParticleNetherAmbience extends Particle {
     		double ySpeed = rand.nextGaussian() * (double)1.0E-4F;
     		double zSpeed = rand.nextGaussian() * (double)1.0E-6F;
     		ParticleNetherAmbience particle = new ParticleNetherAmbience(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeed, ySpeed, zSpeed);
-    		particle.setRBGColorF(0.9F, 0.4F, 0.5F);
+    		particle.setRBGColorF(0.9F, 0.4F, 0.6F);
     		return particle;
     	}
     }
