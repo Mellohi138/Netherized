@@ -86,7 +86,6 @@ public class BlockRespawnAnchor extends BlockBase {
 			}
 		}
 		
-		System.out.print(this.getScaledChargeLevel(state));
 		return false;
 	}
     
@@ -109,32 +108,6 @@ public class BlockRespawnAnchor extends BlockBase {
     private boolean canSetSpawn(World worldIn) {
 		return worldIn.provider.getDimension() == DimensionType.NETHER.getId();
 	}
-	
-	private float getScaledChargeLevel(IBlockState state) {  
-		switch(state.getValue(CHARGE).intValue()) {
-		case 0:
-			return 0.0F;
-		case 1:
-			return 0.25F;
-		case 2:
-			return 0.5F;
-		case 3:
-			return 0.75F;
-		case 4:
-			return 1.0F;
-		}
-		return 1.0F;
-	}
-	
-	@Override
-    public boolean hasComparatorInputOverride(IBlockState state) {
-        return true;
-    }
-    
-    @Override
-    public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
-        return (int) (this.getScaledChargeLevel(blockState) * 15);
-    }
 
 	private boolean getRespawnFuel(ItemStack stack) {   
 		return stack.getItem() == Item.getItemFromBlock(Blocks.GLOWSTONE);
