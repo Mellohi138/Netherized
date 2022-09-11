@@ -194,8 +194,7 @@ public class BlockNetherVines extends Block implements IPlantable {
 	}
 	
 	public static class BlockNetherVinesEnd extends BlockNetherVines implements IGrowable, ICustomRenderer {
-		protected static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
-		private final float growthChance = 0.1F;
+		public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
 		
 		public BlockNetherVinesEnd(String name, Material blockMaterialIn, MapColor blockMapColorIn, EnumNetherForestType forestTypeIn, EnumFacing side, SoundType type) {
 			super(name, blockMaterialIn, blockMapColorIn, forestTypeIn, side, type, null);
@@ -232,7 +231,7 @@ public class BlockNetherVines extends Block implements IPlantable {
 	        
             BlockPos blockPos = pos.offset(this.side);
             
-	        if (state.getValue(AGE) < 15 && ForgeHooks.onCropsGrowPre(worldIn, blockPos, worldIn.getBlockState(blockPos), rand.nextFloat() < this.growthChance)) {
+	        if (state.getValue(AGE) < 15 && ForgeHooks.onCropsGrowPre(worldIn, blockPos, worldIn.getBlockState(blockPos), rand.nextFloat() < 0.1F)) {
 	            if (worldIn.isAirBlock(blockPos)) {
 		        	worldIn.setBlockState(blockPos, state.cycleProperty(AGE));
 		        	ForgeHooks.onCropsGrowPost(worldIn, blockPos, worldIn.getBlockState(blockPos), state);

@@ -4,8 +4,10 @@ import java.util.Random;
 
 import mellohi138.netherized.enums.EnumNetherForestType;
 import mellohi138.netherized.init.NetherizedBlocks;
+import mellohi138.netherized.objects.block.BlockNetherVines;
 import mellohi138.netherized.util.ModUtils;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -18,7 +20,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 /**
  * Code, again, taken from 1.16. No rights owned to it.
  */
-@SuppressWarnings("deprecation")
 public class FeatureHugeFungus extends WorldGenerator {
 	private final EnumNetherForestType forestType;
 	
@@ -65,7 +66,7 @@ public class FeatureHugeFungus extends WorldGenerator {
 	}
 
 	private void generateStems(World worldIn, Random rand, BlockPos pos, int nextInt, boolean randFlag) {
-		IBlockState blockstate = this.forestType.getVegetationBlocks("stem").getStateFromMeta(2);
+		IBlockState state = this.forestType.getVegetationBlocks("stem").getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
 		int i = randFlag ? 1 : 0;
 		if(i == 1) {
 			for(BlockPos blockPos : BlockPos.getAllInBox(pos.add(-1, -1, -1), pos.add(1, -1, 1))) {
@@ -81,13 +82,13 @@ public class FeatureHugeFungus extends WorldGenerator {
 				for(int l = 0; l < nextInt; ++l) {
 					BlockPos.MutableBlockPos mutablePos = ModUtils.setMutableOffset(pos, j, l, k);
 					if (this.isReplaceable(worldIn, mutablePos, true)) {
-						worldIn.setBlockState(mutablePos, blockstate, 3);
+						worldIn.setBlockState(mutablePos, state, 3);
 						if (flag) {
 							if (rand.nextFloat() < 0.1F) {
-								worldIn.setBlockState(mutablePos, blockstate);
+								worldIn.setBlockState(mutablePos, state);
 							}
 						} else {
-							worldIn.setBlockState(mutablePos, blockstate);
+							worldIn.setBlockState(mutablePos, state);
 						}
 					}
 				}
@@ -173,7 +174,7 @@ public class FeatureHugeFungus extends WorldGenerator {
 			
 			for(int e = 0; e <= i; ++e) {
 				if (e == i || !worldIn.isAirBlock(mutablePos.down())) {
-					worldIn.setBlockState(mutablePos, NetherizedBlocks.WEEPING_VINES_END.getStateFromMeta(ModUtils.nextInt(rand, 13, 15)));
+					worldIn.setBlockState(mutablePos, NetherizedBlocks.WEEPING_VINES_END.getDefaultState().withProperty(BlockNetherVines.BlockNetherVinesEnd.AGE, Integer.valueOf(ModUtils.nextInt(rand, 13, 15))));
 					break;
 				}
 				
