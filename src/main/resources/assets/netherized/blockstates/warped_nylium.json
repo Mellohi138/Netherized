@@ -1,6 +1,10 @@
 {
     "variants": {
-	
-        "normal": { "model": "netherized:warped_nylium" }
+		"normal": [
+            { "model": "netherized:warped_nylium" },
+            { "model": "netherized:warped_nylium", "y": 90 },
+            { "model": "netherized:warped_nylium", "y": 180 },
+            { "model": "netherized:warped_nylium", "y": 270 }
+        ]
     }
 }

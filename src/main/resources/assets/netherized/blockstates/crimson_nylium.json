@@ -1,6 +1,10 @@
 {
     "variants": {
-	
-        "normal": { "model": "netherized:crimson_nylium" }
+		"normal": [
+            { "model": "netherized:crimson_nylium" },
+            { "model": "netherized:crimson_nylium", "y": 90 },
+            { "model": "netherized:crimson_nylium", "y": 180 },
+            { "model": "netherized:crimson_nylium", "y": 270 }
+        ]
     }
 }
