@@ -21,8 +21,6 @@ public class BiomeCrimsonForest extends BiomeBase {
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityGhast.class, 50, 4, 4));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityPigZombie.class, 100, 4, 4));
         this.spawnableMonsterList.add(new Biome.SpawnListEntry(EntityMagmaCube.class, 2, 4, 4));
-        
-		this.getSkyColorByTemp(2.0F);
 	}
 	
     @Override
