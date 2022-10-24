@@ -6,7 +6,6 @@ import mellohi138.netherized.enums.EnumNetherForestType;
 import mellohi138.netherized.init.NetherizedBlocks;
 import mellohi138.netherized.objects.block.BlockNetherVines;
 import mellohi138.netherized.util.ModUtils;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -39,26 +38,25 @@ public class FeatureHugeFungus extends WorldGenerator {
     }
 	
 	@Override
-	public boolean generate(World worldIn, Random rand, BlockPos pos) {
-		Block block = this.forestType.getVegetationBlocks("nylium");
-		BlockPos blockpos = null;
-		Block block1 = worldIn.getBlockState(pos.down()).getBlock();
-	      
-		if (block1 == block) {
-			blockpos = pos;
-		}
-	      
-		if (blockpos != null) {
+	public boolean generate(World worldIn, Random rand, BlockPos pos) {      
+		if (worldIn.getBlockState(pos.down()).getBlock() == this.forestType.getVegetationBlocks("nylium")) {
 			int i = ModUtils.nextInt(rand, 4, 13);
 			if (rand.nextInt(12) == 0) {
 				i *= 2;
 			}
 			
-			if (blockpos.getY() + i + 1 < worldIn.getHeight()) {         
+			if(pos.getY() + i + 1 < worldIn.getHeight()) {         
 				boolean flag = rand.nextFloat() < 0.06F;
+				if(flag) {
+					for(BlockPos blockPos : BlockPos.getAllInBox(pos.down().add(-1, 0, -1), pos.down().add(1, 0, 1))) {
+						if(worldIn.getBlockState(blockPos).getBlock() != this.forestType.getVegetationBlocks("nylium")) {
+							flag = false;
+						}
+					}
+				}
 				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-				this.generateStems(worldIn, rand, blockpos, i, flag);
-				this.generateFungusHat(worldIn, rand, blockpos, i, flag);
+				this.generateStems(worldIn, rand, pos, i, flag);
+				this.generateFungusHat(worldIn, rand, pos, i, flag);
 				return true;
 			}
 		}
@@ -68,19 +66,12 @@ public class FeatureHugeFungus extends WorldGenerator {
 	private void generateStems(World worldIn, Random rand, BlockPos pos, int nextInt, boolean randFlag) {
 		IBlockState state = this.forestType.getVegetationBlocks("stem").getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
 		int i = randFlag ? 1 : 0;
-		if(i == 1) {
-			for(BlockPos blockPos : BlockPos.getAllInBox(pos.add(-1, -1, -1), pos.add(1, -1, 1))) {
-				if(worldIn.getBlockState(blockPos).getBlock() != this.forestType.getVegetationBlocks("nylium")) {
-					i = 0;
-				}
-			}
-		}
 		
 		for(int j = -i; j <= i; ++j) {
 			for(int k = -i; k <= i; ++k) {
 				boolean flag = randFlag && MathHelper.abs(j) == i && MathHelper.abs(k) == i;
 				for(int l = 0; l < nextInt; ++l) {
-					BlockPos.MutableBlockPos mutablePos = ModUtils.setMutableOffset(pos, j, l, k);
+					BlockPos.MutableBlockPos mutablePos = ModUtils.createMutablePosOffset(pos, j, l, k);
 					if (this.isReplaceable(worldIn, mutablePos, true)) {
 						worldIn.setBlockState(mutablePos, state, 3);
 						if (flag) {
@@ -118,7 +109,7 @@ public class FeatureHugeFungus extends WorldGenerator {
 					boolean flag3 = !flag1 && !flag2 && k != nextInt;
 					boolean flag4 = flag1 && flag2;
 					boolean flag5 = k < j + 3;
-					BlockPos.MutableBlockPos mutablePos = ModUtils.setMutableOffset(pos, i1, k, j1);
+					BlockPos.MutableBlockPos mutablePos = ModUtils.createMutablePosOffset(pos, i1, k, j1);
 					
 					if (this.isReplaceable(worldIn, mutablePos, false)) {
 						if (!worldIn.isAirBlock(mutablePos.down())) {

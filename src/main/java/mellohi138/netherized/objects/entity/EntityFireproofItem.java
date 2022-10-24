@@ -17,6 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -167,7 +168,7 @@ public class EntityFireproofItem extends EntityItem {
             ItemStack item = this.getItem();
 
             if (!this.world.isRemote && this.age >= lifespan) {
-                int hook = net.minecraftforge.event.ForgeEventFactory.onItemExpire(this, item);
+                int hook = ForgeEventFactory.onItemExpire(this, item);
                 if (hook < 0) this.setDead();
                 else          this.lifespan += hook;
             } if (item.isEmpty()) {

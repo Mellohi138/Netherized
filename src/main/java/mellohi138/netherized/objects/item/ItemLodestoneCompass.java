@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.init.NetherizedBlocks;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItemFrame;
@@ -28,10 +27,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemLodestoneCompass extends ItemCompass {
-	public ItemLodestoneCompass(String name, CreativeTabs tab) {
+	public ItemLodestoneCompass(String name) {
 		this.setTranslationKey(name);
 		this.setRegistryName(Netherized.MODID, name);
-		this.setCreativeTab(tab);
 		
         this.addPropertyOverride(new ResourceLocation("angle"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
@@ -171,6 +169,6 @@ public class ItemLodestoneCompass extends ItemCompass {
 	@Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
-        return true;
+        return hasLodestone(stack);
     }
 }

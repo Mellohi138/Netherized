@@ -2,7 +2,6 @@ package mellohi138.netherized.enums;
 
 import mellohi138.netherized.init.NetherizedBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 
 public enum EnumNetherForestType {
 	CRIMSON(),
@@ -47,6 +46,6 @@ public enum EnumNetherForestType {
     			return NetherizedBlocks.WARPED_WART_BLOCK;
     		}
     	}
-    	return Blocks.AIR;
+    	return null;
     }
 }
