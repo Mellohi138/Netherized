@@ -52,14 +52,21 @@ public class ModUtils {
 	}
 	
 	/**
-	 * Calculates the precentage of a value.
+	 * Calculates a value with the given variable and precentage.
 	 * <p>
 	 * 1st value is the value you want to take the precentage of.
 	 * <p>
-	 * 2nd value is how much precentage you want to use. This value cannot exceed %100.
+	 * 2nd value is how much precentage you want to use. This value cannot exceed 100.
 	 */
-	public static float calculatePrecentage(float precentageOf, float precentageVal) {
+	public static float calculateValueWithPrecentage(float precentageOf, float precentageVal) {
 		return (precentageOf * Math.min(precentageVal, 100.0F)) / 100.0F;
+	}
+	
+	/**
+	 * Takes two values and calcuates a precentage with them. Cannot exceed 100.
+	 */
+	public static float findPrecentageOf(float precentageOf, float precentageVal) {
+		return Math.min((precentageVal * 100.0F) / precentageOf, 100.0F);
 	}
 	
 	/**
@@ -81,8 +88,8 @@ public class ModUtils {
 		return minimum >= maximum ? minimum : random.nextInt(maximum - minimum + 1) + minimum;
 	}
 	
-	public static BlockPos.MutableBlockPos setMutableOffset(BlockPos pos, int x, int y, int z) {    
-		return new BlockPos.MutableBlockPos().setPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+	public static BlockPos.MutableBlockPos createMutablePosOffset(BlockPos pos, int x, int y, int z) {    
+		return new BlockPos.MutableBlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
 	}
 	
 	/*

@@ -5,20 +5,14 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import mellohi138.netherized.Netherized;
-import mellohi138.netherized.util.ModUtils;
-import mellohi138.netherized.util.config.NetherizedItemConfig;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,36 +26,6 @@ public class ItemBruteAxe extends ItemAxe {
 		this.setCreativeTab(tab);
 		this.setMaxDamage(materialIn.getMaxUses() * 20);
 	}
-	
-	@Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(!target.isDead && attacker instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer)attacker;
-			
-			if(!player.getCooldownTracker().hasCooldown(this)) {					
-				//Resets the immunity frames. Required for this to properly work.
-				target.hurtResistantTime = 0;
-				
-				//Copied and edited from EntityPlayer.attackTargetEntityWithCurrentItem(Entity entityIn)
-				boolean isCritical = player.swingProgress == 0 && player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding() && !player.isSprinting();
-				
-				if(isCritical) {
-					float criticalDamage = ModUtils.calculatePrecentage(target.getHealth(), NetherizedItemConfig.bruteAxeConfig.bruteAxeDamage * 1.5F);
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), criticalDamage);
-					target.knockBack(target, 0.5F, player.posX - target.posX, player.posZ - target.posZ);
-					player.getCooldownTracker().setCooldown(this, 300);
-				} else {
-					float swingProgress = 1.0F - attacker.swingProgress;
-					float damage = ModUtils.calculatePrecentage(target.getHealth(), swingProgress * NetherizedItemConfig.bruteAxeConfig.bruteAxeDamage);
-					
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
-					player.getCooldownTracker().setCooldown(this, (int) (swingProgress * 200));
-				}
-			}
-		}
-        stack.damageItem(1, attacker);
-        return true;
-    }
 	
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack itemStack, Enchantment enchantment) {
