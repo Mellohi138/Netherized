@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import mellohi138.netherized.Netherized;
-import mellohi138.netherized.init.NetherizedBlocks;
+import mellohi138.netherized.util.ModUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.BlockTNT;
@@ -51,7 +51,7 @@ public class BlockSoulFire extends Block {
     @Override
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return Block.NULL_AABB;
+        return NULL_AABB;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class BlockSoulFire extends Block {
             }
 
             Block block = worldIn.getBlockState(pos.down()).getBlock();
-            boolean flag = block == Blocks.SOUL_SAND || block == NetherizedBlocks.SOUL_SOIL;
+            boolean flag = ModUtils.getSoulBlocks(block);
             
             int i = 10;
             
@@ -212,7 +212,7 @@ public class BlockSoulFire extends Block {
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     	IBlockState state = worldIn.getBlockState(pos.down());
     	
-        return state.getBlock() == Blocks.SOUL_SAND || state.getBlock() == NetherizedBlocks.SOUL_SOIL;
+        return ModUtils.getSoulBlocks(state.getBlock());
     }
 
     @Override
