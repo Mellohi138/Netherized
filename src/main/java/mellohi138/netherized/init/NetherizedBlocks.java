@@ -56,7 +56,7 @@ public class NetherizedBlocks {
 	public static final Block INFERNO_REACTOR = addBlock(new BlockInfernoReactor("inferno_reactor", Material.ANVIL, MapColor.GOLD, "pickaxe", 3, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F));;
 	public static final Block RESPAWN_ANCHOR = addBlock(new BlockRespawnAnchor("respawn_anchor", Material.ANVIL, MapColor.BLACK, "pickaxe", 3, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(50.0F).setResistance(2000.0F).setLightLevel(1.0F));
 	public static final Block POLISHED_BLACKSTONE_PRESSURE_PLATE = addBlock(new BlockPressurePlateBase("polished_blackstone_pressure_plate", Material.ROCK, MapColor.BLACK, Netherized.NETHERIZED_BLOCKS));
-	public static final Block POLISHED_BLACKSTONE_BUTTON = addBlock(new BlockButtonBase("polished_blackstone_button", Netherized.NETHERIZED_BLOCKS));
+	public static final Block POLISHED_BLACKSTONE_BUTTON = addBlock(new BlockButtonBase("polished_blackstone_button", false, Netherized.NETHERIZED_BLOCKS));
 	
 	//Nether Vegetation	
 	public static final Block CRIMSON_NYLIUM = addBlock(new BlockNetherNylium("crimson_nylium", Material.ROCK, MapColor.RED_STAINED_HARDENED_CLAY, "pickaxe", 0, EnumNetherForestType.CRIMSON, NetherizedSounds.SOUND_TYPE_NETHER_NYLIUM, Netherized.NETHERIZED_BLOCKS).setHardness(0.4F));
@@ -86,6 +86,12 @@ public class NetherizedBlocks {
 	public static final Block CRIMSON_PLANKS = addBlock(new BlockBase("crimson_planks", NetherizedMaterials.NETHER_WOOD, MapColor.RED, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
 	public static final Block WARPED_PLANKS = addBlock(new BlockBase("warped_planks", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, "axe", 0, SoundType.WOOD, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(3.0F));
 	
+	public static final Block CRIMSON_STAIRS = addBlock(new BlockStairsBase("crimson_stairs", CRIMSON_PLANKS.getDefaultState()).setHardness(2.0F).setResistance(3.0F));
+	public static final Block WARPED_STAIRS = addBlock(new BlockStairsBase("warped_stairs", WARPED_PLANKS.getDefaultState()).setHardness(2.0F).setResistance(3.0F));
+	
+	public static final Block CRIMSON_SLABS = addSlab(new BlockSlabBase("crimson_slab", CRIMSON_PLANKS.getDefaultState(), false), new BlockSlabBase("crimson_slab", CRIMSON_PLANKS.getDefaultState(), true));
+	public static final Block WARPED_SLABS = addSlab(new BlockSlabBase("warped_slab", WARPED_PLANKS.getDefaultState(), false), new BlockSlabBase("warped_slab", WARPED_PLANKS.getDefaultState(), true));
+	
 	public static final Block CRIMSON_FENCE = addBlock(new BlockFenceBase("crimson_fence", NetherizedMaterials.NETHER_WOOD, MapColor.RED, Netherized.NETHERIZED_BLOCKS));
 	public static final Block WARPED_FENCE = addBlock(new BlockFenceBase("warped_fence", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, Netherized.NETHERIZED_BLOCKS));
 	
@@ -95,21 +101,21 @@ public class NetherizedBlocks {
 	public static final Block CRIMSON_DOOR = addDoor(new BlockDoorBase("crimson_door", NetherizedMaterials.NETHER_WOOD, MapColor.RED, Netherized.NETHERIZED_BLOCKS));
 	public static final Block WARPED_DOOR = addDoor(new BlockDoorBase("warped_door", NetherizedMaterials.NETHER_WOOD, MapColor.CYAN, Netherized.NETHERIZED_BLOCKS));
 	
-	public static final Block BLACKSTONE_STAIRS = addBlock(new BlockStairsBase(NetherizedBlocks.BLACKSTONE.getDefaultState()));
-	public static final Block BLACKSTONE_WALLS = addBlock(new BlockWallsBase(NetherizedBlocks.BLACKSTONE.getDefaultState()));
-	public static final Block BLACKSTONE_SLABS = addSlab(new BlockSlabsBase(NetherizedBlocks.BLACKSTONE.getDefaultState(), false), new BlockSlabsBase(NetherizedBlocks.BLACKSTONE.getDefaultState(), true));
+	public static final Block BLACKSTONE_STAIRS = addBlock(new BlockStairsBase(BLACKSTONE.getDefaultState()));
+	public static final Block BLACKSTONE_WALLS = addBlock(new BlockWallBase(BLACKSTONE.getDefaultState()));
+	public static final Block BLACKSTONE_SLABS = addSlab(new BlockSlabBase(BLACKSTONE.getDefaultState(), false), new BlockSlabBase(BLACKSTONE.getDefaultState(), true));
 	
 	public static final Block POLISHED_BLACKSTONE = addBlock(new BlockBase("polished_blackstone", Material.ROCK, MapColor.BLACK, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(2.0F).setResistance(6.0F));
 	public static final Block CHISELED_POLISHED_BLACKSTONE = addBlock(new BlockBase("chiseled_polished_blackstone", Material.ROCK, MapColor.BLACK, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(1.5F).setResistance(6.0F));
-	public static final Block POLISHED_BLACKSTONE_STAIRS = addBlock(new BlockStairsBase(NetherizedBlocks.POLISHED_BLACKSTONE.getDefaultState()));
-	public static final Block POLISHED_BLACKSTONE_WALLS = addBlock(new BlockWallsBase(NetherizedBlocks.POLISHED_BLACKSTONE.getDefaultState()));
-	public static final Block POLISHED_BLACKSTONE_SLABS = addSlab(new BlockSlabsBase(NetherizedBlocks.POLISHED_BLACKSTONE.getDefaultState(), false), new BlockSlabsBase(NetherizedBlocks.POLISHED_BLACKSTONE.getDefaultState(), true));
+	public static final Block POLISHED_BLACKSTONE_STAIRS = addBlock(new BlockStairsBase(POLISHED_BLACKSTONE.getDefaultState()));
+	public static final Block POLISHED_BLACKSTONE_WALLS = addBlock(new BlockWallBase(POLISHED_BLACKSTONE.getDefaultState()));
+	public static final Block POLISHED_BLACKSTONE_SLABS = addSlab(new BlockSlabBase(POLISHED_BLACKSTONE.getDefaultState(), false), new BlockSlabBase(POLISHED_BLACKSTONE.getDefaultState(), true));
 	
 	public static final Block POLISHED_BLACKSTONE_BRICKS = addBlock(new BlockBase("polished_blackstone_bricks", Material.ROCK, MapColor.BLACK, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(1.5F).setResistance(6.0F));
 	public static final Block CRACKED_POLISHED_BLACKSTONE_BRICKS = addBlock(new BlockBase("cracked_polished_blackstone_bricks", Material.ROCK, MapColor.BLACK, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS).setHardness(1.5F).setResistance(6.0F));
-	public static final Block POLISHED_BLACKSTONE_BRICKS_STAIRS = addBlock(new BlockStairsBase(NetherizedBlocks.POLISHED_BLACKSTONE_BRICKS.getDefaultState()));
-	public static final Block POLISHED_BLACKSTONE_BRICKS_WALLS = addBlock(new BlockWallsBase(NetherizedBlocks.POLISHED_BLACKSTONE_BRICKS.getDefaultState()));
-	public static final Block POLISHED_BLACKSTONE_BRICKS_SLABS = addSlab(new BlockSlabsBase(NetherizedBlocks.POLISHED_BLACKSTONE_BRICKS.getDefaultState(), false), new BlockSlabsBase(NetherizedBlocks.POLISHED_BLACKSTONE_BRICKS.getDefaultState(), true));
+	public static final Block POLISHED_BLACKSTONE_BRICK_STAIRS = addBlock(new BlockStairsBase("polished_blackstone_brick_stairs", POLISHED_BLACKSTONE_BRICKS.getDefaultState()));
+	public static final Block POLISHED_BLACKSTONE_BRICK_WALLS = addBlock(new BlockWallBase("polished_blackstone_brick_wall", POLISHED_BLACKSTONE_BRICKS.getDefaultState()));
+	public static final Block POLISHED_BLACKSTONE_BRICK_SLABS = addSlab(new BlockSlabBase("polished_blackstone_brick_slab", POLISHED_BLACKSTONE_BRICKS.getDefaultState(), false), new BlockSlabBase("polished_blackstone_brick_slab", POLISHED_BLACKSTONE_BRICKS.getDefaultState(), true));
 	
 	public static final Block QUARTZ_BRICKS = addBlock(new BlockBase("quartz_bricks", Material.ROCK, MapColor.QUARTZ, "pickaxe", 0, SoundType.STONE, Netherized.NETHERIZED_BLOCKS));
 	public static final Block POLISHED_BASALT = addBlock(new BlockRotatedPillarBase("polished_basalt", Material.ROCK, MapColor.BLACK, "pickaxe", 0, NetherizedSounds.SOUND_TYPE_BASALT, Netherized.NETHERIZED_BLOCKS).setHardness(1.25F).setResistance(4.2F));

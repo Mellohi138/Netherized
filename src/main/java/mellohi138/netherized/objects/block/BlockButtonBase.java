@@ -10,8 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockButtonBase extends BlockButton {
-	public BlockButtonBase(String nameIn, CreativeTabs tabIn) {
-		super(false);
+	public BlockButtonBase(String nameIn, boolean isWood, CreativeTabs tabIn) {
+		super(isWood);
 		this.setTranslationKey(nameIn);
 		this.setRegistryName(Netherized.MODID, nameIn);
 		this.setCreativeTab(tabIn);

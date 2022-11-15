@@ -10,6 +10,19 @@ import net.minecraft.world.IBlockAccess;
 public class BlockStairsBase extends BlockStairs {
 	private final IBlockState mainState;
 	
+	public BlockStairsBase(String name, IBlockState mainState) {
+		super(mainState);
+		Block mainBlock = mainState.getBlock();
+		this.mainState = mainState;
+		
+		this.setTranslationKey(name);
+		this.setRegistryName(name);
+		this.setCreativeTab(mainBlock.getCreativeTab());
+		this.setHarvestLevel(mainBlock.getHarvestTool(mainState), mainBlock.getHarvestLevel(mainState));
+		
+		this.useNeighborBrightness = true;
+	}
+	
 	public BlockStairsBase(IBlockState mainState) {
 		super(mainState);
 		Block mainBlock = mainState.getBlock();

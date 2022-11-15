@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "netherized:blocks/crimson_planks",
+        "top": "netherized:blocks/crimson_planks",
+        "side": "netherized:blocks/crimson_planks"
+    }
+}

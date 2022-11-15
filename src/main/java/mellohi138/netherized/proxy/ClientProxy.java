@@ -3,7 +3,8 @@ package mellohi138.netherized.proxy;
 import mellohi138.netherized.Netherized;
 import mellohi138.netherized.client.EntityRenderRegistry;
 import mellohi138.netherized.client.NetherizedTEISR;
-import mellohi138.netherized.client.render.entity.*;
+import mellohi138.netherized.client.render.entity.RenderHoveringInferno;
+import mellohi138.netherized.client.render.entity.RenderStrider;
 import mellohi138.netherized.enums.EnumNetherizedParticles;
 import mellohi138.netherized.init.NetherizedItems;
 import mellohi138.netherized.objects.entity.hostile.EntityHoveringInferno;
@@ -47,7 +48,7 @@ public class ClientProxy implements IProxy {
 			}
 		});
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityHoveringInferno.class, new EntityRenderRegistry<EntityHoveringInferno>( ) {
+		RenderingRegistry.registerEntityRenderingHandler(EntityHoveringInferno.class, new EntityRenderRegistry<EntityHoveringInferno>() {
 			@Override
 			public Render<? super EntityHoveringInferno> createRenderFor(RenderManager manager) {
 				return new RenderHoveringInferno(manager);

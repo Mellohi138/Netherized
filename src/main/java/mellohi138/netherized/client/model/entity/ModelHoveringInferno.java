@@ -20,8 +20,8 @@ public class ModelHoveringInferno extends ModelBase {
 
     public ModelHoveringInferno() {
     	super();
-        textureWidth = 64;
-        textureHeight = 64;
+        this.textureWidth = 64;
+        this.textureHeight = 64;
         
         this.head = new ModelRenderer(this, 0, 0);
         this.head.setRotationPoint(0.0F, 0.0F, 0.0F);

@@ -1,7 +1,6 @@
 package mellohi138.netherized.objects.entity;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,15 +8,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * Tinkers Construct belongs to mDiyo. 
  */
 public class EntityFireproofItem extends EntityItem { 
-    private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack>createKey(EntityFireproofItem.class, DataSerializers.ITEM_STACK);
     /** The age of this EntityFireproofItem (used to animate it up and down as well as expire it) */
     private int age;
     private int pickupDelay;
@@ -53,18 +49,14 @@ public class EntityFireproofItem extends EntityItem {
         this.isImmuneToFire = true;
 	}
 	
-    public EntityFireproofItem(World worldIn, Entity entity, ItemStack stack) {
-        this(worldIn, entity.posX, entity.posY, entity.posZ, stack);
-        this.motionX = entity.motionX;
-        this.motionY = entity.motionY;
-        this.motionZ = entity.motionZ;
-      	 if(entity instanceof EntityItem) {
-     	    NBTTagCompound tag = new NBTTagCompound();
-     	    entity.writeToNBT(tag);
-     	    this.setPickupDelay(tag.getShort("PickupDelay"));
-     	 } else {
-      	    this.setDefaultPickupDelay();
-     	 }
+    public EntityFireproofItem(World worldIn, EntityItem itemIn, ItemStack stack) {
+        this(worldIn, itemIn.posX, itemIn.posY, itemIn.posZ, stack);
+        this.motionX = itemIn.motionX;
+        this.motionY = itemIn.motionY;
+        this.motionZ = itemIn.motionZ;
+ 	    NBTTagCompound tag = new NBTTagCompound();
+ 	    itemIn.writeToNBT(tag);
+ 	    this.setPickupDelay(tag.getShort("PickupDelay"));
     }
     
     @Override
@@ -72,9 +64,12 @@ public class EntityFireproofItem extends EntityItem {
         if (this.world.isRemote || this.isDead) return false;
         if (this.isEntityInvulnerable(source)) {
             return false;
-        } else if (!this.getItem().isEmpty() && this.getItem().getItem() == Items.NETHER_STAR && source.isExplosion()) {
-            return false;
-        } else if (source.isFireDamage()) {
+        } else if (!this.getItem().isEmpty()) {
+        	if(source.isExplosion()) {
+        		return this.getItem().getItem() != Items.NETHER_STAR;
+        	} else if(source.isFireDamage()) {
+        		return false;
+        	}
             return false;
         } else {
             this.markVelocityChanged();
@@ -194,11 +189,6 @@ public class EntityFireproofItem extends EntityItem {
         return this.isInsideOfMaterial(Material.LAVA);
     }
     
-    @Override
-	protected void entityInit() {
-        this.getDataManager().register(ITEM, ItemStack.EMPTY);
-    }
-    
     private void searchForOtherItemsNearby() {
         for (EntityFireproofItem entityitem : this.world.getEntitiesWithinAABB(EntityFireproofItem.class, this.getEntityBoundingBox().grow(0.5D, 0.0D, 0.5D))) {
             this.combineItems(entityitem);
@@ -283,17 +273,6 @@ public class EntityFireproofItem extends EntityItem {
         }
         if (compound.hasKey("Lifespan")) lifespan = compound.getInteger("Lifespan");
     }
-    
-    @Override
-    public ItemStack getItem() {
-        return (ItemStack)this.getDataManager().get(ITEM);
-    }
-    
-    @Override
-    public void setItem(ItemStack stack) {
-        this.getDataManager().set(ITEM, stack);
-        this.getDataManager().setDirty(ITEM);
-    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -345,13 +324,13 @@ public class EntityFireproofItem extends EntityItem {
             Item item = itemstack.getItem();
             int i = itemstack.getCount();
 
-            int hook = net.minecraftforge.event.ForgeEventFactory.onItemPickup(this, entityIn);
+            int hook = ForgeEventFactory.onItemPickup(this, entityIn);
             if (hook < 0) return;
             ItemStack clone = itemstack.copy();
 
             if (this.pickupDelay <= 0 && (this.getOwner() == null || lifespan - this.age <= 200 || this.getOwner().equals(entityIn.getName())) && (hook == 1 || i <= 0 || entityIn.inventory.addItemStackToInventory(itemstack) || clone.getCount() > this.getItem().getCount())) {
                 clone.setCount(clone.getCount() - this.getItem().getCount());
-                net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(entityIn, this, clone);
+                FMLCommonHandler.instance().firePlayerItemPickupEvent(entityIn, this, clone);
 
                 if (itemstack.isEmpty()) {
                     entityIn.onItemPickup(this, i);

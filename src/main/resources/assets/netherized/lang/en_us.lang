@@ -22,10 +22,19 @@ item.warped_fungus_on_a_stick.name=Warped Fungus On A Stick
 //Blocks
 tile.crimson_planks.name=Crimson Planks
 tile.warped_planks.name=Warped Planks
+
+tile.crimson_stairs.name=Crimson Stairs
+tile.warped_stairs.name=Warped Stairs
+
+tile.crimson_slab.name=Crimson Slab
+tile.warped_slab.name=Warped Slab
+
 tile.crimson_fence.name=Crimson Fence
 tile.warped_fence.name=Warped Fence
+
 tile.crimson_fence_gate.name=Crimson Fence Gate
 tile.warped_fence_gate.name=Warped Fence Gate
+
 tile.crimson_door.name=Crimson Door
 tile.warped_door.name=Warped Door
 
@@ -58,19 +67,19 @@ tile.polished_basalt.name=Polished Basalt
 tile.blackstone.name=Blackstone
 tile.blackstone_stairs.name=Blackstone Stairs
 tile.blackstone_wall.name=Blackstone Wall
-tile.blackstone_slabs.name=Blackstone Slab
+tile.blackstone_slab.name=Blackstone Slab
 
 tile.polished_blackstone.name=Polished Blackstone
 tile.chiseled_polished_blackstone.name=Chiseled Polished Blackstone
 tile.polished_blackstone_stairs.name=Polished Blackstone Stairs
 tile.polished_blackstone_wall.name=Polished Blackstone Wall
-tile.polished_blackstone_slabs.name=Polished Blackstone Slab
+tile.polished_blackstone_slab.name=Polished Blackstone Slab
 
 tile.polished_blackstone_bricks.name=Polished Blackstone Bricks
 tile.cracked_polished_blackstone_bricks.name=Cracked Polished Blackstone Bricks
-tile.polished_blackstone_bricks_stairs.name=Polished Blackstone Brick Stairs
-tile.polished_blackstone_bricks_wall.name=Polished Blackstone Brick Wall
-tile.polished_blackstone_bricks_slabs.name=Polished Blackstone Brick Slab 
+tile.polished_blackstone_brick_stairs.name=Polished Blackstone Brick Stairs
+tile.polished_blackstone_brick_wall.name=Polished Blackstone Brick Wall
+tile.polished_blackstone_brick_slab.name=Polished Blackstone Brick Slab 
 
 tile.chain.name=Chain
 tile.soul_fire.name=Soul Fire

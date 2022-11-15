@@ -10,10 +10,21 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockWallsBase extends BlockWall {
+public class BlockWallBase extends BlockWall {
 	private final IBlockState mainState;
 	
-	public BlockWallsBase(IBlockState mainState) {
+	public BlockWallBase(String name, IBlockState mainState) {
+		super(mainState.getBlock());
+		Block mainBlock = mainState.getBlock();
+		this.mainState = mainState;
+		
+		this.setTranslationKey(name);
+		this.setRegistryName(name);
+		this.setCreativeTab(mainBlock.getCreativeTab());
+        this.setHarvestLevel(mainBlock.getHarvestTool(mainState), mainBlock.getHarvestLevel(mainState));
+	}
+	
+	public BlockWallBase(IBlockState mainState) {
 		super(mainState.getBlock());
 		Block mainBlock = mainState.getBlock();
 		this.mainState = mainState;

@@ -28,9 +28,8 @@ public class RenderStrider extends RenderLiving<EntityStrider> {
 	
 	@Override
     protected void applyRotations(EntityStrider striderIn, float ageInTicks, float rotationYaw, float partialTicks) {
-    	if(striderIn.getIsCold()) {
-            rotationYaw += (float)(Math.cos((double)striderIn.ticksExisted * 3.25D) * Math.PI * 0.25D);
-    	}
+    	if(striderIn.getIsCold()) rotationYaw += (float)(Math.cos((double)striderIn.ticksExisted * 3.25D) * Math.PI * 0.25D);
+    	
     	super.applyRotations(striderIn, ageInTicks, rotationYaw, partialTicks);
     }
 	

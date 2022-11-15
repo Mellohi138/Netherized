@@ -1,0 +1,7 @@
+{
+    "variants": {
+		
+        "half=bottom": { "model": "netherized:blackstone_slab_bottom" },
+        "half=top": { "model": "netherized:blackstone_slab_top" }
+    }
+}

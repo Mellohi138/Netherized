@@ -27,7 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -42,10 +42,12 @@ public class EntityEvents {
 			EntityItem entityItem = (EntityItem)event.getEntity();
 			ItemStack stack = entityItem.getItem();
 			
-			if(ModUtils.isFireproof(stack.getItem()) && !stack.isEmpty() && !worldIn.isRemote) {
-	    		EntityFireproofItem fireproofItem = new EntityFireproofItem(worldIn, entityItem, stack);
-	    		worldIn.spawnEntity(fireproofItem);
-				entityItem.setDead();
+			if(ModUtils.isFireproof(stack.getItem())) {
+				if(!stack.isEmpty()) {
+		    		EntityFireproofItem fireproofItem = new EntityFireproofItem(worldIn, entityItem, stack);
+		    		worldIn.spawnEntity(fireproofItem);
+					entityItem.setDead();
+				}
 			}
 		}
 	}
@@ -58,16 +60,18 @@ public class EntityEvents {
 			EntityFireproofItem fireproofItem = (EntityFireproofItem)event.getEntity();
 			ItemStack stack = fireproofItem.getItem();
 			
-			if(!ModUtils.isFireproof(stack.getItem()) && !stack.isEmpty() && !worldIn.isRemote) {
-				EntityItem entityItem = new EntityItem(worldIn, fireproofItem.posX, fireproofItem.posY, fireproofItem.posZ, stack);
-				worldIn.spawnEntity(entityItem);
-				fireproofItem.setDead();
+			if(!ModUtils.isFireproof(stack.getItem())) {
+				if(!stack.isEmpty()) {
+					EntityItem entityItem = new EntityItem(worldIn, fireproofItem.posX, fireproofItem.posY, fireproofItem.posZ, stack);
+					worldIn.spawnEntity(entityItem);
+					fireproofItem.setDead();
+				}
 			}
 		}
 	}
 	
 	@SubscribeEvent
-	public static void addSoulSpeed(LivingEvent.LivingUpdateEvent event) {
+	public static void addSoulSpeed(LivingUpdateEvent event) {
 		EntityLivingBase entityIn = event.getEntityLiving();
 		
     	IAttributeInstance attributeIn = entityIn.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
@@ -122,7 +126,7 @@ public class EntityEvents {
 	}
 	
 	@SubscribeEvent
-	public static void removeNetheriteHorseArmorBuffs(LivingEvent.LivingUpdateEvent event) {
+	public static void removeNetheriteHorseArmorBuffs(LivingUpdateEvent event) {
 		EntityLivingBase entityIn = event.getEntityLiving();
 		
 		if(entityIn instanceof EntityHorse) {

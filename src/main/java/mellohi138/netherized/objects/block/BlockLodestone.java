@@ -28,9 +28,6 @@ public class BlockLodestone extends BlockBase {
 		
 		if(!playerIn.isSneaking() && (stack.getItem() == Items.COMPASS || stack.getItem() == NetherizedItems.LODESTONE_COMPASS)) {
 			ItemStack lodestoneCompass = NetherizedItems.LODESTONE_COMPASS.getDefaultInstance();
-			NBTTagCompound compassNBT = stack.getTagCompound();
-			if(compassNBT == null) compassNBT = new NBTTagCompound();
-			
 			lodestoneCompass.setTagCompound(this.setupLodestoneCompass(pos, worldIn));
 			
 			if(!playerIn.capabilities.isCreativeMode) stack.shrink(1);
@@ -46,7 +43,6 @@ public class BlockLodestone extends BlockBase {
 		NBTTagCompound lodestoneNBT = new NBTTagCompound();
 		lodestoneNBT.setIntArray("LodestonePos", new int[] {pos.getX(), pos.getY(), pos.getZ()});
 		lodestoneNBT.setInteger("LodestoneDimension", worldIn.provider.getDimension());
-		lodestoneNBT.setBoolean("LodestoneTracked", true);
 		return lodestoneNBT;
     }
 }

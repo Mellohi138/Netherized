@@ -20,7 +20,7 @@ public class ModelStrider extends ModelBase {
 	private final ModelRenderer field_239126_l_;
   
 	public ModelStrider() {
-		this.textureWidth = 64;
+        this.textureWidth = 64;
 		this.textureHeight = 128;
       
 		this.field_239118_a_ = new ModelRenderer(this, 0, 32);

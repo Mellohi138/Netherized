@@ -51,7 +51,7 @@ public class ParticleSoul extends Particle {
 	}
     
 	/*
-	 * We have manually add a new rendering method because using texture atlas sprites results in the particle texture being synced for all the particles, 
+	 * We have to manually add a new rendering method because using texture atlas sprites results in the particle texture being synced for all the particles, 
 	 * meaning after the dissapearing animation you can just see a new soul spawn-mid air, creating a janky feel.
 	 * Rendering code taken and tweaked from net.minecraft.client.particle.ParticleExplosionLarge
 	 */

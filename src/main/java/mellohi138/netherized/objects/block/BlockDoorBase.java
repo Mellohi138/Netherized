@@ -3,10 +3,13 @@ package mellohi138.netherized.objects.block;
 import java.util.Random;
 
 import mellohi138.netherized.Netherized;
+import mellohi138.netherized.util.interfaces.ICustomRenderer;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -14,8 +17,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 
-public class BlockDoorBase extends BlockDoor {
+public class BlockDoorBase extends BlockDoor implements ICustomRenderer {
 	private final MapColor color;
 	
 	public BlockDoorBase(String name, Material materialIn, MapColor colorIn, CreativeTabs tab) {
@@ -44,4 +48,10 @@ public class BlockDoorBase extends BlockDoor {
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     	return this.color;
     }
+
+	@Override
+	public void registerModels() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+		ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(POWERED).build());
+	}
 }

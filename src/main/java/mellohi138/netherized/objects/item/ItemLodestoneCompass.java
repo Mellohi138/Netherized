@@ -34,8 +34,10 @@ public class ItemLodestoneCompass extends ItemCompass {
         this.addPropertyOverride(new ResourceLocation("angle"), new IItemPropertyGetter() {
             @SideOnly(Side.CLIENT)
             double rotation;
+            
             @SideOnly(Side.CLIENT)
             double rota;
+            
             @SideOnly(Side.CLIENT)
             long lastUpdateTick;
             
@@ -46,27 +48,20 @@ public class ItemLodestoneCompass extends ItemCompass {
                     return 0.0F;
                 } else {
                     boolean isEntityHere = entityIn != null;
-                    Entity entity = (Entity)(isEntityHere ? entityIn : stack.getItemFrame());
+                    Entity entity = isEntityHere ? entityIn : stack.getItemFrame();
 
-                    if (worldIn == null) {
-                        worldIn = entity.world;
-                    }
+                    if (worldIn == null) worldIn = entity.world;
 
                     double d0 = Math.random();
-
-                    NBTTagCompound NBT = stack.getTagCompound();
-                    if(NBT == null) NBT = new NBTTagCompound();
                     
-                    if(NBT.hasKey("LodestonePos") && NBT.hasKey("LodestoneTracked")) {
-                    	if(NBT.getBoolean("LodestoneTracked")) {
-                        	IBlockState state = worldIn.getBlockState(new BlockPos(getPos(stack)[0], getPos(stack)[1], getPos(stack)[2]));
-                        	
-                        	if(state.getBlock() == NetherizedBlocks.LODESTONE) {
-                                double d1 = isEntityHere ? (double)entity.rotationYaw : this.getFrameRotation((EntityItemFrame)entity);
-                                d1 = MathHelper.positiveModulo(d1 / 360.0D, 1.0D);
-                                double d2 = this.getCompassAngle(worldIn, entity, stack) / (Math.PI * 2D);
-                                d0 = 0.5D - (d1 - 0.25D - d2);
-                        	}
+                    if(hasLodestone(stack) && getLodestoneDimension(stack) == worldIn.provider.getDimensionType().getId()) {
+                    	IBlockState state = worldIn.getBlockState(new BlockPos(getPos(stack)[0], getPos(stack)[1], getPos(stack)[2]));
+                    	
+                    	if(state.getBlock() == NetherizedBlocks.LODESTONE) {
+                            double d1 = isEntityHere ? (double)entity.rotationYaw : this.getFrameRotation((EntityItemFrame)entity);
+                            d1 = MathHelper.positiveModulo(d1 / 360.0D, 1.0D);
+                            double d2 = this.getCompassAngle(worldIn, entity, stack) / (Math.PI * 2D);
+                            d0 = 0.5D - (d1 - 0.25D - d2);
                     	}
                     }
 
@@ -99,14 +94,10 @@ public class ItemLodestoneCompass extends ItemCompass {
 
             @SideOnly(Side.CLIENT)
 			private double getCompassAngle(World worldIn, Entity entity, ItemStack stack) {
-                NBTTagCompound NBT = stack.getTagCompound();
-                if(NBT == null) NBT = new NBTTagCompound();
                 BlockPos blockPos = null;
                 
-                if(NBT.hasKey("LodestoneTracked")) {
-                	if(NBT.getBoolean("LodestoneTracked") == true) {
-                		blockPos = new BlockPos(getPos(stack)[0], getPos(stack)[1], getPos(stack)[2]);
-                	}
+                if(hasLodestone(stack) && getLodestoneDimension(stack) == worldIn.provider.getDimensionType().getId()) {
+                	blockPos = new BlockPos(getPos(stack)[0], getPos(stack)[1], getPos(stack)[2]);
                 }
                 
                 return Math.atan2((double)blockPos.getZ() - entity.posZ, (double)blockPos.getX() - entity.posX);
@@ -130,40 +121,23 @@ public class ItemLodestoneCompass extends ItemCompass {
     	
     	return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
-   
-	@Override
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    	if (!worldIn.isRemote) {
-     		if (hasLodestone(stack)) {
-    			NBTTagCompound NBT = stack.getTagCompound();
-    			if(NBT == null) NBT = new NBTTagCompound();
-    			
-    			if (this.getLodestoneDimension(stack) != worldIn.provider.getDimensionType().getId() && (NBT.hasKey("LodestoneTracked") && NBT.getBoolean("LodestoneTracked"))) {
-    		    	NBT.setBoolean("LodestoneTracked", false);
-    			}
-    		}
-    	}
-    }
     
 	private static boolean hasLodestone(ItemStack stack) {
 		NBTTagCompound NBT = stack.getTagCompound();
-		return NBT != null && NBT.hasKey("LodestoneTracked");
-	}
-	
-	private int getLodestoneDimension(ItemStack stack) {
-		NBTTagCompound NBT = stack.getTagCompound();
 		if(NBT != null) {
-			return NBT.getInteger("LodestoneDimension");
+			return NBT.hasKey("LodestonePos") && NBT.hasKey("LodestoneDimension");
 		}
-		return 0;
+		return false;
 	}
 	
 	private int[] getPos(ItemStack stack) {
 		NBTTagCompound NBT = stack.getTagCompound();
-		if(NBT != null) {
-			return NBT.getIntArray("LodestonePos");
-		}
-		return new int[] {0, 0, 0};
+		return NBT.getIntArray("LodestonePos");
+	}
+	
+	private int getLodestoneDimension(ItemStack stack) {
+		NBTTagCompound NBT = stack.getTagCompound();
+		return NBT.getInteger("LodestoneDimension");
 	}
 	
 	@Override

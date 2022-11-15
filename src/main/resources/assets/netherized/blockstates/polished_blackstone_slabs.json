@@ -1,7 +1,0 @@
-{
-    "variants": {
-		
-        "half=bottom,variant=default": { "model": "netherized:polished_blackstone_slabs_bottom" },
-        "half=top,variant=default": { "model": "netherized:polished_blackstone_slabs_top" }
-    }
-}

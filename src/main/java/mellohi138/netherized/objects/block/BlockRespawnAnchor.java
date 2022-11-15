@@ -83,14 +83,12 @@ public class BlockRespawnAnchor extends BlockBase {
 		} else if(state.getValue(CHARGE) < 4 && stack.getItem() == Item.getItemFromBlock(Blocks.GLOWSTONE)) {
 			worldIn.setBlockState(pos, state.cycleProperty(CHARGE));
 			worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, NetherizedSounds.BLOCK_RESPAWN_ANCHOR_CHARGE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			if (!playerIn.isCreative()) {
-				stack.shrink(1); 
-			}
+			if (!playerIn.isCreative()) stack.shrink(1); 
 			return true;
 		} else if(state.getValue(CHARGE) != 0) {
 			if(worldIn.provider.getDimension() == DimensionType.NETHER.getId()) {
 				playerIn.setSpawnDimension(DimensionType.NETHER.getId());
-				playerIn.setSpawnPoint(pos.up(), true);
+				playerIn.setSpawnPoint(pos.offset(facing), true);
 				worldIn.setBlockState(pos, state.withProperty(CHARGE, Integer.valueOf(state.getValue(CHARGE) - 1)));
 				worldIn.playSound((EntityPlayer)null, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, NetherizedSounds.BLOCK_RESPAWN_ANCHOR_SPAWN_SET, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				return true;

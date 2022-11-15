@@ -1,6 +1,5 @@
 package mellohi138.netherized.client.model.armor;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -195,7 +194,7 @@ public class ModelInfernalHelmet extends ModelBiped {
     	} else {
         	super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
         	
-        	ModelBase.copyModelAngles(this.bipedHead, this.helm);
+        	copyModelAngles(this.bipedHead, this.helm);
     	}
     }
 }
